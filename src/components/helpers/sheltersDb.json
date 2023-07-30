@@ -1,0 +1,42 @@
+[
+    {
+        "id": "1",
+        "name": "Refugio San Pedro",
+        "stars": "4.5",
+        "address": "Av. del Libertador 4101",
+        "district": "Palermo",
+        "map": "/img/shelter/maps/shelter_1.png"
+    },
+    {
+        "id": "2",
+        "name": "Refugio #2",
+        "stars": "3",
+        "address": "Moreno 1623",
+        "district": "Monserrat",
+        "map": "/img/shelter/maps/shelter_2.png"
+    },
+    {
+        "id": "3",
+        "name": "Refugio #3",
+        "stars": "5",
+        "address": "Hipólito Yrigoyen 1849",
+        "district": "Balvanera",
+        "map": "/img/shelter/maps/shelter_3.png"
+    },
+    {
+        "id": "4",
+        "name": "Refugio #4",
+        "stars": "2.6",
+        "address": "Av. San Juan 350",
+        "district": "San Telmo",
+        "map": "/img/shelter/maps/shelter_4.png"
+    },
+    {
+        "id": "5",
+        "name": "Refugio #5",
+        "stars": "4.1",
+        "address": "Adolfo Alsina 940",
+        "district": "Monserrat",
+        "map": "/img/shelter/maps/shelter_5.png"
+    }
+]

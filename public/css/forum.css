@@ -1,0 +1,49 @@
+.forum-message-wrapper {
+    margin-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.forum-message-wrapper button {
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.user-panel {
+    text-align: center;
+}
+
+.user-panel img {
+    border-radius: 50%;
+    border: 1px solid var(--default-border-color);
+}
+
+.user-panel .card-title {
+    padding-top: 0.5rem;
+    margin-bottom: 0;
+}
+
+.forum-user-contact {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+}
+
+.forum-user-contact p {
+    margin-bottom: 0;
+    font-size: 0.9rem;
+}
+
+.forum-date, .forum-comment-number {
+    color: dimgray;
+    font-size: small;
+}
+
+.forum-comment {
+    word-break: break-word;
+    min-height: 224px;
+}
+
+.forum-comment-image {
+    max-width: 100%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

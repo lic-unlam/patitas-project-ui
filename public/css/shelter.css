@@ -1,0 +1,215 @@
+/* Vista general */
+
+.shelters-wrapper > h1, .shelters-wrapper > h2 {
+    font-family: 'Quicksand';
+    padding-bottom: 1rem;
+}
+
+.shelter-card .card-body .title, .shelter-card .card-body .stars {
+    font-family: 'Quicksand';
+    font-weight: bold;
+}
+
+.shelter-card {
+    border-radius: var(--default-border-radius);
+    overflow: hidden;
+}
+
+/* Barra superior */
+
+.shelter-details-wrapper h1, .shelter-details-wrapper h2 {
+    font-family: 'Quicksand';
+}
+
+.bi-geo-alt-fill {
+    color: orangered;
+}
+
+.bi-star-fill {
+    color: #f1cb00;
+}
+
+.bi-star {
+    color: goldenrod;
+}
+
+/* Pestañas */
+
+.nav-link {
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: initial;
+}
+
+.nav-link:hover {
+	color: var(--default-color-theme);
+}
+
+.nav-link.active {
+	background-color: transparent !important;
+    border-bottom: 2px solid var(--default-color-theme);
+    border-radius: unset;
+    color: var(--default-color-theme) !important;
+    font-weight: bold;
+}
+
+.tab-pane {
+    padding: 1.5rem;
+}
+
+/* Galería */
+
+.thumbnails-wrapper > * {
+    padding-top: calc(var(--bs-gutter-x) * .5);
+	padding-bottom: calc(var(--bs-gutter-x) * .5);
+}
+
+.thumbnails-wrapper > * img:hover {
+    outline: 1px solid var(--default-color-theme);
+}
+
+.thumbnails-wrapper img {
+    border-radius: var(--default-border-radius);
+    width: 300px;
+	height: 300px;
+    object-fit: cover;
+}
+
+/* Publicación */
+
+.post-wrapper {
+    position: fixed;
+    height: 90vh;
+    width: 90vw;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1111;
+    background-color: white;
+    border-radius: var(--default-border-radius);
+    border: 1px solid var(--default-border-color);
+    box-shadow: 0px 0px 8px 0rem var(--default-border-color);
+    animation: growUp .25s;
+}
+
+.post-wrapper > .row, .post-wrapper > .row > div[class^="col"] {
+    height: inherit;
+}
+
+@-webkit-keyframes growUp {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+@keyframes growUp {
+    from {
+        transform: translate(-50%, -50%) scale(0);
+    }
+    to {
+        transform: translate(-50%, -50%) scale(1);
+    }
+}
+
+.post-image {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.close-button {
+    text-align: right;
+}
+
+.close-button:hover {
+    color: red;
+}
+
+.close-button button {
+    border: none;
+}
+
+.close-button i {
+    font-size: xx-large;
+}
+
+.close-button > button {
+    padding-right: 0.75rem !important;
+}
+
+.post-content {
+    height: calc(100% - 60px);
+    overflow-y: auto;
+    padding-right: 1rem;
+    padding-bottom: 1rem;
+}
+
+.request-adoption {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}
+
+.information ul > li {
+    list-style-type: square;
+}
+
+/* Modal de empezar proceso de adopción */
+
+#startAdoptionModal, #preAdoptionModal {
+    z-index: 1111;
+    background-color: #c7c0c099;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    box-shadow: 1px 1px 7px 1px #4c98ef;
+    text-align: center;
+}
+
+.modal-footer > button {
+    margin: 0 auto;
+    padding-right: 2rem;
+    padding-left: 2rem;
+}
+
+.modal-footer > .row {
+    width: 100%;
+}
+
+/* Comentarios */
+
+.comment-wrapper {
+    padding-bottom: 1rem;
+}
+
+.comment-wrapper img {
+    width: 40px;
+    border-radius: var(--default-border-radius);
+}
+
+.comment-name {
+    color: initial;
+    margin-bottom: 0;
+}
+
+.comment-date {
+    font-family: 'Quicksand';
+    font-size: 0.9rem;
+    color: gray;
+}
+
+#pills-veterinary > .row:not(:last-child) {
+    padding-bottom: 4rem;
+}
+
+canvas {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+    z-index: 1111 !important;
+}
