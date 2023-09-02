@@ -1,19 +1,27 @@
 import { createBrowserRouter } from "react-router-dom";
 
-// Componentes
+// Home
 import Welcome from "../components/home/Welcome";
+
+// Acciones de usuario
 import AuthenticationForms from "../components/auth/AuthenticationForms";
 import Profile from "../components/user/Profile";
 import Notifications from "../components/user/Notifications";
+
+// Refugios
 import Shelter from '../components/shelter/Shelter';
 import ShelterDetails from '../components/shelter/ShelterDetails';
 import Publication from "../components/shelter/sections/Publication";
+
+// Foro
+import Forum from "../components/forum/Forum";
 import Missing from "../components/forum/Missing";
 
 // Componentes fijos
 
 import LayoutPublic from "../components/layout/LayoutPublic";
 import NotFound from '../components/errors/NotFound';
+import PostList from "../components/forum/PostList";
 
 export const router = createBrowserRouter([
     {
@@ -41,7 +49,23 @@ export const router = createBrowserRouter([
                         element: <Notifications />
                     },
                     {
+                        path: "/forum",
+                        element: <Forum />
+                    },
+                    {
                         path: "/forum/missing",
+                        element: <PostList />
+                    },
+                    {
+                        path: "/forum/missing/:id",
+                        element: <Missing />
+                    },
+                    {
+                        path: "/forum/abandoned",
+                        element: <PostList />
+                    },
+                    {
+                        path: "/forum/abandoned/:id",
                         element: <Missing />
                     },
                     {

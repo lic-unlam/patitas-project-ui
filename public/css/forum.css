@@ -1,3 +1,16 @@
+#latest_posts_wrapper .card-header {
+    background-color: #e8f1ff;
+}
+
+.latest-posts > .row:not(:first-child) {
+    padding-top: 1rem;
+}
+
+.section-title {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
 .forum-message-wrapper {
     margin-top: 1.5rem;
     margin-bottom: 2rem;

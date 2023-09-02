@@ -6,7 +6,7 @@ function Missing() {
             <nav aria-label="breadcrumb">
                 <ol className="breadcrumb">
                     <li className="breadcrumb-item"><Link to="/forum"><i className="bi bi-house-door-fill"></i> Foros</Link></li>
-                    <li className="breadcrumb-item"><Link to="/forum/missing">Mascotas extraviadas</Link></li>
+                    <li className="breadcrumb-item"><Link to="/forum/missing">Mascotas perdidas</Link></li>
                     <li className="breadcrumb-item active" aria-current="page">Se me perdió mi perro ¡por favor ayuda!</li>
                 </ol>
             </nav>

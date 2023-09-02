@@ -155,7 +155,7 @@ blockquote {
 
 /* Barra de navegación */
 
-nav {
+.navbar {
 	border-bottom: 1px solid #dddddd;
 }
 

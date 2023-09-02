@@ -51,6 +51,8 @@ function Navbar(props) {
                                     <li><hr className="dropdown-divider"/></li>
                                     <li><Link className="dropdown-item" to="/forum/support">Ayuda y asistencia</Link></li>
                                     <li><Link className="dropdown-item" to="/forum/suggestions">Sugerencias</Link></li>
+                                    <li><hr className="dropdown-divider"/></li>
+                                    <li><Link className="dropdown-item" to="/forum">Ver todos</Link></li>
                                 </ul>
                             </li>
                         </ul>
