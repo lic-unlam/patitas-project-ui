@@ -15,6 +15,10 @@
     overflow: hidden;
 }
 
+.shelter-card:hover {
+    border: 1px solid var(--default-color-theme);
+}
+
 /* Barra superior */
 
 .shelter-details-wrapper h1, .shelter-details-wrapper h2 {
@@ -26,7 +30,7 @@
 }
 
 .bi-star-fill {
-    color: #f1cb00;
+    color: orange;
 }
 
 .bi-star {
@@ -35,8 +39,8 @@
 
 /* Pestañas */
 
-.nav-link {
-    font-size: 1.1rem;
+.nav-link, .dropdown-menu {
+    font-size: 1rem;
     font-weight: 300;
     color: initial;
 }

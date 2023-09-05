@@ -196,6 +196,8 @@ blockquote {
 
 .nav-text-username {
 	font-size: 0.9rem !important;
+	background-color: #efefef;
+    border-radius: 0.5rem;
 }
 
 .nav-text-username:hover {
@@ -220,7 +222,9 @@ blockquote {
 /* Barra de búsqueda */
 
 #search_wrapper {
-	width: 100%;
+	/*width: 100%;*/
+	padding-left: 0.4rem;
+	padding-right: 0.4rem;
 }
 
 #shelter_search {
@@ -242,9 +246,9 @@ blockquote {
 }
 
 @media (min-width: 768px) {
-	#search_wrapper {
+	/*#search_wrapper {
 		width: 50%;
-	}
+	}*/
 }
 
 @media (max-width: 767.99px) {

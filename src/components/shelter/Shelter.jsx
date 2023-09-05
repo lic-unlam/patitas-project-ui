@@ -14,6 +14,7 @@ function Shelter(props) {
         sheltersToShow.forEach((shelter, index) => {
             shelters.push(
                 <div className="col-6" key={index}>
+                    <Link to={`/shelter/${shelter.id}`}>
                     <div className="card shelter-card mb-3">
                         <div className="row g-0">
                             <div className="col-2">
@@ -21,17 +22,18 @@ function Shelter(props) {
                             </div>
                             <div className="col-10">
                                 <div className="card-body">
-                                    <Link to={`/shelter/${shelter.id}`} className="list-group-item list-group-item-action" aria-current="true">
+                                    <span className="list-group-item list-group-item-action" aria-current="true">
                                         <div className="d-flex w-100 justify-content-between">
                                             <h5 className="mb-1 title">{shelter.name}</h5>
                                             <span className="stars">{shelter.stars} <i className="bi bi-star-fill"></i></span>
                                         </div>
                                         <p className="mb-1 text-muted location">{shelter.address}, {shelter.district}</p>
-                                    </Link>
+                                    </span>
                                 </div>
                             </div>
                         </div>
                     </div>
+                    </Link>
                 </div>
             );
         });

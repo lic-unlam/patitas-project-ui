@@ -33,6 +33,16 @@ function Register(props) {
             <div className="card-body">
                 <form id="register_form" onSubmit={doRegister}>
                     <legend>Únete y empieza a compartir</legend>
+                    <div className="form-group row py-2 role-selector-wrapper justify-content-center">
+                        <label className="col-auto">¿Qué tipo de usuario eres?</label>
+                        <div className="col-4">
+                            <select id="role_selector" className="form-select form-select-sm" aria-label="Seleccionar tipo de usuario">
+                                <option value="0" defaultValue>Adoptante</option>
+                                <option value="1">Refugio</option>
+                                <option value="2">Veterinaria</option>
+                            </select>
+                        </div>
+                    </div>
                     <div className="py-2">
                         <input type="text" className="form-control" placeholder="Nombre de usuario"/>
                     </div>

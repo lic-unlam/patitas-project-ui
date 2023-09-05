@@ -12,6 +12,7 @@ import Notifications from "../components/user/Notifications";
 import Shelter from '../components/shelter/Shelter';
 import ShelterDetails from '../components/shelter/ShelterDetails';
 import Publication from "../components/shelter/sections/Publication";
+import BuscadorDeRefugios from "../components/shelter/buscar/BuscadorDeRefugios";
 
 // Foro
 import Forum from "../components/forum/Forum";
@@ -82,6 +83,10 @@ export const router = createBrowserRouter([
                             }
                         ]
                     },
+                    {
+                        path: "/refugios/buscador",
+                        element: <BuscadorDeRefugios />
+                    }
                 ],
             },
         ],

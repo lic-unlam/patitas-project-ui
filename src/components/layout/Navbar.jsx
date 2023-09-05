@@ -24,7 +24,9 @@ function Navbar(props) {
     return (
         <nav className="navbar bg-white fixed-top navbar-expand-md">
             <div className="container">
-                <Link className="navbar-brand" to="/"><img className='img-fluid patitas-logo' src='/img/patitas.png' alt="patitas_logo"/> <span>Patitas</span></Link>
+                <Link className="navbar-brand" to="/"><img className='img-fluid patitas-logo' src='/img/patitas.png' alt="patitas_logo"/>
+                    <span> Patitas</span>
+                </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">
                     <span className="navbar-toggler-icon"></span>
                 </button>
@@ -39,7 +41,7 @@ function Navbar(props) {
                     </div>
                     <div className="offcanvas-body" id="navbarSupportedContent">
                         <ul className="navbar-nav">
-                                <li className="nav-item dropdown">
+                            <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                                     Foros
                                 </Link>
@@ -55,16 +57,26 @@ function Navbar(props) {
                                     <li><Link className="dropdown-item" to="/forum">Ver todos</Link></li>
                                 </ul>
                             </li>
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/shelter">Explorar refugios</Link>
+                            </li>
                         </ul>
-                        <div id="search_wrapper" className="d-flex mx-auto">
+                        {/*<form id="search_wrapper" className="d-flex ms-auto">
                             <Search/>
+                        </form>*/}
+                        <div className="navbar-nav pe-4 ms-auto">
+                            <li className="nav-item">
+                                <Link className="nav-link" to="/refugios/buscador"><i className="bi bi-search"></i> Buscar refugios</Link>
+                            </li>
                         </div>
                         {!userDataString ?
+                            <div className="nav-item">
                             <ul className="navbar-nav auth-wrapper">
                                 <li>
                                     <Link id="signin" to="/auth/signin" className="btn btn-primary">Acceder</Link>
                                 </li>
-                            </ul> :
+                            </ul>
+                            </div> :
                             <ul className="navbar-nav user-actions">
                                 <li className="nav-item">
                                     <Link className="nav-link nav-text-username" to="/user/profile" title={userDataObject.email}>{userDataObject.username}</Link>
