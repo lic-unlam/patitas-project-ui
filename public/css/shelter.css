@@ -8,6 +8,7 @@
 .shelter-card .card-body .title, .shelter-card .card-body .stars {
     font-family: 'Quicksand';
     font-weight: bold;
+    color: initial;
 }
 
 .shelter-card {
@@ -34,7 +35,7 @@
 }
 
 .bi-star {
-    color: goldenrod;
+    color: orange;
 }
 
 /* Pestañas */

@@ -400,8 +400,12 @@ section p {
 
 /* Autenticación */
 
-#authentication_wrapper {
+#authentication_wrapper legend {
 	text-align: center;
+}
+
+#authentication_wrapper span {
+	font-size: 0.8rem;
 }
 
 form button[type="submit"] {

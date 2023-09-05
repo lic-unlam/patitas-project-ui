@@ -11,9 +11,9 @@ function AuthenticationForms() {
                 <div className="col-12 col-md-6 order-1 order-md-2">
                     <Login></Login>
                     <img className="img-fluid dog-mobile" width={150} src="/img/perro_escribiendo.png" alt="perro_escribiendo"/>
+                    <div className="text-center"><img className="dog-desktop" width={150} src="/img/perro_escribiendo.png" alt="perro_escribiendo"/></div>
                 </div>
             </div>
-            <img className="img-fluid dog-desktop" width={150} src="/img/perro_escribiendo.png" alt="perro_escribiendo"/>
         </div>
     )
 }
