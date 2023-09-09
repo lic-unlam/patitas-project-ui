@@ -447,3 +447,8 @@ form button[type="submit"] {
 .not-found-wrapper img {
 	border-radius: var(--default-border-radius);
 }
+
+.map-container {
+	width: 100%;
+	height: 100%;
+}
