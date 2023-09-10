@@ -1,9 +1,10 @@
 import PreAdoptionForm from "./PreAdoptionForm";
+import MisAdopciones from "./MisAdopciones";
+import MisTurnos from "./MisTurnos";
 
 function Profile() {
     return (
         <div className="profile-wrapper">
-            <h1>Panel de usuario</h1>
             <div className="row">
                 <div className="col">
 					<ul className="nav nav-pills justify-content-center" id="pills-tab" role="tablist">
@@ -14,7 +15,13 @@ function Profile() {
 							<button className="nav-link active" id="pills-adoption-tab" data-bs-toggle="pill" data-bs-target="#pills-adoption" type="button" role="tab" aria-controls="pills-adoption" aria-selected="false"><i className="bi bi-file-text-fill"></i> Formulario de pre-adopción</button>
 						</li>
 						<li className="nav-item" role="presentation">
-							<button className="nav-link" id="pills-settings-tab" data-bs-toggle="pill" data-bs-target="#pills-settings" type="button" role="tab" aria-controls="pills-settings" aria-selected="false"><i className="bi bi-gear-fill"></i> Configuración</button>
+							<button className="nav-link" id="pills-settings-tab" data-bs-toggle="pill" data-bs-target="#pills-settings" type="button" role="tab" aria-controls="pills-settings" aria-selected="false"><i className="bi bi-house-heart-fill"></i> Mis adopciones</button>
+						</li>
+						<li className="nav-item" role="presentation">
+							<button className="nav-link" id="pills-settings-tab" data-bs-toggle="pill" data-bs-target="#pills-mis-turnos" type="button" role="tab" aria-controls="pills-settings" aria-selected="false"><i className="bi bi-gear-fill"></i> Mis turnos</button>
+						</li>
+						<li className="nav-item" role="presentation">
+							<button className="nav-link" id="pills-settings-tab" data-bs-toggle="pill" data-bs-target="#pills-settings" type="button" role="tab" aria-controls="pills-settings" aria-selected="false"><i className="bi bi-gear-fill"></i> Seguimientos</button>
 						</li>
 					</ul>
 					<div className="tab-content" id="pills-tabContent">
@@ -29,7 +36,10 @@ function Profile() {
                             </div>
                         </div>
 						<div className="tab-pane fade" id="pills-settings" role="tabpanel" aria-labelledby="pills-settings-tab" tabIndex="0">
-                            <p>Configuración</p>
+                            <MisAdopciones/>
+                        </div>
+						<div className="tab-pane fade" id="pills-mis-turnos" role="tabpanel" aria-labelledby="pills-settings-tab" tabIndex="0">
+                            <MisTurnos/>
                         </div>
 					</div>
 				</div>

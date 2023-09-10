@@ -438,6 +438,24 @@ form button[type="submit"] {
 	backdrop-filter: blur(4px);
 }
 
+/* Modal genérico */
+
+.modal-popup {
+	z-index: 1111;
+    background-color: #c7c0c099;
+    backdrop-filter: blur(4px);
+}
+
+.modal-content {
+    box-shadow: 1px 1px 7px 1px #4c98ef;
+    text-align: center;
+}
+
+.modal-header {
+	justify-content: center;
+	padding: 0.5rem;
+}
+
 /* Página de error 404 */
 
 .not-found-wrapper {

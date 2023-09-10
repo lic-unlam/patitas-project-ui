@@ -48,3 +48,10 @@
 .form-fingerprint:nth-child(odd) > img {
     padding-left: 0.5rem;
 }
+
+/* Pestañas de perfil */
+
+.tab-pane {
+    padding-left: 0;
+    padding-right: 0;
+}
