@@ -1,41 +1,85 @@
+import { Link, Outlet } from "react-router-dom";
+
 const MisAdopciones = () => {
     return (
-        <div className="accordion" id="accordionExample">
-            <div className="accordion-item">
-                <h2 className="accordion-header">
-                <button className="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
-                    Adopciones en curso
-                </button>
-                </h2>
-                <div id="collapseOne" className="accordion-collapse collapse show" data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    <strong>This is the first item's accordion body.</strong> It is shown by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-                </div>
+        <div id="mis_turnos_wrapper">
+            <hr/>
+            <h5 className="title text-center">Procesos de adopción en curso</h5>
+            <hr/>
+            <div className="list-group">
+                <Link to="/adoptantes/1/mis-adopciones/1" className="list-group-item list-group-item-action">
+                    <div>
+                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4> <span style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom"><i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Pendiente de aprobación</span>
+                    </div>
+                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
+                    <div>
+                        <span className="fs-5">Refugio: </span>
+                        <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
+                    </div>
+                    <div>
+                        <span className="fs-5">Animal a adoptar: </span>
+                        <span>Chispita</span>
+                    </div>
+                </Link>
             </div>
-            <div className="accordion-item">
-                <h2 className="accordion-header">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-                    Adopciones canceladas
-                </button>
-                </h2>
-                <div id="collapseTwo" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    <strong>This is the second item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-                </div>
+
+            <hr/>
+            <h5 className="title text-center">Adopciones exitosas</h5>
+            <hr/>
+
+            <div className="list-group">
+                <Link to="/adoptantes/1/mis-adopciones/1" className="list-group-item list-group-item-action">
+                    <div>
+                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
+                    </div>
+                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
+                    <div>
+                        <span className="fs-5">Refugio: </span>
+                        <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
+                    </div>
+                    <div>
+                        <span className="fs-5">Animal a adoptar: </span>
+                        <span>Chispita</span>
+                    </div>
+                    <p className="text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
+                </Link>
+                <Link to="/adoptantes/1/mis-adopciones/1" className="list-group-item list-group-item-action">
+                    <div>
+                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
+                    </div>
+                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
+                    <div>
+                        <span className="fs-5">Refugio: </span>
+                        <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
+                    </div>
+                    <div>
+                        <span className="fs-5">Animal a adoptar: </span>
+                        <span>Chispita</span>
+                    </div>
+                    <p className="text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
+                </Link>
             </div>
-            <div className="accordion-item">
-                <h2 className="accordion-header">
-                <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
-                    Adopciones exitosas
-                </button>
-                </h2>
-                <div id="collapseThree" className="accordion-collapse collapse" data-bs-parent="#accordionExample">
-                <div className="accordion-body">
-                    <strong>This is the third item's accordion body.</strong> It is hidden by default, until the collapse plugin adds the appropriate classes that we use to style each element. These classes control the overall appearance, as well as the showing and hiding via CSS transitions. You can modify any of this with custom CSS or overriding our default variables. It's also worth noting that just about any HTML can go within the <code>.accordion-body</code>, though the transition does limit overflow.
-                </div>
-                </div>
+
+            <hr/>
+            <h5 className="title text-center">Adopciones canceladas</h5>
+            <hr/>
+
+            <div className="list-group">
+                <Link to="/adoptantes/1/mis-adopciones/1" className="list-group-item list-group-item-action">
+                    <div>
+                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
+                    </div>
+                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
+                    <div>
+                        <span className="fs-5">Refugio: </span>
+                        <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
+                    </div>
+                    <div>
+                        <span className="fs-5">Animal a adoptar: </span>
+                        <span>Chispita</span>
+                    </div>
+                    <p className="text-danger mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
+                </Link>
             </div>
         </div>
     );

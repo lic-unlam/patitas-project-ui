@@ -47,12 +47,13 @@ function Navbar(props) {
                                 </Link>
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/forum/missing">Mascotas perdidas</Link></li>
-                                    <li><Link className="dropdown-item" to="/forum/abandoned">Animales callejeros</Link></li>
+                                    <li><Link className="dropdown-item" to="/foros/animales-callejeros">Animales callejeros</Link></li>
                                     <li><hr className="dropdown-divider"/></li>
-                                    <li><Link className="dropdown-item" to="/forum/news">Noticias</Link></li>
+                                    <li><Link className="dropdown-item" to="/foros/novedades">Noticias</Link></li>
+                                    <li><Link className="dropdown-item" to="/foros/promociones">Promociones</Link></li>
                                     <li><hr className="dropdown-divider"/></li>
-                                    <li><Link className="dropdown-item" to="/forum/support">Ayuda y asistencia</Link></li>
-                                    <li><Link className="dropdown-item" to="/forum/suggestions">Sugerencias</Link></li>
+                                    <li><Link className="dropdown-item" to="/foros/soporte">Ayuda y asistencia</Link></li>
+                                    <li><Link className="dropdown-item" to="/foros/sugerencias">Sugerencias</Link></li>
                                     <li><hr className="dropdown-divider"/></li>
                                     <li><Link className="dropdown-item" to="/forum">Ver todos</Link></li>
                                 </ul>
@@ -82,13 +83,30 @@ function Navbar(props) {
                                     <Link className="nav-link nav-text-username" to="/adoptantes/1/datos-personales" title={userDataObject.email}>{userDataObject.username}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/adoptantes/1/datos-personales" title="Ver datos personales"><img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/></Link>
-                                </li>
-                                <li className="nav-item">
                                     <Link className="nav-link" to="/user/notifications" title="Notificaciones"><i className="bi bi-bell"></i></Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link className="nav-link" to="/user/settings" title="Configuración"><i className="bi bi-gear"></i></Link>
+                                    <li className="nav-item dropdown">
+                                        <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/>
+                                        </button>
+                                        <ul className="dropdown-menu dropdown-menu-end">
+                                            <li>
+                                                <Link className="dropdown-item" to="/adoptantes/1/datos-personales">Datos personales</Link>
+                                            </li>
+                                            <div className="dropdown-divider"></div>
+                                            <li>
+                                                <Link className="dropdown-item" to="/adoptantes/1/formulario-pre-adopcion">Formulario pre-adopción</Link>
+                                            </li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/adoptantes/1/mis-adopciones">Mis adopciones</Link>
+                                            </li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/adoptantes/1/mis-turnos">Mis turnos</Link>
+                                            </li>
+                                            <li>
+                                                <Link className="dropdown-item" to="/adoptantes/1/seguimientos">Seguimientos</Link>
+                                            </li>
+                                        </ul>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/user/logout" onClick={logout} title="Salir"><i className="bi bi-box-arrow-in-right"></i></Link>
