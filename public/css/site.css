@@ -479,6 +479,22 @@ form button[type="submit"] {
     animation: growUp .25s;
 }
 
+/* Listas de ítems */
+
+.list-group-item {
+	margin-top: 0.2rem;
+	margin-bottom: 0.2rem;
+	border-radius: inherit;
+}
+
+.list-group-item:hover {
+	border-color: var(--default-color-theme);
+}
+
+.list-group-item+.list-group-item {
+	border-top-width: 0.1rem;
+}
+
 /* Página de error 404 */
 
 .not-found-wrapper {
