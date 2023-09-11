@@ -5,9 +5,10 @@ import Welcome from "../components/home/Welcome";
 
 // Acciones de usuario
 import AuthenticationForms from "../components/auth/AuthenticationForms";
-import Profile from "../components/user/Profile";
+import PanelDeUsuario from "../components/user/PanelDeUsuario";
 import { TurnoDetalle } from "../components/user/TurnoDetalle";
 import Notifications from "../components/user/Notifications";
+import adoptanteTabs from '../config/usuario/adoptanteTabs.json';
 
 // Refugios
 import Shelter from '../components/shelter/Shelter';
@@ -43,28 +44,30 @@ export const router = createBrowserRouter([
                         element: <AuthenticationForms />
                     },
                     {
-                        path: "/adoptantes/:id/perfil",
-                        element: <Profile seccionActiva="perfil" />
+                        path: `/adoptantes/:id/${adoptanteTabs.datosPersonales}`,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.datosPersonales} />
                     },
                     {
-                        path: "/adoptantes/:id/formulario-pre-adopcion",
-                        element: <Profile seccionActiva="formulario-pre-adopcion" />
+                        path: `/adoptantes/:id/${adoptanteTabs.formularioPreAdopcion}`,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.formularioPreAdopcion} />
                     },
                     {
-                        path: "/adoptantes/:id/mis-adopciones",
-                        element: <Profile seccionActiva="mis-adopciones" />
+                        path: `/adoptantes/:id/${adoptanteTabs.misAdopciones}`,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misAdopciones} />
                     },
                     {
-                        path: "/adoptantes/:id/mis-turnos",
-                        element: <Profile seccionActiva="mis-turnos" />
+                        path: `/adoptantes/:id/${adoptanteTabs.misTurnos}`,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misTurnos} />,
+                        children: [
+                            {
+                                path: `/adoptantes/:id/${adoptanteTabs.misTurnos}/:turnoId`,
+                                element: <TurnoDetalle />
+                            }
+                        ]
                     },
                     {
-                        path: "/adoptantes/:id/seguimientos",
-                        element: <Profile seccionActiva="seguimientos" />
-                    },
-                    {
-                        path: "/adoptantes/:id/turnos/:id",
-                        element: <TurnoDetalle />
+                        path: `/adoptantes/:id/${adoptanteTabs.seguimientos}`,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.seguimientos} />
                     },
                     {
                         path: "user/notifications",

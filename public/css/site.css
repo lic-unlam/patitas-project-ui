@@ -153,6 +153,11 @@ blockquote {
 	padding-bottom: 1.5rem;
 }
 
+.title {
+	font-family: 'Quicksand';
+	font-size: x-large;
+}
+
 /* Barra de navegación */
 
 .navbar {
@@ -454,6 +459,24 @@ form button[type="submit"] {
 .modal-header {
 	justify-content: center;
 	padding: 0.5rem;
+}
+
+/* Ventana emergente */
+
+.custom-modal-wrapper {
+    position: fixed;
+	width: max-content;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    overflow: hidden;
+    z-index: 1111;
+    background-color: white;
+	padding: 1rem;
+    border-radius: var(--default-border-radius);
+    border: 1px solid #4c98ef;
+    box-shadow: 1px 1px 7px 1px #4c98ef;
+    animation: growUp .25s;
 }
 
 /* Página de error 404 */
