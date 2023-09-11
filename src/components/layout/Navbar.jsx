@@ -79,10 +79,10 @@ function Navbar(props) {
                             </div> :
                             <ul className="navbar-nav user-actions">
                                 <li className="nav-item">
-                                    <Link className="nav-link nav-text-username" to="/user/profile" title={userDataObject.email}>{userDataObject.username}</Link>
+                                    <Link className="nav-link nav-text-username" to="/adoptantes/1/perfil" title={userDataObject.email}>{userDataObject.username}</Link>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/user/profile" title="Ver perfil"><img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/></Link>
+                                    <Link className="nav-link" to="/adoptantes/1/perfil" title="Ver perfil"><img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/></Link>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/user/notifications" title="Notificaciones"><i className="bi bi-bell"></i></Link>
