@@ -29,7 +29,7 @@ export const TurnoDetalle = () => {
         <CustomModal>
             <h4 className="title">Turno pendiente para visitar el refugio "<Link to="/shelter/1">San Pedro</Link>"</h4>
             <hr/>
-            <button className="btn btn-sm btn-outline-dark">Ver solicitud de adopción</button>
+            <Link to="/adoptantes/1/mis-adopciones/1" className="btn btn-sm btn-outline-dark">Ver solicitud de adopción</Link>
             <p className="card-text pt-2 mb-1">Se te ha reservado un turno para visitar el refugio en la siguiente fecha:</p>
             <p><b>20/11/2022 a las 12:00 hs.</b></p>
             <button type="button" className="btn btn-danger me-4" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.cancelarAdopcion)}>

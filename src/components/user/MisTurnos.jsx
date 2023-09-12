@@ -3,6 +3,17 @@ import { Link, Outlet } from "react-router-dom";
 const MisTurnos = () => {
     return (
         <div id="mis_turnos_wrapper">
+            <div className="row justify-content-center mb-4">
+                <label className="col-auto my-auto">Filtrar por: </label>
+                <div className="col-10 col-md-4">
+                    <select className="form-select" aria-label="Default select example">
+                        <option defaultValue>Todos los refugios</option>
+                        <option value="1">San Pedro</option>
+                        <option value="2">Santuario animal</option>
+                        <option value="3">Cuidados amorosos</option>
+                    </select>
+                </div>
+            </div>
             <h5 className="title">Turnos activos</h5>
             <hr/>
             <div className="list-group">

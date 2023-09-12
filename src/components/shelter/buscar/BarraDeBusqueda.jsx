@@ -9,7 +9,7 @@ export const BarraDeBusqueda = () => {
                         <button id="shelter_search_button" type="button" className="btn"><i className="bi bi-search"></i></button>
                     </div>
                     <div className="form-group row py-2 role-selector-wrapper">
-                        <label className="col-auto">Filtrar por barrio porteño:</label>
+                        <label className="col-auto my-auto">Filtrar por barrio porteño:</label>
                         <div className="col-4">
                             <select id="barrio_selector" className="form-select form-select-sm" aria-label="Seleccionar barrio porteño">
                                 <option value="0" defaultValue>Todos</option>

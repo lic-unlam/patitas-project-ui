@@ -2,7 +2,7 @@ import { Link, Outlet } from "react-router-dom";
 
 const MisAdopciones = () => {
     return (
-        <div id="mis_turnos_wrapper">
+        <div id="mis_adopciones_wrapper">
             <hr/>
             <h5 className="title text-center">Procesos de adopción en curso</h5>
             <hr/>
@@ -78,9 +78,11 @@ const MisAdopciones = () => {
                         <span className="fs-5">Animal a adoptar: </span>
                         <span>Chispita</span>
                     </div>
-                    <p className="text-danger mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
+                    <p className="text-danger mt-2">Interrumpida el 22/11/2022 a las 11:00 hs.</p>
                 </Link>
             </div>
+
+            <Outlet/>
         </div>
     );
 }

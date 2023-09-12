@@ -42,19 +42,19 @@ function Navbar(props) {
                     <div className="offcanvas-body" id="navbarSupportedContent">
                         <ul className="navbar-nav">
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                     Foros
-                                </Link>
+                                </button>
                                 <ul className="dropdown-menu">
                                     <li><Link className="dropdown-item" to="/forum/missing">Mascotas perdidas</Link></li>
                                     <li><Link className="dropdown-item" to="/foros/animales-callejeros">Animales callejeros</Link></li>
-                                    <li><hr className="dropdown-divider"/></li>
+                                    <div className="dropdown-divider"></div>
                                     <li><Link className="dropdown-item" to="/foros/novedades">Noticias</Link></li>
                                     <li><Link className="dropdown-item" to="/foros/promociones">Promociones</Link></li>
-                                    <li><hr className="dropdown-divider"/></li>
+                                    <div className="dropdown-divider"></div>
                                     <li><Link className="dropdown-item" to="/foros/soporte">Ayuda y asistencia</Link></li>
                                     <li><Link className="dropdown-item" to="/foros/sugerencias">Sugerencias</Link></li>
-                                    <li><hr className="dropdown-divider"/></li>
+                                    <div className="dropdown-divider"></div>
                                     <li><Link className="dropdown-item" to="/forum">Ver todos</Link></li>
                                 </ul>
                             </li>
@@ -85,28 +85,28 @@ function Navbar(props) {
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/user/notifications" title="Notificaciones"><i className="bi bi-bell"></i></Link>
                                 </li>
-                                    <li className="nav-item dropdown">
-                                        <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/>
-                                        </button>
-                                        <ul className="dropdown-menu dropdown-menu-end">
-                                            <li>
-                                                <Link className="dropdown-item" to="/adoptantes/1/datos-personales">Datos personales</Link>
-                                            </li>
-                                            <div className="dropdown-divider"></div>
-                                            <li>
-                                                <Link className="dropdown-item" to="/adoptantes/1/formulario-pre-adopcion">Formulario pre-adopción</Link>
-                                            </li>
-                                            <li>
-                                                <Link className="dropdown-item" to="/adoptantes/1/mis-adopciones">Mis adopciones</Link>
-                                            </li>
-                                            <li>
-                                                <Link className="dropdown-item" to="/adoptantes/1/mis-turnos">Mis turnos</Link>
-                                            </li>
-                                            <li>
-                                                <Link className="dropdown-item" to="/adoptantes/1/seguimientos">Seguimientos</Link>
-                                            </li>
-                                        </ul>
+                                <li className="nav-item dropdown">
+                                    <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/>
+                                    </button>
+                                    <ul className="dropdown-menu dropdown-menu-end">
+                                        <li>
+                                            <Link className="dropdown-item" to="/adoptantes/1/datos-personales">Datos personales</Link>
+                                        </li>
+                                        <div className="dropdown-divider"></div>
+                                        <li>
+                                            <Link className="dropdown-item" to="/adoptantes/1/formulario-pre-adopcion">Formulario pre-adopción</Link>
+                                        </li>
+                                        <li>
+                                            <Link className="dropdown-item" to="/adoptantes/1/mis-adopciones">Mis adopciones</Link>
+                                        </li>
+                                        <li>
+                                            <Link className="dropdown-item" to="/adoptantes/1/mis-turnos">Mis turnos</Link>
+                                        </li>
+                                        <li>
+                                            <Link className="dropdown-item" to="/adoptantes/1/seguimientos">Seguimientos</Link>
+                                        </li>
+                                    </ul>
                                 </li>
                                 <li className="nav-item">
                                     <Link className="nav-link" to="/user/logout" onClick={logout} title="Salir"><i className="bi bi-box-arrow-in-right"></i></Link>

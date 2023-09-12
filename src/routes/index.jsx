@@ -6,6 +6,7 @@ import Welcome from "../components/home/Welcome";
 // Acciones de usuario
 import AuthenticationForms from "../components/auth/AuthenticationForms";
 import PanelDeUsuario from "../components/user/PanelDeUsuario";
+import { AdopcionDetalle } from "../components/user/secciones/detalles/AdopcionDetalle";
 import { TurnoDetalle } from "../components/user/TurnoDetalle";
 import Notifications from "../components/user/Notifications";
 import adoptanteTabs from '../config/usuario/adoptanteTabs.json';
@@ -53,7 +54,13 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: `/adoptantes/:id/${adoptanteTabs.misAdopciones}`,
-                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misAdopciones} />
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misAdopciones} />,
+                        children: [
+                            {
+                                path: `/adoptantes/:id/${adoptanteTabs.misAdopciones}/:solicitudId`,
+                                element: <AdopcionDetalle />
+                            }
+                        ]
                     },
                     {
                         path: `/adoptantes/:id/${adoptanteTabs.misTurnos}`,
