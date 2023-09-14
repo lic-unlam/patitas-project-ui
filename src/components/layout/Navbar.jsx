@@ -24,7 +24,7 @@ function Navbar(props) {
     return (
         <nav className="navbar bg-white fixed-top navbar-expand-md">
             <div className="container">
-                <Link className="navbar-brand" to="/"><img className='img-fluid patitas-logo' src='/img/patitas.png' alt="patitas_logo"/>
+                <Link className="navbar-brand" to="/"><img className='img-fluid patitas-logo' src='/img/patitas_logo.png' alt="patitas_logo"/>
                     <span> Patitas</span>
                 </Link>
                 <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar">

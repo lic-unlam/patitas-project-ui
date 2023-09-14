@@ -41,7 +41,7 @@ const MisAdopciones = () => {
                         <span className="fs-5">Animal a adoptar: </span>
                         <span>Chispita</span>
                     </div>
-                    <p className="text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
+                    <p className="fw-bold text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
                 </Link>
                 <Link to="/adoptantes/1/mis-adopciones/1" className="list-group-item list-group-item-action">
                     <div>
@@ -56,7 +56,7 @@ const MisAdopciones = () => {
                         <span className="fs-5">Animal a adoptar: </span>
                         <span>Chispita</span>
                     </div>
-                    <p className="text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
+                    <p className="fw-bold text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
                 </Link>
             </div>
 
@@ -78,7 +78,7 @@ const MisAdopciones = () => {
                         <span className="fs-5">Animal a adoptar: </span>
                         <span>Chispita</span>
                     </div>
-                    <p className="text-danger mt-2">Interrumpida el 22/11/2022 a las 11:00 hs.</p>
+                    <p className="fw-bold text-danger mt-2">Interrumpida el 22/11/2022 a las 11:00 hs.</p>
                 </Link>
             </div>
 

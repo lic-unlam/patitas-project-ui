@@ -7,6 +7,7 @@
 
 .shelter-card .card-body .title, .shelter-card .card-body .stars {
     font-family: 'Quicksand';
+    font-size: larger;
     font-weight: bold;
     color: initial;
 }

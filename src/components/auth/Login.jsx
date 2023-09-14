@@ -9,8 +9,8 @@ function Login(props) {
 
 		try {
 			const userData = {
-				username: 'cosme_fulanito',
-				email: 'cosme.fulanito@gmail.com',
+				username: 'adoptante.test',
+				email: 'adoptante.test@gmail.com',
 				profilePicture: '/img/default_profile_picture.png'
 			};
 

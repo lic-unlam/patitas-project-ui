@@ -3,6 +3,7 @@ import { useLocation, useParams, useNavigate } from "react-router-dom";
 import PreAdoptionForm from "./PreAdoptionForm";
 import MisAdopciones from "./MisAdopciones";
 import MisTurnos from "./MisTurnos";
+import MisSeguimientos from "./MisSeguimientos";
 
 const PanelDeUsuario = (props) => {
 	const location = useLocation();
@@ -57,17 +58,17 @@ const PanelDeUsuario = (props) => {
 						</div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.formularioPreAdopcion ? "show active" : ""}`} id={`pills-${props.tabs.formularioPreAdopcion}`} role="tabpanel">
                             <div className="row">
-                                <PreAdoptionForm/>
+                                <PreAdoptionForm />
                             </div>
                         </div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.misAdopciones ? "show active" : ""}`} id={`pills-${props.tabs.misAdopciones}`} role="tabpanel">
-                            <MisAdopciones/>
+                            <MisAdopciones />
                         </div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.misTurnos ? "show active" : ""}`} id={`pills-${props.tabs.misTurnos}`} role="tabpanel">
-                            <MisTurnos/>
+                            <MisTurnos />
                         </div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.seguimientos ? "show active" : ""}`} id={`pills-${props.tabs.seguimientos}`} role="tabpanel">
-                            Seguimientos
+                            <MisSeguimientos />
                         </div>
 					</div>
 				</div>

@@ -24,7 +24,7 @@ function LandingPage() {
                 </div>
                 <div className="col-12 col-md-6">
                     <div className="logo-wrapper">
-                        <img className="img-fluid py-4" src="/img/patitas.png" alt="patitas_logo"/>
+                        <img className="img-fluid py-4" src="/img/patitas_logo.png" alt="patitas_logo"/>
                     </div>
                 </div>
                 <div id="see_next" onClick={scrollToFeatures}>

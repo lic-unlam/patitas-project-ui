@@ -44,8 +44,8 @@ function Publication() {
                         </div>
                         <div className="post-content">
                             <div className="request-adoption">
-                                <h4>¿Te gustaría adoptarlo? ¿Quieres verlo en persona?</h4>
-                                <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Iniciar proceso de adopción</button>
+                                <h4>¿Te gustaría adoptarme? ¿Quieres verme en persona?</h4>
+                                <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
                             </div>
                             <div className="information">
                                 <span>Nombre:</span>
