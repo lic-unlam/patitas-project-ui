@@ -83,7 +83,7 @@ body {
 }
 
 #root > :nth-child(2):not(section) {
-	padding-top: 5rem;
+	padding-top: 4rem;
 }
 
 :root {
@@ -143,6 +143,10 @@ a{
 	background-color: #d3389a !important;
     color: white !important;
     border-color: #d3389a !important;
+}
+
+.alert-success {
+	background-color: #baffbc;
 }
 
 button[class*="btn-"]:hover, a[class*="btn-"]:hover {
@@ -557,4 +561,12 @@ form button[type="submit"] {
 
 .not-found-wrapper img {
 	border-radius: var(--default-border-radius);
+}
+
+/* Alerts */
+
+.alert-sticky {
+	position: sticky;
+	z-index: 1029; /* el z-index del navbar es 1030 */
+	top: 3.5rem;
 }

@@ -13,7 +13,7 @@ export const AdopcionDetalle = () => {
                         <p>20/11/2022 a las 12:00 hs.</p>
                         <span className="fs-6 fw-bold">Animal que quieres adoptar:</span>
                         <p>Chispita - Raza Border Collie (Macho)</p>
-                        <Link to="/refugios/1/publication/1" className="btn btn-sm btn-primary">Ver ficha</Link>
+                        <Link to="/refugios/1/animales/1" className="btn btn-sm btn-primary">Ver ficha</Link>
                         <div className="custom-modal-animal-img-wrapper">
                             <img src="/img/shelter/animals/thumbnail_1.jpg" alt="perro" />
                         </div>
