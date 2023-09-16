@@ -22,7 +22,7 @@ function Navbar(props) {
     }
 
     return (
-        <nav className="navbar bg-white fixed-top navbar-expand-md">
+        <nav className="navbar bg-white py-1 fixed-top navbar-expand-md">
             <div className="container">
                 <Link className="navbar-brand" to="/"><img className='img-fluid patitas-logo' src='/img/patitas_logo.png' alt="patitas_logo"/>
                     <span> Patitas</span>
@@ -59,35 +59,33 @@ function Navbar(props) {
                                 </ul>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to="/shelter">Explorar refugios</Link>
+                                <Link className="nav-link" to="/refugios">Explorar refugios</Link>
                             </li>
                         </ul>
                         {/*<form id="search_wrapper" className="d-flex ms-auto">
                             <Search/>
                         </form>*/}
-                        <div className="navbar-nav pe-4 ms-auto">
+                        <ul className="navbar-nav mx-auto">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/refugios/buscador"><i className="bi bi-search"></i> Buscar refugios</Link>
                             </li>
-                        </div>
+                        </ul>
                         {!userDataString ?
-                            <div className="nav-item">
                             <ul className="navbar-nav auth-wrapper">
-                                <li>
+                                <li className="nav-item">
                                     <Link id="signin" to="/auth/signin" className="btn btn-primary">Acceder</Link>
                                 </li>
-                            </ul>
-                            </div> :
+                            </ul> :
                             <ul className="navbar-nav user-actions">
                                 <li className="nav-item">
-                                    <Link className="nav-link nav-text-username" to="/adoptantes/1/datos-personales" title={userDataObject.email}>{userDataObject.username}</Link>
+                                    <span className="nav-link nav-text-username" title={userDataObject.email}>{userDataObject.username}</span>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/user/notifications" title="Notificaciones"><i className="bi bi-bell"></i></Link>
+                                    <Link className="nav-link icon" to="/usuarios/notificaciones" title="Notificaciones"><i className="bi bi-bell"></i></Link>
                                 </li>
                                 <li className="nav-item dropdown">
-                                    <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture"/>
+                                    <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Panel de usuario">
+                                    <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture" />
                                     </button>
                                     <ul className="dropdown-menu dropdown-menu-end">
                                         <li>
@@ -106,10 +104,20 @@ function Navbar(props) {
                                         <li>
                                             <Link className="dropdown-item" to="/adoptantes/1/seguimientos">Seguimientos</Link>
                                         </li>
+                                        <div className="dropdown-divider"></div>
+                                        <li>
+                                            <Link className="dropdown-item" to="/administradores/1/panel/activaciones">Activación refugio/veterinaria</Link>
+                                        </li>
+                                        <li>
+                                            <Link className="dropdown-item" to="/administradores/1/panel/abm-usuarios">ABM de usuarios</Link>
+                                        </li>
+                                        <li>
+                                            <Link className="dropdown-item" to="/administradores/1/panel/moderar-foro">Moderar foro</Link>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li className="nav-item">
-                                    <Link className="nav-link" to="/user/logout" onClick={logout} title="Salir"><i className="bi bi-box-arrow-in-right"></i></Link>
+                                    <Link className="nav-link icon" to="/user/logout" onClick={logout} title="Salir"><i className="bi bi-box-arrow-in-right"></i></Link>
                                 </li>
                             </ul>
                         }

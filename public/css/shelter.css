@@ -70,11 +70,11 @@
 	padding-bottom: calc(var(--bs-gutter-x) * .5);
 }
 
-.thumbnails-wrapper > * img:hover {
+.thumbnails-wrapper > * .animal-thumbnail:hover {
     outline: 1px solid var(--default-color-theme);
 }
 
-.thumbnails-wrapper img {
+.thumbnails-wrapper .animal-thumbnail {
     border-radius: var(--default-border-radius);
     width: 300px;
 	height: 300px;
@@ -147,11 +147,14 @@
 }
 
 .close-button > button {
-    padding-right: 0.75rem !important;
+    /*padding-right: 0.75rem !important;*/
+    padding-right: 0 !important;
+    padding-left: 0 !important;
 }
 
 .post-content {
-    height: calc(100% - 60px);
+    /*height: calc(100% - 60px);*/
+    height: 100%;
     overflow-y: auto;
     padding-right: 1rem;
     padding-bottom: 1rem;

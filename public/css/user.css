@@ -70,3 +70,20 @@
     object-fit: cover;
     border-radius: 1rem;
 }
+
+/* Administrador */
+
+.datos-de-usuario img {
+    width: 50px;
+    border: 1px solid var(--default-border-color);
+    border-radius: 50%;
+}
+
+.datos-de-usuario span {
+    font-weight: bold;
+}
+
+.accordion-button:focus {
+    border-color: transparent;
+    box-shadow: none;
+}

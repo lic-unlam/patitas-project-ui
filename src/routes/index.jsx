@@ -1,22 +1,37 @@
-import { createBrowserRouter } from "react-router-dom";
+import { createBrowserRouter, Navigate } from "react-router-dom";
 
 // Home
-import Welcome from "../components/home/Welcome";
+import Bienvenida from "../components/home/Bienvenida";
 
-// Acciones de usuario
-import AuthenticationForms from "../components/auth/AuthenticationForms";
-import PanelDeUsuario from "../components/user/PanelDeUsuario";
-import { AdopcionDetalle } from "../components/user/secciones/detalles/AdopcionDetalle";
-import { TurnoDetalle } from "../components/user/TurnoDetalle";
-import { SeguimientoDetalle } from "../components/user/secciones/detalles/SeguimientoDetalle";
-import Notifications from "../components/user/Notifications";
+// Adoptante
+import Autenticacion from "../components/auth/Autenticacion";
+import PanelDeUsuario from "../components/usuario/PanelDeUsuario";
+import { AdopcionDetalle } from "../components/usuario/secciones/detalles/AdopcionDetalle";
+import { TurnoDetalle } from "../components/usuario/secciones/detalles/TurnoDetalle";
+import { SeguimientoDetalle } from "../components/usuario/secciones/detalles/SeguimientoDetalle";
+import Notificaciones from "../components/usuario/Notificaciones";
 import adoptanteTabs from '../config/usuario/adoptanteTabs.json';
 
+// Administrador
+import PanelDeAdministrador from "../components/usuario/administrador/PanelDeAdministrador";
+import { ActivarUsuarios } from "../components/usuario/administrador/secciones/ActivarUsuarios";
+import { ABMUsuarios } from "../components/usuario/administrador/secciones/ABMUsuarios";
+import { ModerarForo } from "../components/usuario/administrador/secciones/ModerarForo";
+import { PerfilAdministrador } from "../components/usuario/administrador/secciones/PerfilAdministrador";
+
 // Refugios
-import Shelter from '../components/shelter/Shelter';
-import ShelterDetails from '../components/shelter/ShelterDetails';
-import Publication from "../components/shelter/sections/Publication";
-import BuscadorDeRefugios from "../components/shelter/buscar/BuscadorDeRefugios";
+import ExplorarRefugios from '../components/refugio/ExplorarRefugios';
+import RefugioDetalle from '../components/refugio/RefugioDetalle';
+
+import Animales from "../components/refugio/secciones/Animales";
+import Comentarios from "../components/refugio/secciones/Comentarios";
+import VeterinariasAsociadas from "../components/refugio/secciones/VeterinariasAsociadas";
+import MasInformacion from "../components/refugio/secciones/MasInformacion";
+import shelterDb from '../components/helpers/sheltersDb.json';
+
+import AnimalDetalle from "../components/refugio/secciones/AnimalDetalle";
+import BuscadorDeRefugios from "../components/refugio/buscar/BuscadorDeRefugios";
+import refugioTabs from '../config/refugio/refugioTabs.json';
 
 // Foro
 import Forum from "../components/forum/Forum";
@@ -39,11 +54,11 @@ export const router = createBrowserRouter([
                 children: [
                     {
                         index: true,
-                        element: <Welcome />
+                        element: <Bienvenida />
                     },
                     {
                         path: "/auth/signin",
-                        element: <AuthenticationForms />
+                        element: <Autenticacion />
                     },
                     {
                         path: `/adoptantes/:id/${adoptanteTabs.datosPersonales}`,
@@ -88,8 +103,34 @@ export const router = createBrowserRouter([
                         element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.seguimientos} />
                     },
                     {
-                        path: "user/notifications",
-                        element: <Notifications />
+                        path: "usuarios/notificaciones",
+                        element: <Notificaciones />
+                    },
+                    {
+                        path: "/administradores/:id/panel",
+                        element: <PanelDeAdministrador />,
+                        children: [
+                            {
+                                index: true,
+                                element: <ActivarUsuarios title="Activar refugio/veterinaria" />
+                            },
+                            {
+                                path: "activaciones",
+                                element: <ActivarUsuarios title="Activar refugio/veterinaria" />
+                            },
+                            {
+                                path: "abm-usuarios",
+                                element: <ABMUsuarios title="ABM de usuarios" />
+                            },
+                            {
+                                path: "moderar-foro",
+                                element: <ModerarForo title="Moderar foro" />
+                            },
+                            {
+                                path: "datos-personales",
+                                element: <PerfilAdministrador title="Datos personales" />
+                            }
+                        ]
                     },
                     {
                         path: "/forum",
@@ -112,19 +153,69 @@ export const router = createBrowserRouter([
                         element: <Missing />
                     },
                     {
-                        path: "/shelter",
-                        element: <Shelter />
+                        path: "/refugios",
+                        element: <ExplorarRefugios title="Explorar refugios" />
                     },
                     {
-                        path: "/shelter/:id",
-                        element: <ShelterDetails />,
+                        path: "/refugios/:id",
+                        element: <RefugioDetalle />,
                         children: [
                             {
-                                path: "/shelter/:id/publication/:postid", // es obligatorio que lo combine el path padre
-                                element: <Publication />
+                                path: "animales",
+                                element: <Animales title="Animales en el refugio" />,
+                                children: [
+                                    {
+                                        path: ":animalId",
+                                        element: <AnimalDetalle title="Ver animal" />
+                                    }
+                                ]
+                            },
+                            {
+                                path: "comentarios",
+                                element: <Comentarios title="Comentarios del refugio" />
+                            },
+                            {
+                                path: "veterinarias-asociadas",
+                                element: <VeterinariasAsociadas title="Veterinarias asociadas del refugio" />
+                            },
+                            {
+                                path: "mas-informacion",
+                                element: <MasInformacion shelterDb={shelterDb} title="Más información del refugio" />
                             }
                         ]
                     },
+                    /*{
+                        path: "/refugios/:id",
+                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.animales} />,
+                        children: [
+                            {
+                                path: "/refugios/:id/publicacion/:postid", // es obligatorio que lo combine el path padre
+                                element: <AnimalDetalle />
+                            }
+                        ]
+                    },
+                    {
+                        path: "/refugios/:id/animales",
+                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.animales} title="Refugio" />,
+                        children: [
+                            {
+                                path: "/refugios/:id/animales/:animalId", // es obligatorio que lo combine el path padre
+                                element: <AnimalDetalle />
+                            }
+                        ]
+                    },
+                    {
+                        path: "/refugios/:id/comentarios",
+                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.comentarios} />
+                    },
+                    {
+                        path: "/refugios/:id/veterinarias-asociadas",
+                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.veterinariasAsociadas} />
+                    },
+                    {
+                        path: "/refugios/:id/mas-informacion",
+                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.masInformacion} />
+                    },*/
                     {
                         path: "/refugios/buscador",
                         element: <BuscadorDeRefugios />

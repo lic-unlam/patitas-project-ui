@@ -233,6 +233,7 @@ blockquote {
 	font-size: 0.9rem !important;
 	background-color: #efefef;
     border-radius: 0.5rem;
+	padding: 0;
 }
 
 .nav-text-username:hover {
@@ -243,10 +244,15 @@ blockquote {
 	margin: auto;
 }
 
-.user-actions > li > a {
+/*.user-actions > li > a {
 	font-size: 1.5rem;
 	padding-top: 0;
 	padding-bottom: 0;
+}*/
+
+.user-actions > .nav-item > .nav-link.icon {
+	font-size: 1.5rem;
+	padding: 0 0.5rem;
 }
 
 .nav-profile-picture {

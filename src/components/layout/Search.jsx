@@ -16,7 +16,7 @@ export const Search = (props) => {
 
 	const suggestionClick = (event, id) => {
 		event.preventDefault();
-		navigate(`/shelter/${id}`);
+		navigate(`/refugios/${id}`);
 		document.querySelector('.suggestions-wrapper').style = "display: none;";
 	}
 
