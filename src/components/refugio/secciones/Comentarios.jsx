@@ -97,7 +97,10 @@ const Comentarios = (props) => {
     return (
         <>
         {contenidoAlert.mostrar && <CustomAlert tipo={contenidoAlert.tipo} ocultarAlert={ocultarAlert}>{contenidoAlert.mensaje}</CustomAlert>}
-        <div id="comentarios_wrapper" className="row justify-content-center">
+        <div className="alert alert-warning border-warning text-center" role="alert">
+            Sólo aquellos que hayan adoptado al menos un animal de este refugio pueden comentar. <strong>¡Anímate!</strong>
+        </div>
+        <div id="comentar_wrapper" className="row justify-content-center">
             <div className="col">
                 <div className="card">
                     <h5 className="card-header fw-bold">Cuentános tu experiencia</h5>
@@ -122,15 +125,15 @@ const Comentarios = (props) => {
                                 </form>
                             </div>
                             <div className="col-12 col-md-3">
-                                <img className="img-fluid" width={200} src="https://img.freepik.com/vector-premium/lindo-gato-trabajando-portatil-escribiendo-papel-ilustracion-icono-dibujos-animados_138676-2267.jpg?w=2000" alt="gato_escribiendo" />
+                                <img className="img-fluid" width={200} src="/img/posts/gato-trabajando-portatil.avif" alt="gato_escribiendo" />
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="row pt-4">
-                {comments_loop()}
-            </div>
+        </div>
+        <div id="comentarios_wrapper" className="row pt-4">
+            {comments_loop()}
         </div>
         </>
     );

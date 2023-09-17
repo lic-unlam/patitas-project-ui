@@ -19,8 +19,9 @@ const RefugioDetalle = (props) => {
     useEffect(() => {
 		if(!cargado.current) {
 			cargado.current = true;
-
-			if(!location.pathname.includes("/animales"))
+			let regExp = new RegExp("/", "gi"); // g: buscar todas las ocurrencias, i: no sensible a mayúsculas
+			
+			if(location.pathname.match(regExp).length === 2)
 				navigate(`/refugios/${params.id}/animales`, {
 					replace: true
 				});

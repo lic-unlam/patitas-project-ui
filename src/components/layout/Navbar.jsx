@@ -106,7 +106,7 @@ function Navbar(props) {
                                         </li>
                                         <div className="dropdown-divider"></div>
                                         <li>
-                                            <Link className="dropdown-item" to="/administradores/1/panel/activaciones">Activación refugio/veterinaria</Link>
+                                            <Link className="dropdown-item" to="/administradores/1/panel/activaciones">Activar refugio/veterinaria</Link>
                                         </li>
                                         <li>
                                             <Link className="dropdown-item" to="/administradores/1/panel/moderar-foro">Moderar foro</Link>
