@@ -2,9 +2,14 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import CustomAlert from '../../layout/CustomAlert';
+import { ProhibidoComentario } from './comentarios/ProhibidoComentario';
+import { CrearComentario } from './comentarios/CrearComentario';
+import { EditarComentario } from './comentarios/EditarComentario';
 
 const Comentarios = (props) => {
     const [descripcionEstrella, setDescripcionEstrella] = useState({ nroEstrella: 0, leyenda: "" });
+    const [tieneComentario, setTieneComentario] = useState(false);
+
     const [ contenidoAlert, setContenidoAlert ] = useState({
         mostrar: false,
         tipo: "",
@@ -88,6 +93,8 @@ const Comentarios = (props) => {
             tipo: "success",
             mensaje: <span><strong>¡Gracias por dejar tu comentario!</strong> Se mostrará una vez que haya sido aprobado por un administrador.</span>
         });
+
+        setTieneComentario(true);
     }
 
     const ocultarAlert = () => {
@@ -97,10 +104,15 @@ const Comentarios = (props) => {
     return (
         <>
         {contenidoAlert.mostrar && <CustomAlert tipo={contenidoAlert.tipo} ocultarAlert={ocultarAlert}>{contenidoAlert.mensaje}</CustomAlert>}
-        <div className="alert alert-warning border-warning text-center" role="alert">
-            Sólo aquellos que hayan adoptado al menos un animal de este refugio pueden comentar. <strong>¡Anímate!</strong>
-        </div>
-        <div id="comentar_wrapper" className="row justify-content-center">
+        <ProhibidoComentario />
+        {!tieneComentario ? <CrearComentario
+            descripcionEstrella={descripcionEstrella}
+            mostrarDescripcionEstrella={mostrarDescripcionEstrella}
+            limpiarDescripcionEstrella={limpiarDescripcionEstrella}
+            agregarComentario={agregarComentario}
+        /> :
+        <EditarComentario setTieneComentario={setTieneComentario} />}
+        {/*<div id="comentar_wrapper" className="row justify-content-center">
             <div className="col">
                 <div className="card">
                     <h5 className="card-header fw-bold">Cuentános tu experiencia</h5>
@@ -131,7 +143,8 @@ const Comentarios = (props) => {
                     </div>
                 </div>
             </div>
-        </div>
+    </div>*/}
+        <hr/>
         <div id="comentarios_wrapper" className="row pt-4">
             {comments_loop()}
         </div>

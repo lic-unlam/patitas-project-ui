@@ -15,8 +15,9 @@ import adoptanteTabs from '../config/usuario/adoptanteTabs.json';
 // Administrador
 import PanelDeAdministrador from "../components/usuario/administrador/PanelDeAdministrador";
 import { ActivarUsuarios } from "../components/usuario/administrador/secciones/ActivarUsuarios";
-import { ABMUsuarios } from "../components/usuario/administrador/secciones/ABMUsuarios";
+import { AprobarComentarios } from "../components/usuario/administrador/secciones/AprobarComentarios";
 import { ModerarForo } from "../components/usuario/administrador/secciones/ModerarForo";
+import { ABMUsuarios } from "../components/usuario/administrador/secciones/ABMUsuarios";
 import { PerfilAdministrador } from "../components/usuario/administrador/secciones/PerfilAdministrador";
 
 // Refugios
@@ -119,12 +120,16 @@ export const router = createBrowserRouter([
                                 element: <ActivarUsuarios title="Activar refugio/veterinaria" />
                             },
                             {
-                                path: "abm-usuarios",
-                                element: <ABMUsuarios title="ABM de usuarios" />
+                                path: "aprobar-comentarios",
+                                element: <AprobarComentarios title="Aprobar comentarios" />
                             },
                             {
                                 path: "moderar-foro",
                                 element: <ModerarForo title="Moderar foro" />
+                            },
+                            {
+                                path: "abm-usuarios",
+                                element: <ABMUsuarios title="ABM de usuarios" />
                             },
                             {
                                 path: "datos-personales",
