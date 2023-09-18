@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-export const EditarComentario = (props) => {
+export const MostrarComentario = (props) => {
     const mostrarFormulario = () => {
         props.setTieneComentario(false);
     }

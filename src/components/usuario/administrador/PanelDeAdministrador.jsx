@@ -22,19 +22,19 @@ const PanelDeAdministrador = () => {
             <h1 className="title">Panel administrativo</h1>
             <ul className="nav nav-underline nav-fill p-4">
                 <li className="nav-item">
-                    <Link to="/administradores/1/panel/activaciones" className={`nav-link ${location.pathname === "/administradores/1/panel/activaciones" ? "active" : "" }`}>Activar usuarios</Link>
+                    <Link to="/administradores/1/activaciones" className={`nav-link ${location.pathname === "/administradores/1/activaciones" ? "active" : "" }`}>Activar usuarios</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/administradores/1/panel/aprobar-comentarios" className={`nav-link ${location.pathname === "/administradores/1/panel/aprobar-comentarios" ? "active" : "" }`}>Aprobar comentarios</Link>
+                    <Link to="/administradores/1/aprobar-comentarios" className={`nav-link ${location.pathname === "/administradores/1/aprobar-comentarios" ? "active" : "" }`}>Aprobar comentarios</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/administradores/1/panel/moderar-foro" className={`nav-link ${location.pathname === "/administradores/1/panel/moderar-foro" ? "active" : "" }`}>Moderar foro</Link>
+                    <Link to="/administradores/1/moderar-foro" className={`nav-link ${location.pathname === "/administradores/1/moderar-foro" ? "active" : "" }`}>Moderar foro</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/administradores/1/panel/abm-usuarios" className={`nav-link ${location.pathname === "/administradores/1/panel/abm-usuarios" ? "active" : "" }`}>ABM usuarios</Link>
+                    <Link to="/administradores/1/abm-usuarios" className={`nav-link ${location.pathname === "/administradores/1/abm-usuarios" ? "active" : "" }`}>ABM usuarios</Link>
                 </li>
                 <li className="nav-item">
-                    <Link to="/administradores/1/panel/datos-personales" className={`nav-link ${location.pathname === "/administradores/1/panel/datos-personales" ? "active" : "" }`}>Datos personales</Link>
+                    <Link to="/administradores/1/datos-personales" className={`nav-link ${location.pathname === "/administradores/1/datos-personales" ? "active" : "" }`}>Datos personales</Link>
                 </li>
             </ul>
             <Outlet context={[ contenidoAlert, setContenidoAlert ]} />

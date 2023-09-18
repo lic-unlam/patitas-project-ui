@@ -108,7 +108,7 @@ export const router = createBrowserRouter([
                         element: <Notificaciones />
                     },
                     {
-                        path: "/administradores/:id/panel",
+                        path: "/administradores/:id",
                         element: <PanelDeAdministrador />,
                         children: [
                             {

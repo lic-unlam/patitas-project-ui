@@ -87,3 +87,11 @@
     border-color: transparent;
     box-shadow: none;
 }
+
+#panel_administrativo_wrapper > div {
+    animation: fadeIn .5s;
+}
+
+#aprobar_comentarios > .comment-wrapper:not(:last-child) {
+    margin-bottom: 2rem;
+}

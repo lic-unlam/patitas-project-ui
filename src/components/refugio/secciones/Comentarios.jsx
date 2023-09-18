@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import CustomAlert from '../../layout/CustomAlert';
 import { ProhibidoComentario } from './comentarios/ProhibidoComentario';
 import { CrearComentario } from './comentarios/CrearComentario';
-import { EditarComentario } from './comentarios/EditarComentario';
+import { MostrarComentario } from './comentarios/MostrarComentario';
 
 const Comentarios = (props) => {
     const [descripcionEstrella, setDescripcionEstrella] = useState({ nroEstrella: 0, leyenda: "" });
@@ -111,7 +111,7 @@ const Comentarios = (props) => {
             limpiarDescripcionEstrella={limpiarDescripcionEstrella}
             agregarComentario={agregarComentario}
         /> :
-        <EditarComentario setTieneComentario={setTieneComentario} />}
+        <MostrarComentario setTieneComentario={setTieneComentario} />}
         {/*<div id="comentar_wrapper" className="row justify-content-center">
             <div className="col">
                 <div className="card">
