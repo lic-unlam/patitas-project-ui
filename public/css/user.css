@@ -95,3 +95,18 @@
 #aprobar_comentarios > .comment-wrapper:not(:last-child) {
     margin-bottom: 2rem;
 }
+
+/* Lista de vacunas */
+
+.lista-de-vacunas ul {
+    font-size: 0.8rem;
+}
+
+.lista-de-vacunas ul > li:first-child {
+    width: 100%;
+    text-align: left;
+}
+
+.lista-de-vacunas ul > li:last-child {
+    width: 50%;
+}

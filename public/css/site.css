@@ -575,3 +575,53 @@ form button[type="submit"] {
 	z-index: 1029; /* el z-index del navbar es 1030 */
 	top: 3.5rem;
 }
+
+/* Grilla */
+
+.grilla-de-items {
+	margin-top: 0.5rem;
+	border: 0 !important;
+	width: 100%;
+}
+
+.grilla-de-items ul {
+	align-items: center;
+}
+
+.grilla-de-items li {
+	border-width: unset;
+	border: none;
+}
+
+.grilla-de-items ul:first-child {
+	font-weight: bold;
+}
+
+.grilla-de-items ul > li:first-child {
+	border-bottom: thin;
+}
+
+/* Hacer blanco y negro la imágen */
+
+.grayscale {
+	filter: grayscale(100%);
+}
+
+@-moz-keyframes spin { 
+	0% { -moz-transform: rotate(0deg); } 
+    100% { -moz-transform: rotate(360deg); } 
+}
+@-webkit-keyframes spin { 
+	0% { -webkit-transform: rotate(0deg); } 
+    100% { -webkit-transform: rotate(360deg); } 
+}
+@keyframes spin { 
+	0% { 
+        -webkit-transform: rotate(0deg); 
+        transform:rotate(0deg); 
+    } 
+    100% { 
+        -webkit-transform: rotate(360deg); 
+        transform:rotate(360deg); 
+    } 
+}

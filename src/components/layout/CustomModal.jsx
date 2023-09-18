@@ -26,7 +26,7 @@ export const CustomModal = (props) => {
             <div className="overlay"></div>
             <div id="custom_modal" className="custom-modal-wrapper mb-2 text-center">
                 {props.children}
-                <button className="btn btn-primary my-2" onClick={cerrarCustomModal}>Cerrar</button>
+                <button className="btn btn-primary mt-4" onClick={cerrarCustomModal}>Cerrar</button>
             </div>
         </>
     );

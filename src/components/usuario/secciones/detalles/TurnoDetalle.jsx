@@ -32,13 +32,13 @@ export const TurnoDetalle = () => {
             <Link to="/adoptantes/1/mis-adopciones/1">Ver solicitud de adopción</Link>
             <p className="card-text pt-2 mb-1">Se te ha reservado un turno para visitar el refugio en la siguiente fecha:</p>
             <p><b>20/11/2022 a las 12:00 hs.</b></p>
-            <button type="button" className="btn btn-danger me-4" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.cancelarAdopcion)}>
+            <button type="button" className="btn btn-danger me-0 me-md-4 my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.cancelarAdopcion)}>
                 <i className="bi bi-x-lg"></i> Cancelar adopción
             </button>
-            <button type="button" className="btn btn-success me-4" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.confirmarAsistencia)}>
+            <button type="button" className="btn btn-success me-0 me-md-4 my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.confirmarAsistencia)}>
                 <i className="bi bi-check-lg"></i> Confirmo asistencia
             </button>
-            <button type="button" className="btn btn-warning" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.reprogramarTurno)}>
+            <button type="button" className="btn btn-warning my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.reprogramarTurno)}>
                 <i className="bi bi-clock"></i> Reprogramar turno
             </button>
             <span style={{'color': 'forestgreen', 'fontStyle': 'italic'}} className="d-block"><i className="bi bi-check-lg h2 align-middle"></i> Asistencia confirmada</span>

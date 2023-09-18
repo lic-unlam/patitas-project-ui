@@ -7,6 +7,7 @@ import Modal from "../../modal/Modal";
 import { CancelarAdopcion } from "../../modal/popups/CancelarAdopcion";
 import { ConfirmarAsistencia } from "../../modal/popups/ConfirmarAsistencia";
 import { ReprogramarTurno } from "../../modal/popups/ReprogramarTurno";
+import PlanDeVacunacion from "../../PlanDeVacunacion";
 
 export const SeguimientoDetalle = () => {
     const [modalActivo, setModalActivo] = useState(''); // por defecto el modal no se carga al DOM
@@ -28,23 +29,20 @@ export const SeguimientoDetalle = () => {
             <h4 className="title">Reserva para vacunación en la veterinaria "<Link to="/refugios/1">El Arca de Noé</Link>"</h4>
             <hr/>
             <Link to="/adoptantes/1/mis-adopciones/1" className="d-block mb-4">Ver solicitud de adopción</Link>
-            <p className="d-inline-flex gap-1">
-                <button className="btn btn-sm btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">Ver plan de vacunación 🠋</button>
-            </p>
-            <div className="collapse" id="collapseExample">
-                <div className="card card-body">
-                    Some placeholder content for the collapse component. This panel is hidden by default but revealed when the user activates the relevant trigger.
+            <div className="row justify-content-center">
+                <div className="col-12 col-md-6">
+                    <PlanDeVacunacion />
                 </div>
             </div>
             <p className="card-text pt-2 mb-1">Se te ha reservado un turno para la aplicación de la vacuna del Parvovirus (1º dosis) a "Chispita" en la siguiente fecha:</p>
             <p><b>20/11/2022 a las 12:00 hs.</b></p>
-            <button type="button" className="btn btn-danger me-4" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.cancelarAdopcion)}>
+            <button type="button" className="btn btn-danger me-0 me-md-4 my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.cancelarAdopcion)}>
                 <i className="bi bi-x-lg"></i> Cancelar adopción
             </button>
-            <button type="button" className="btn btn-success me-4" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.confirmarAsistencia)}>
+            <button type="button" className="btn btn-success me-0 me-md-4 my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.confirmarAsistencia)}>
                 <i className="bi bi-check-lg"></i> Confirmo asistencia
             </button>
-            <button type="button" className="btn btn-warning" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.reprogramarTurno)}>
+            <button type="button" className="btn btn-warning my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.reprogramarTurno)}>
                 <i className="bi bi-clock"></i> Reprogramar turno
             </button>
             <span style={{'color': 'forestgreen', 'fontStyle': 'italic'}} className="d-block"><i className="bi bi-check-lg h2 align-middle"></i> Asistencia confirmada</span>
