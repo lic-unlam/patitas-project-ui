@@ -17,22 +17,24 @@ const Modal = (props) => {
     }, [ocultarModal]);
 
     return (
-        <div className="modal fade" id="modal_popup" tabIndex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modalPopup" aria-hidden="true">
-            <div className="modal-dialog modal-dialog-centered">
-                <div className="modal-content">
-                    <div className="modal-header">
-                        <h5 className="modal-title">{props.title}</h5>
-                    </div>
-                    <div className="modal-body">
-                        {props.element}
-                    </div>
-                    <div className="modal-footer">
-                        <button id="aceptar" type="button" className="btn btn-success me-2" onClick={confirmarModal}>Si</button>
-                        <button id="denegar" type="button" className="btn btn-danger" data-bs-dismiss="modal">No</button>
+        <form>
+            <div className="modal fade" id="modal_popup" tabIndex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modalPopup" aria-hidden="true">
+                <div className="modal-dialog modal-dialog-centered">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title">{props.title}</h5>
+                        </div>
+                        <div className="modal-body">
+                            {props.element}
+                        </div>
+                        <div className="modal-footer">
+                            <button id="aceptar" type="submit" className="btn btn-success me-2" onClick={confirmarModal}>Confirmar</button>
+                            <button id="denegar" type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </form>
     );
 }
 

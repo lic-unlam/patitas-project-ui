@@ -96,6 +96,49 @@
     margin-bottom: 2rem;
 }
 
+.listado-publicaciones {
+    text-align: center;
+    background-color: transparent;
+}
+
+.listado-publicaciones ul, .listado-publicaciones ul > li {
+    background-color: transparent;
+    padding: 0.2rem;
+}
+
+.listado-publicaciones a {
+    color: initial;
+}
+
+.listado-publicaciones a:hover {
+    text-decoration: underline;
+}
+
+.listado-publicaciones ul > li > button {
+    padding-left: 1.2rem !important;
+    padding-right: 1.2rem !important;
+}
+
+.listado-publicaciones ul > li:first-child {
+    width: 20% !important;
+}
+
+.listado-publicaciones ul > li:nth-child(2) {
+    width: 100% !important;
+}
+
+.listado-publicaciones ul > li:nth-child(3) {
+    width: 60% !important;
+}
+
+.listado-publicaciones ul > li:nth-child(4) {
+    width: 40% !important;
+}
+
+.listado-publicaciones ul > li:nth-child(5) {
+    width: 40% !important;
+}
+
 /* Lista de vacunas */
 
 .lista-de-vacunas ul {
