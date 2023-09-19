@@ -20,6 +20,12 @@ import { ModerarForo } from "../components/usuario/administrador/secciones/Moder
 import { ABMUsuarios } from "../components/usuario/administrador/secciones/ABMUsuarios";
 import { PerfilAdministrador } from "../components/usuario/administrador/secciones/PerfilAdministrador";
 
+// Refugio
+import PanelDeRefugio from "../components/usuario/refugio/PanelDeRefugio";
+import { PerfilDeRefugio } from "../components/usuario/refugio/secciones/PerfilDeRefugio";
+import { SolicitudesDeAdopcion } from "../components/usuario/refugio/secciones/SolicitudesDeAdopcion";
+import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detalles/SolicitudDetalle";
+
 // Refugios
 import ExplorarRefugios from '../components/refugio/ExplorarRefugios';
 import RefugioDetalle from '../components/refugio/RefugioDetalle';
@@ -189,6 +195,24 @@ export const router = createBrowserRouter([
                             }
                         ]
                     },
+                    {
+                        path: "/usuarios/:id",
+                        element: <PanelDeRefugio />,
+                        children: [
+                            {
+                                path: "perfil",
+                                element: <PerfilDeRefugio />
+                            },
+                            {
+                                path: "solicitudes-de-adopcion",
+                                element: <SolicitudesDeAdopcion />
+                            }
+                        ]
+                    },
+                    {
+                        path: "/usuarios/:id/solicitudes-de-adopcion/:solicitudId",
+                        element: <SolicitudDetalle />,
+                    }
                     /*{
                         path: "/refugios/:id",
                         element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.animales} />,
@@ -221,10 +245,10 @@ export const router = createBrowserRouter([
                         path: "/refugios/:id/mas-informacion",
                         element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.masInformacion} />
                     },*/
-                    {
+                    /*{
                         path: "/refugios/buscador",
                         element: <BuscadorDeRefugios />
-                    }
+                    }*/
                 ],
             },
         ],

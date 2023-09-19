@@ -49,7 +49,11 @@
     padding-left: 0.5rem;
 }
 
-/* Pestañas de perfil */
+/* Pestañas de usuario */
+
+#panel_de_usuario_wrapper > div {
+    animation: fadeIn .5s;
+}
 
 .tab-pane {
     padding-left: 0;

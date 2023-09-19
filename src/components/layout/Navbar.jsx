@@ -117,6 +117,13 @@ function Navbar(props) {
                                         <li>
                                             <Link className="dropdown-item" to="/administradores/1/abm-usuarios">ABM de usuarios</Link>
                                         </li>
+                                        <div className="dropdown-divider"></div>
+                                        <li>
+                                            <Link className="dropdown-item" to="/usuarios/1/perfil">Datos de perfil</Link>
+                                        </li>
+                                        <li>
+                                            <Link className="dropdown-item" to="/usuarios/1/solicitudes-de-adopcion">Adopciones</Link>
+                                        </li>
                                     </ul>
                                 </li>
                                 <li className="nav-item">
