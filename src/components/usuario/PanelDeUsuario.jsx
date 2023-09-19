@@ -38,19 +38,19 @@ const PanelDeUsuario = (props) => {
                 <div className="col">
 					<ul className="nav nav-pills nav-fill" id="pills-tab" role="tablist">
 						<li className="nav-item" role="presentation">
-							<button className={`nav-link ${props.seccionActiva === props.tabs.datosPersonales ? "active" : ""}`} id={`pills-${props.tabs.datosPersonales}-tab`} data-url={`/adoptantes/${id}/${props.tabs.datosPersonales}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.datosPersonales}`} type="button" role="tab"><i className="bi bi-person-fill"></i> Datos personales</button>
+							<button className={`nav-link ${props.seccionActiva === props.tabs.datosPersonales ? "active" : ""}`} id={`pills-${props.tabs.datosPersonales}-tab`} data-url={`/adoptantes/${id}/${props.tabs.datosPersonales}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.datosPersonales}`} type="button" role="tab"><img src="/img/usuarios/perfil.png" width={32} alt="datos_personales_icon" /> Datos personales</button>
 						</li>
 						<li className="nav-item" role="presentation">
-							<button className={`nav-link ${props.seccionActiva === props.tabs.formularioPreAdopcion ? "active" : ""}`} id={`pills-${props.tabs.formularioPreAdopcion}-tab`} data-url={`/adoptantes/${id}/${props.tabs.formularioPreAdopcion}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.formularioPreAdopcion}`} type="button" role="tab"><i className="bi bi-file-text-fill"></i> Formulario de pre-adopción</button>
+							<button className={`nav-link ${props.seccionActiva === props.tabs.formularioPreAdopcion ? "active" : ""}`} id={`pills-${props.tabs.formularioPreAdopcion}-tab`} data-url={`/adoptantes/${id}/${props.tabs.formularioPreAdopcion}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.formularioPreAdopcion}`} type="button" role="tab"><img src="/img/usuarios/pre_adopcion_2.png" width={32} alt="pre_adopcion_icon" /> Formulario pre-adopción</button>
 						</li>
 						<li className="nav-item" role="presentation">
-							<button className={`nav-link ${props.seccionActiva === props.tabs.misAdopciones ? "active" : ""}`} id={`pills-${props.tabs.misAdopciones}-tab`} data-url={`/adoptantes/${id}/${props.tabs.misAdopciones}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.misAdopciones}`} type="button" role="tab"><i className="bi bi-house-heart-fill"></i> Mis adopciones</button>
+							<button className={`nav-link ${props.seccionActiva === props.tabs.misAdopciones ? "active" : ""}`} id={`pills-${props.tabs.misAdopciones}-tab`} data-url={`/adoptantes/${id}/${props.tabs.misAdopciones}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.misAdopciones}`} type="button" role="tab"><img src="/img/usuarios/perro_corazon.png" width={32} alt="mis_adopciones_icon" /> Mis adopciones</button>
 						</li>
 						<li className="nav-item" role="presentation">
-							<button className={`nav-link ${props.seccionActiva === props.tabs.misTurnos ? "active" : ""}`} id={`pills-${props.tabs.misTurnos}-tab`} data-url={`/adoptantes/${id}/${props.tabs.misTurnos}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.misTurnos}`} type="button" role="tab"><i className="bi bi-gear-fill"></i> Mis turnos</button>
+							<button className={`nav-link ${props.seccionActiva === props.tabs.misTurnos ? "active" : ""}`} id={`pills-${props.tabs.misTurnos}-tab`} data-url={`/adoptantes/${id}/${props.tabs.misTurnos}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.misTurnos}`} type="button" role="tab"><img src="/img/usuarios/turnos.png" width={32} alt="mis_turnos_icon" /> Mis turnos</button>
 						</li>
 						<li className="nav-item" role="presentation">
-							<button className={`nav-link ${props.seccionActiva === props.tabs.seguimientos ? "active" : ""}`} id={`pills-${props.tabs.seguimientos}-tab`} data-url={`/adoptantes/${id}/${props.tabs.seguimientos}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.seguimientos}`} type="button" role="tab"><i className="bi bi-gear-fill"></i> Seguimientos</button>
+							<button className={`nav-link ${props.seccionActiva === props.tabs.seguimientos ? "active" : ""}`} id={`pills-${props.tabs.seguimientos}-tab`} data-url={`/adoptantes/${id}/${props.tabs.seguimientos}`} data-bs-toggle="pill" data-bs-target={`#pills-${props.tabs.seguimientos}`} type="button" role="tab"><img src="/img/usuarios/jeringa.png" width={32} alt="seguimientos_icon" /> Seguimientos</button>
 						</li>
 					</ul>
 					<div className="tab-content" id="pills-tabContent">

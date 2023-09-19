@@ -27,6 +27,7 @@ export const AdopcionDetalle = () => {
                         <div className="d-grid gap-2">
                             <Link to="/adoptantes/1/mis-turnos?refugio_id=1" className="btn btn-sm btn-block btn-success">Turnos</Link>
                             <Link to="/adoptantes/1/seguimientos?veterinaria_id=1" className="btn btn-sm btn-block btn-danger">Seguimiento de vacunación</Link>
+                            <Link to="/refugios/1/comentarios" className="btn btn-sm btn-block btn-warning">Calificar refugio</Link>
                             <PlanDeVacunacion />
                         </div>
                     </div>

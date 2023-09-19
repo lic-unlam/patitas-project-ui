@@ -5,7 +5,6 @@ export const CustomModal = (props) => {
     const navigate = useNavigate();
 
     const cerrarCustomModal = useCallback(() => {
-        document.body.style.overflow = '';
         navigate('..');
     }, [navigate]); // uso 'useCallback' porque voy a utilizar esta función dentro de useEffect
 
@@ -18,7 +17,11 @@ export const CustomModal = (props) => {
 		document.addEventListener("keydown", goBack);
         document.body.style.overflow = "hidden";
 
-		return () => document.removeEventListener("keydown", goBack);
+		return () => {
+            document.removeEventListener("keydown", goBack);
+            document.body.style.overflow = '';
+            return true;
+        };
 	}, [navigate, cerrarCustomModal]);
 
     return (

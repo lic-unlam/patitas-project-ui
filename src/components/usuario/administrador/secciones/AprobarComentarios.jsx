@@ -50,8 +50,7 @@ export const AprobarComentarios = () => {
                 {comentario.aprobado ? <p className="text-success fw-bold"><i className="bi bi-check-lg fs-2 align-middle"></i> Comentario (Nº {comentario.id}) aprobado</p> :
                 <div className="acciones-aprobar-comentario">
                     <button className="btn btn-success me-2" onClick={() => aprobarComentario(comentario.id)}>Aprobar comentario</button>
-                    <button className="btn btn-dark me-2 mt-2 mt-md-0">Ver perfil de adoptante.test</button>
-                    <button className="btn btn-dark mt-2 mt-md-0">Ir al refugio</button>
+                    <button className="btn btn-dark">Ir al refugio</button>
                 </div>}
             </div>
             )

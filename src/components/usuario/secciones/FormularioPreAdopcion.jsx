@@ -6,7 +6,7 @@ const FormularioPreAdopcion = () => {
 
     return (
         <div id="adoption_form_wrapper">
-            <h5 className='alert alert-warning'>Para poder postularse e iniciar el proceso de adopción de un animal, es necesario que completes este formulario para brindarle información a los refugios sobre tu persona y te tengan en consideración.</h5>
+            <h5 className='alert alert-warning border-warning'>Para poder postularse e iniciar el proceso de adopción de un animal, es necesario que completes este formulario para brindarle información a los refugios sobre tu persona y te tengan en consideración.</h5>
             <img className="img-fluid" width={300} src="/img/gato_guiñando_ojo.png" alt="gato_guiñando_ojo"/>
             <div className="card">
                 <div className="row">

@@ -145,6 +145,15 @@ const Comentarios = (props) => {
             </div>
     </div>*/}
         <hr/>
+        <div id="ordenar_comentarios" className="form-group row py-2">
+            <label className="col-auto my-auto">Ordenar por:</label>
+            <div className="col-12 col-md-3 pt-2 pt-md-0">
+                <select id="ordenar_comentarios_select" className="form-select" aria-label="Ordenar por...">
+                    <option value="0" defaultValue>Más recientes</option>
+                    <option value="1">Más antiguos</option>
+                </select>
+            </div>
+        </div>
         <div id="comentarios_wrapper" className="row pt-4">
             {comments_loop()}
         </div>

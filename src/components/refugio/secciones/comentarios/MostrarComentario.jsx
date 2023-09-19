@@ -32,7 +32,9 @@ export const MostrarComentario = (props) => {
                         <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
                     </div>
                 </div>
+                <p className="text-danger fw-bold fst-italic">Comentario a la espera de aprobación por un administrador.</p>
                 <button className="btn btn-dark" onClick={mostrarFormulario}>Editar comentario</button>
+                <p className="text-danger fw-bold fst-italic"><i className="bi bi-x-lg fw-bold fs-5"></i> Tu comentario debe ser editado. Motivo: el comentario es muy agresivo.</p>
             </div>
         </div>
     );
