@@ -87,6 +87,10 @@
     font-weight: bold;
 }
 
+#perfil_wrapper .datos-de-usuario img {
+    width: 100px;
+}
+
 .accordion-button:focus {
     border-color: transparent;
     box-shadow: none;
@@ -141,6 +145,28 @@
 
 .listado-publicaciones ul > li:nth-child(5) {
     width: 40% !important;
+}
+
+/* Cuenta refugio */
+
+.marco-formulario {
+    border: 8px solid #CA8B4C;
+    outline: 3px solid #83582f;
+    border-radius: 0.5rem;
+    overflow: hidden;
+}
+
+#contenido_formulario_preadopcion {
+    text-align: center;
+    padding-top: 1rem;
+}
+
+#contenido_formulario_preadopcion span {
+    font-weight: bold;
+}
+
+#contenido_formulario_preadopcion img {
+    width: 50px;
 }
 
 /* Lista de vacunas */

@@ -1,5 +1,7 @@
 import React, { useEffect, useRef } from "react";
 import { useLocation, useParams, useNavigate } from "react-router-dom";
+
+import { PerfilAdoptante } from "./adoptante/secciones/PerfilAdoptante";
 import FormularioPreAdopcion from "./secciones/FormularioPreAdopcion";
 import MisAdopciones from "./secciones/MisAdopciones";
 import MisTurnos from "./secciones/MisTurnos";
@@ -55,8 +57,8 @@ const PanelDeUsuario = (props) => {
 					</ul>
 					<div className="tab-content" id="pills-tabContent">
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.datosPersonales ? "show active" : ""}`} id={`pills-${props.tabs.datosPersonales}`} role="tabpanel">
-							<div className='row thumbnails-wrapper'>
-								<p>Datos personales</p>
+							<div className="row">
+								<PerfilAdoptante />
 							</div>
 						</div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.formularioPreAdopcion ? "show active" : ""}`} id={`pills-${props.tabs.formularioPreAdopcion}`} role="tabpanel">
