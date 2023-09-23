@@ -87,7 +87,7 @@
     font-weight: bold;
 }
 
-#perfil_wrapper .datos-de-usuario img {
+.datos-de-usuario img {
     width: 100px;
 }
 
@@ -158,7 +158,6 @@
 
 #contenido_formulario_preadopcion {
     text-align: center;
-    padding-top: 1rem;
 }
 
 #contenido_formulario_preadopcion span {

@@ -72,6 +72,11 @@
 
 body {
 	font-family: 'Wix';
+	cursor: url('../img/cursors/dog_1.cur'), pointer;
+}
+
+a, button, select {
+	cursor: url('../img/cursors/dog_1.cur'), pointer !important;
 }
 
 #root::after {

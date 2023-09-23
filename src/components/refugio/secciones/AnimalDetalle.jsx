@@ -9,7 +9,6 @@ const AnimalDetalle = (props) => {
     const { animalId } = useParams();
 
     const closePublication = useCallback(() => {
-        document.body.style.overflow = '';
         navigate('..');
     }, [navigate]); // uso 'useCallback' porque voy a utilizar esta función dentro de useEffect
 
@@ -27,6 +26,8 @@ const AnimalDetalle = (props) => {
 
 		return () => {
 			document.removeEventListener("keydown", goBack);
+            document.body.style.overflow = '';
+            return true;
 		}
 	}, [navigate,closePublication]);
 

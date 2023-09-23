@@ -1,4 +1,11 @@
+import { Link } from "react-router-dom";
+
+import { useTitlePageSetter } from "src/hooks/useTitlePageSetter";
+import PlanDeVacunacion from "src/components/usuario/PlanDeVacunacion";
+
 export const SolicitudDetalle = () => {
+    useTitlePageSetter("Solicitud Nº 789");
+
     return (
         <div id="solicitud_detalle_wrapper">
             <div className="card">
@@ -6,22 +13,28 @@ export const SolicitudDetalle = () => {
                     <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº 789</span>
                 </div>
                 <div className="card-body fs-5">
-                    <h5 className="card-title fs-4 text-center py-2 border-top border-bottom">Datos del adoptante:</h5>
-                    <div id="perfil_wrapper">
-                        <div className="datos-de-usuario pt-2">
-                            <div className="row justify-content-center">
+                    <div className="row pt-2">
+                        <div className="col-12 col-md-6 datos-de-usuario">
+                            <h5 className="card-title fs-4 text-center py-2 border-top border-bottom">Datos del adoptante</h5>
+                            <div className="row py-4 justify-content-center">
                                 <div className="col-auto">
-                                    <img src="/img/default_profile_picture.png" alt="foto_perfil" />
+                                    <img src="/img/default_profile_picture.png" width={100} alt="foto_perfil" />
                                 </div>
                                 <div className="col-auto">
                                     <span className="text-center text-md-start">adoptante.test</span>
-                                    <p>adoptante.test@gmail.com</p>
-                                    <p className="text-muted"><small>Registrado el 25/12/2022 14:45</small></p>
+                                    <p className="mb-0">adoptante.test@gmail.com</p>
+                                    <small className="text-muted fs-6 fst-italic">Registrado el 25/12/2022 14:45</small>
                                 </div>
                             </div>
-                            <div className="row py-4 justify-content-center">
-                                <div className="col-12 col-md-6 text-center">
+                            <div className="row">
+                                <div className="col text-center">
                                     <div className="row">
+                                        <div className="col-12 col-xl-6">
+                                            <button className="btn btn-primary mb-3 mb-xl-0">Historial de adopciones</button>
+                                        </div>
+                                        <div className="col-12 col-xl-6">
+                                            <button className="btn btn-primary mb-4">Historial de seguimientos</button>
+                                        </div>
                                         <div className="col-12 col-md-6">
                                             <span>Nombre:</span>
                                             <p>Adoptante</p>
@@ -58,17 +71,41 @@ export const SolicitudDetalle = () => {
                                 </div>
                             </div>
                         </div>
+                        <div className="col-12 col-md-6">
+                            <h5 className="card-title fs-4 text-center py-2 border-top border-bottom">Datos del animal</h5>
+                            <div className="custom-modal-animal-img-wrapper">
+                                <img src="/img/shelter/animals/thumbnail_4.jpg" className="img-fluid" alt="animal_a_adoptar" />
+                            </div>
+                            <div className="row pt-4 text-center">
+                                <div className="col-12 col-md-6">
+                                    <span className="fw-bold">Nombre:</span>
+                                    <p>Pancho</p>
+                                    <span className="fw-bold">Raza:</span>
+                                    <p>Gato siamés</p>
+                                    <span className="fw-bold">Género:</span>
+                                    <p>Macho</p>
+                                </div>
+                                <div className="col-12 col-md-6">
+                                    <div className="d-grid gap-2">
+                                        <Link to="/refugios/1/animales/4" className="btn btn-sm btn-primary">Ver ficha completa</Link>
+                                        <Link to="/adoptantes/1/mis-turnos?refugio_id=1" className="btn btn-sm btn-success">Turnos</Link>
+                                        <Link to="/adoptantes/1/seguimientos?veterinaria_id=1" className="btn btn-sm btn-danger">Seguimiento de vacunación</Link>
+                                        <PlanDeVacunacion />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                     <hr className="border-dashed" />
-                    <div className="row g-0">
-                        <div className="col-6 pt-2 text-start"><img src="/img/usuarios/perro.png" width={48} alt="perro" /></div>
-                        <div className="col-6 pt-2 text-end"><img src="/img/usuarios/gato.png" width={48} alt="gato" /></div>
-                    </div>
                     <div className="marco-formulario">
                         <h5 className="card-title text-center fs-4 py-1 m-2 border-top border-bottom"><img src="/img/usuarios/pre_adopcion_2.png" className="img-fluid" width={48} alt="formulario_preadopcion_icon" /> Formulario de pre-adopción:</h5>
                         <div id="contenido_formulario_preadopcion">
                             <div className="row justify-content-center">
-                                <div className="col-12 col-md-8">
+                                <div className="row">
+                                    <div className="col-6 pt-2 text-start"><img src="/img/usuarios/perro.png" width={48} alt="perro" /></div>
+                                    <div className="col-6 pt-2 text-end"><img src="/img/usuarios/gato.png" width={48} alt="gato" /></div>
+                                </div>
+                                <div className="row col-12 col-md-8">
                                     <span>Motivo</span>
                                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
                                 </div>
@@ -122,24 +159,37 @@ export const SolicitudDetalle = () => {
                                         </div>
                                     </div>
                                 </div>
+                                <div className="row">
+                                    <div className="col-6 pb-2 text-start"><img src="/img/usuarios/gato.png" width={48} alt="gato" /></div>
+                                        <div className="col-6 pb-2 text-end"><img src="/img/usuarios/perro.png" width={48} alt="perro" />
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div className="row g-0">
-                        <div className="col-6 pb-2 text-start"><img src="/img/usuarios/gato.png" width={48} alt="gato" /></div>
-                            <div className="col-6 pb-2 text-end"><img src="/img/usuarios/perro.png" width={48} alt="perro" />
-                        </div>
-                    </div>
+                    
                 </div>
                 <div className="card-footer text-body-secondary">
-                    <div className="row justify-content-center">
-                        <div className="col-12 col-md-6 text-center text-md-end">
-                            <button className="btn btn-success mb-4 mb-md-0"><i className="bi bi-check-lg"></i> Aprobar solicitud</button>
+                    <form id="aprobar_solicitud">
+                        <h5 className="text-center pt-4">Seleccione una fecha y hora para reservar un turno:</h5>
+                        <div className="row justify-content-center py-4">
+                            <div className="col-12 col-md-auto">
+                                <input id="fecha_turno" name="fechaTurno" className="form-control form-control-lg" type="date" />
+                            </div>
+                            <div className="col-12 col-md-auto">
+                                <input id="hora_turno" name="horaTurno" className="form-control form-control-lg" type="time" />
+                            </div>
                         </div>
-                        <div className="col-12 col-md-6 text-center text-md-start">
-                            <button className="btn btn-danger"><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
+                        <p className="fw-bold text-center">Nota: la aprobación de una solicitud de adopción REQUIERE reservar un turno para la visita del adoptante al refugio.</p>
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-6 text-center text-md-end">
+                                <button type="submit" className="btn btn-success mb-4 mb-md-0"><i className="bi bi-check-lg"></i> Aprobar solicitud</button>
+                            </div>
+                            <div className="col-12 col-md-6 text-center text-md-start">
+                                <button type="button" className="btn btn-danger"><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
+                            </div>
                         </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>

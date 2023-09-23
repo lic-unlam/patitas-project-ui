@@ -168,6 +168,10 @@ export const router = createBrowserRouter([
                         element: <ExplorarRefugios title="Explorar refugios" />
                     },
                     {
+                        path: "/refugios/buscador",
+                        element: <BuscadorDeRefugios />
+                    },
+                    {
                         path: "/refugios/:id",
                         element: <RefugioDetalle />,
                         children: [
@@ -245,10 +249,6 @@ export const router = createBrowserRouter([
                         path: "/refugios/:id/mas-informacion",
                         element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.masInformacion} />
                     },*/
-                    /*{
-                        path: "/refugios/buscador",
-                        element: <BuscadorDeRefugios />
-                    }*/
                 ],
             },
         ],
