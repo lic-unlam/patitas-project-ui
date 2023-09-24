@@ -4,21 +4,29 @@ import { Link } from "react-router-dom";
 import { useTitlePageSetter } from "src/hooks/useTitlePageSetter";
 import PlanDeVacunacion from "src/components/usuario/PlanDeVacunacion";
 import { CustomModal } from "src/components/layout/CustomModal";
+import { scrollToTop } from "src/utils/scrollToTop";
 
 export const SolicitudDetalle = () => {
     useTitlePageSetter("Solicitud Nº 789");
+
     const [contenidoModal, setContenidoModal] = useState({
         mostrar: false,
         componente: null,
         customButtons: false
     });
 
+    //const [estadoAdopcion, setEstadoAdopcion] = useState("Pendiente de aprobación");
+
     const solicitudAprobada = (event) => {
         event.preventDefault();
         
         setContenidoModal({
             mostrar: true,
-            componente: <h4>¡La solicitud ha sido aprobada!</h4>,
+            componente: <div>
+                            <h4 className="title">¡Solicitud de adopción Nº 789 aprobada!</h4>
+                            <hr/>
+                            <h5>Se reservó un turno para adoptante.test el día 12/09/2023 a las 17:30 hs.</h5>
+                        </div>,
             customButtons: false
         });
     }
@@ -55,9 +63,52 @@ export const SolicitudDetalle = () => {
 
         setContenidoModal({
             mostrar: true,
-            componente: <h4>¡La solicitud ha sido rechazada!</h4>,
+            componente: <div>
+                            <h4 className="title">Solicitud de adopción Nº 789 rechazada</h4>
+                            <hr/>
+                            <h5>adoptante.test será informado del motivo de la cancelación.</h5>
+                        </div>,
             customButtons: false
         });
+    }
+
+    /*const mostrarEstadoAdopcion = () => {
+        let contenidoAlert;
+
+        switch(estadoAdopcion) {
+            case "En curso":
+                contenidoAlert = {
+                    tipo: "primary",
+                    mensaje: "Adopción en curso"
+                }
+            break;
+            case "Completada":
+                contenidoAlert = {
+                    tipo: "success",
+                    mensaje: "Adopción completada"
+                }
+            break;
+            case "Cancelada":
+                contenidoAlert = {
+                    tipo: "danger",
+                    mensaje: "Adopción cancelada"
+                }
+            break;
+            default:
+                contenidoAlert = {
+                    tipo: "danger",
+                    mensaje: "Adopción Eliminada"
+                }
+        }
+
+        return <div className={`alert alert-${contenidoAlert.tipo} sticky-bottom text-center border-success`} role="alert">
+                    {contenidoAlert.mensaje}
+                </div>
+    }*/
+
+    const cerrarCustomModal = () => {
+        scrollToTop();
+        setContenidoModal({});
     }
 
     return (
@@ -67,6 +118,7 @@ export const SolicitudDetalle = () => {
                     <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº 789</span>
                 </div>
                 <div className="text-center pt-2">Enviada el 10/09/2023 18:00 hs.</div>
+                <div className="text-center pt-2"><span className="text-primary fw-bold">En curso</span></div>
                 <div className="card-body fs-5">
                     <div className="row pt-2">
                         <div className="col-12 col-md-6 datos-de-usuario">
@@ -248,7 +300,7 @@ export const SolicitudDetalle = () => {
                 </div>
             </div>
             { contenidoModal.mostrar && 
-                <CustomModal onCloseCustomModal={() => setContenidoModal({})} customButtons={contenidoModal.customButtons}>
+                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons}>
                     { contenidoModal.componente }
                 </CustomModal>
             }

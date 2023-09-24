@@ -581,6 +581,10 @@ form button[type="submit"] {
 	top: 3.5rem;
 }
 
+.alert.sticky-bottom {
+	bottom: 0.5rem;
+}
+
 /* Grilla */
 
 .grilla-de-items {
@@ -604,6 +608,25 @@ form button[type="submit"] {
 
 .grilla-de-items ul > li:first-child {
 	border-bottom: thin;
+}
+
+/* scroll to top */
+
+#go_top {
+	position: fixed;
+	text-align: center;
+	right: 0;
+	bottom: 0.5rem;
+}
+
+#go_top > button {
+	font-size: larger;
+	padding: 0.5rem 1rem !important;
+	border: 0;
+}
+
+#go_top > button:hover {
+	color: var(--default-color-theme);
 }
 
 /* Hacer blanco y negro la imágen */
