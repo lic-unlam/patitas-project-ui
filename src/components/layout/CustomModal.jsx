@@ -5,7 +5,7 @@ export const CustomModal = (props) => {
     const navigate = useNavigate();
 
     const cerrarCustomModal = useCallback(() => {
-        navigate('..');
+        props.onCloseCustomModal ? props.onCloseCustomModal() : navigate('..');
     }, [navigate]); // uso 'useCallback' porque voy a utilizar esta función dentro de useEffect
 
     useEffect(() => {
@@ -29,7 +29,9 @@ export const CustomModal = (props) => {
             <div className="overlay"></div>
             <div id="custom_modal" className="custom-modal-wrapper mb-2 text-center">
                 {props.children}
-                <button className="btn btn-primary mt-4" onClick={cerrarCustomModal}>Cerrar</button>
+                { !props.customButtons &&
+                    <button className="btn btn-primary mt-4" onClick={cerrarCustomModal}>Cerrar</button>
+                }
             </div>
         </>
     );

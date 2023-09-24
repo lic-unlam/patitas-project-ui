@@ -1,10 +1,64 @@
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import { useTitlePageSetter } from "src/hooks/useTitlePageSetter";
 import PlanDeVacunacion from "src/components/usuario/PlanDeVacunacion";
+import { CustomModal } from "src/components/layout/CustomModal";
 
 export const SolicitudDetalle = () => {
     useTitlePageSetter("Solicitud Nº 789");
+    const [contenidoModal, setContenidoModal] = useState({
+        mostrar: false,
+        componente: null,
+        customButtons: false
+    });
+
+    const solicitudAprobada = (event) => {
+        event.preventDefault();
+        
+        setContenidoModal({
+            mostrar: true,
+            componente: <h4>¡La solicitud ha sido aprobada!</h4>,
+            customButtons: false
+        });
+    }
+
+    const mostrarRechazarSolicitudForm = () => {
+        setContenidoModal({
+            mostrar: true,
+            componente: 
+                <div>
+                    <h5 className="title">Rechazar solicitud</h5>
+                    <hr/>
+                    <span className="fs-5">¿Está seguro que desea rechazar la solicitud Nº 789 de adoptante.test?</span>
+                    <form id="rechazar_solicitud_form" onSubmit={rechazarSolicitud}>
+                        <div className="py-4">
+                            <label htmlFor="motivo">Motivo del rechazo</label>
+                            <textarea id="motivo" name="motivo" className="form-control" placeholder="Máximo 200 caracteres..." autoFocus></textarea>
+                        </div>
+                        <div className="row justify-content-center">
+                            <div className="col-6 text-end">
+                                <button type="submit" className="btn btn-success">Confirmar</button>
+                            </div>
+                            <div className="col-6 text-start">
+                                <button type="button" className="btn btn-danger" onClick={() => setContenidoModal({})}>Cancelar</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>,
+            customButtons: true
+        });
+    }
+
+    const rechazarSolicitud = (event) => {
+        event.preventDefault();
+
+        setContenidoModal({
+            mostrar: true,
+            componente: <h4>¡La solicitud ha sido rechazada!</h4>,
+            customButtons: false
+        });
+    }
 
     return (
         <div id="solicitud_detalle_wrapper">
@@ -12,6 +66,7 @@ export const SolicitudDetalle = () => {
                 <div className="card-header title text-center">
                     <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº 789</span>
                 </div>
+                <div className="text-center pt-2">Enviada el 10/09/2023 18:00 hs.</div>
                 <div className="card-body fs-5">
                     <div className="row pt-2">
                         <div className="col-12 col-md-6 datos-de-usuario">
@@ -170,7 +225,7 @@ export const SolicitudDetalle = () => {
                     
                 </div>
                 <div className="card-footer text-body-secondary">
-                    <form id="aprobar_solicitud">
+                    <form id="aprobar_solicitud" onSubmit={solicitudAprobada}>
                         <h5 className="text-center pt-4">Seleccione una fecha y hora para reservar un turno:</h5>
                         <div className="row justify-content-center py-4">
                             <div className="col-12 col-md-auto">
@@ -186,12 +241,17 @@ export const SolicitudDetalle = () => {
                                 <button type="submit" className="btn btn-success mb-4 mb-md-0"><i className="bi bi-check-lg"></i> Aprobar solicitud</button>
                             </div>
                             <div className="col-12 col-md-6 text-center text-md-start">
-                                <button type="button" className="btn btn-danger"><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
+                                <button type="button" className="btn btn-danger" onClick={mostrarRechazarSolicitudForm}><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
                             </div>
                         </div>
                     </form>
                 </div>
             </div>
+            { contenidoModal.mostrar && 
+                <CustomModal onCloseCustomModal={() => setContenidoModal({})} customButtons={contenidoModal.customButtons}>
+                    { contenidoModal.componente }
+                </CustomModal>
+            }
         </div>
     );
 }

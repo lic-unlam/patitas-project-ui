@@ -29,7 +29,7 @@ const Modal = (props) => {
                         </div>
                         <div className="modal-footer">
                             <button id="aceptar" type="submit" className="btn btn-success me-2" onClick={confirmarModal}>Confirmar</button>
-                            <button id="denegar" type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                            <button id="cancelar" type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>
                 </div>

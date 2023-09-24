@@ -16,7 +16,7 @@ function Footer() {
                 <Link className="d-block d-md-inline me-0 me-md-4" to="#"><img src='/img/social_media/youtube.png' alt='youtube'/><span> patitas_official</span></Link>
                 <Link className="d-block d-md-inline" to="#"><img src='/img/social_media/instagram.png' alt='instagram'/><span> @patitas</span></Link>
             </div>
-            <p>© 2022 Patitas</p>
+            <p>© 2023 Patitas</p>
         </footer>
     );
 }
