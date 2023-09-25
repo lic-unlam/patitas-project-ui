@@ -18,7 +18,7 @@ const ExplorarRefugios = (props) => {
 
         sheltersToShow.forEach((shelter, index) => {
             shelters.push(
-                <div className="col-6" key={index}>
+                <div className="col-12 col-md-6" key={index}>
                     <Link to={`/refugios/${shelter.id}`}>
                     <div className="card shelter-card mb-3">
                         <div className="row g-0">
@@ -50,7 +50,19 @@ const ExplorarRefugios = (props) => {
         <div className="shelters-wrapper">
             <h1><i className="bi bi-geo-alt-fill"></i> Refugios encontrados en tu zona: Palermo</h1>
             <div className="row pb-4">{sheltersLoop('Palermo', true)}</div>
-            <h2 className="pt-4">Otros refugios que te pueden interesar</h2>
+            <h2>Nuestros refugios asociados</h2>
+            <div className="form-group row pb-4">
+                <label className="col-auto my-auto">Filtrar por barrio porteño:</label>
+                <div className="col-12 col-md-2">
+                    <select id="barrio_selector" className="form-select form-select-sm" aria-label="Seleccionar barrio porteño">
+                        <option value="0" defaultValue>Todos</option>
+                        <option value="1">Recoleta</option>
+                        <option value="2">Congreso</option>
+                        <option value="3">Puerto Madero</option>
+                        <option value="4">Caballito</option>
+                    </select>
+                </div>
+            </div>
             <div className="row">{sheltersLoop('Palermo', false)}</div>
         </div>
     );

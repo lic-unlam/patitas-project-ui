@@ -23,7 +23,7 @@ export const AdopcionDetalle = () => {
                         <span className="fs-6 fw-bold">Refugio:</span>
                         <p>San Pedro (Av. del Libertador 4101, Palermo)</p>
                         <span className="fs-6 fw-bold">Responsable a cargo:</span>
-                        <p>Juan topo</p>
+                        <p>Jorge Perez</p>
                         <div className="d-grid gap-2">
                             <Link to="/adoptantes/1/mis-turnos?refugio_id=1" className="btn btn-sm btn-block btn-success">Turnos</Link>
                             <Link to="/adoptantes/1/seguimientos?veterinaria_id=1" className="btn btn-sm btn-block btn-danger">Seguimiento de vacunación</Link>

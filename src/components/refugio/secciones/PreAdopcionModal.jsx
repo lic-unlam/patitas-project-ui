@@ -7,7 +7,7 @@ const PreAdopcionModal = () => {
                 <div className="modal-content">
                     <div className="modal-body">
                         <div className="row">
-                            <FormularioPreAdopcion />
+                            <FormularioPreAdopcion mostrarGuardado={false} />
                         </div>
                     </div>
                     <div className="modal-footer">

@@ -84,7 +84,7 @@ const Registro = (props) => {
         <div id="register_wrapper" className="card">
             <div className="card-body">
                 <form id="register_form" onSubmit={doRegister}>
-                    <legend>Únete y empieza a compartir</legend>
+                    <legend>Únete a la experiencia</legend>
                     <div className="form-group row py-2 role-selector-wrapper justify-content-center">
                         <label className="col-auto">¿Qué tipo de usuario eres?</label>
                         <div className="col-4">

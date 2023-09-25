@@ -80,9 +80,9 @@ function Navbar(props) {
                                 <li className="nav-item">
                                     <span className="nav-link nav-text-username" title={userDataObject.email}>{userDataObject.username}</span>
                                 </li>
-                                <li className="nav-item">
+                                {/*<li className="nav-item">
                                     <Link className="nav-link icon" to="/usuarios/notificaciones" title="Notificaciones"><i className="bi bi-bell"></i></Link>
-                                </li>
+                                </li>*/}
                                 <li className="nav-item dropdown">
                                     <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Panel de usuario">
                                     <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture" />

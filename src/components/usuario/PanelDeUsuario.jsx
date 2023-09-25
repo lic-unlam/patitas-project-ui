@@ -63,7 +63,7 @@ const PanelDeUsuario = (props) => {
 						</div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.formularioPreAdopcion ? "show active" : ""}`} id={`pills-${props.tabs.formularioPreAdopcion}`} role="tabpanel">
                             <div className="row">
-                                <FormularioPreAdopcion />
+                                <FormularioPreAdopcion mostrarGuardado={true} />
                             </div>
                         </div>
 						<div className={`tab-pane fade ${props.seccionActiva === props.tabs.misAdopciones ? "show active" : ""}`} id={`pills-${props.tabs.misAdopciones}`} role="tabpanel">

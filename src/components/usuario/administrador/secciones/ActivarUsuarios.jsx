@@ -52,7 +52,7 @@ export const ActivarUsuarios = (props) => {
                                 <div className="row">
                                     <div className="col-6">
                                         <span>Responsable a cargo:</span>
-                                        <p>Juan Topo</p>
+                                        <p>Jorge Perez</p>
                                     </div>
                                     <div className="col-6">
                                         <span>Dirección:</span>

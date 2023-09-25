@@ -244,11 +244,11 @@ export const SolicitudDetalle = () => {
                                                 <p>Redes en ventanas a altura</p>
                                             </div>
                                             <div className="col-12">
-                                                <span>¿Tiene conocimiento acerca de la ley del maltrato animal?</span>
+                                                <span>¿Tiene conocimiento acerca de la Ley 14.346 referida al maltrato animal?</span>
                                                 <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
                                             </div>
                                             <div className="col-12">
-                                                <span>¿Con que frecuencia quedaría solo el animal en el hogar?</span>
+                                                <span>¿Con que frecuencia dejaría solo al animal en el hogar?</span>
                                                 <p>Algo frecuente</p>
                                             </div>
                                             <div className="col-12">

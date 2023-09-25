@@ -2,7 +2,7 @@
 
 .shelters-wrapper > h1, .shelters-wrapper > h2 {
     font-family: 'Quicksand';
-    padding-bottom: 1rem;
+    padding-bottom: 0.5rem;
 }
 
 .shelter-card .card-body .title, .shelter-card .card-body .stars {
