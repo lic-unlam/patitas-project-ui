@@ -89,7 +89,7 @@ a, button, select {
   	z-index: -1;
 	background-image: url('../img/huellas.png');
 	background-repeat: repeat;
-	opacity: 0.016;
+	opacity: 0.02;
 }
 
 #root > :nth-child(2):not(section) {
@@ -118,10 +118,12 @@ a{
 	border-radius: var(--default-border-radius) !important;
 	padding-right: 2rem;
 	padding-left: 2rem;
+	border-color: var(--default-border-color);
 }
 
 .btn-primary {
 	background-color: var(--default-color-theme) !important;
+	border-color: var(--default-border-color);
 }
 
 .btn-primary:hover {
@@ -129,30 +131,50 @@ a{
 }
 
 .btn-success {
-	background-color: #52ae32;
-	border-color: #52ae32;
+	background-color: #00b725;
+	border-color: var(--default-border-color);
 }
 
 .btn-success:hover, .btn-success:active {
-	background-color: #64b646 !important;
-	border-color: #6eb555 !important;
+	background-color: #00d12a !important;
+	border-color: var(--default-border-color);
 }
 
 .btn-danger:hover, .btn-danger:active {
-	background-color: #d94856 !important;
-	border-color: #d94856 !important;
+	background-color: #f73447 !important;
+	border-color: var(--default-border-color);
 }
 
 .btn-warning {
 	background-color: mediumvioletred;
-	border-color: mediumvioletred;
+	border-color: var(--default-border-color);
 	color: white;
 }
 
 .btn-warning:hover, .btn-warning:active {
 	background-color: #d3389a !important;
     color: white !important;
-    border-color: #d3389a !important;
+    border-color: var(--default-border-color);
+}
+
+.btn-turnos {
+	background-color: #49a50d;
+	color: white;
+}
+
+.btn-turnos:hover, .btn-turnos:active {
+	background-color: #55bf10 !important;
+    color: white !important;
+}
+
+.btn-seguimiento {
+	background-color: crimson;
+	color: white;
+}
+
+.btn-seguimiento:hover, .btn-seguimiento:active {
+	background-color: #ed103a !important;
+    color: white !important;
 }
 
 .alert-success {
@@ -532,6 +554,10 @@ form button[type="submit"] {
     animation: growUp .25s;
 }
 
+.custom-modal-body {
+	padding: 1rem;
+}
+
 @media (min-width: 992px) {
 	.custom-modal-wrapper {
 		width: 80%;
@@ -660,4 +686,14 @@ form button[type="submit"] {
         -webkit-transform: rotate(360deg); 
         transform:rotate(360deg); 
     } 
+}
+
+/* Textos de color */
+
+.text-success {
+	color: #11af11 !important;
+}
+
+.text-danger {
+	color: #ff355b !important;
 }

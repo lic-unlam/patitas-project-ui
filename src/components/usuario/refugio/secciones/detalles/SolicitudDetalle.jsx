@@ -25,9 +25,20 @@ export const SolicitudDetalle = () => {
             componente: <div>
                             <h4 className="title">¡Solicitud de adopción Nº 789 aprobada!</h4>
                             <hr/>
-                            <h5>Se reservó un turno para adoptante.test el día 12/09/2023 a las 17:30 hs.</h5>
+                            <div className="custom-modal-body">
+                                <h5>Ahora puede reservar un turno para la visita de <strong>adoptante.test</strong> al refugio.</h5>
+                                {/*<h5>Se reservó un turno para adoptante.test el día 12/09/2023 a las 17:30 hs.</h5>*/}
+                            </div>
+                            <div className="row justify-content-center">
+                                <div className="col-6 text-end">
+                                    <Link to="/usuarios/turnos" className="btn btn-turnos">Ir a mis turnos</Link>
+                                </div>
+                                <div className="col-6 text-start">
+                                    <button type="button" className="btn btn-dark" onClick={() => setContenidoModal({})}>Cerrar</button>
+                                </div>
+                            </div>
                         </div>,
-            customButtons: false
+            customButtons: true
         });
     }
 
@@ -118,7 +129,19 @@ export const SolicitudDetalle = () => {
                     <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº 789</span>
                 </div>
                 <div className="text-center pt-2">Enviada el 10/09/2023 18:00 hs.</div>
-                <div className="text-center pt-2"><span className="text-primary fw-bold">En curso</span></div>
+                <div className="text-center pt-2">
+                    <span>Estado: <strong className="text-danger">Pendiente de aprobación</strong></span>
+                </div>
+                <div className="pt-4">
+                    <div className="row justify-content-center">
+                        <div className="col-12 col-md-6 text-center text-md-end">
+                            <button type="submit" className="btn btn-success mb-4 mb-md-0" onClick={solicitudAprobada}><i className="bi bi-check-lg"></i> Aprobar solicitud</button>
+                        </div>
+                        <div className="col-12 col-md-6 text-center text-md-start">
+                            <button type="button" className="btn btn-danger" onClick={mostrarRechazarSolicitudForm}><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
+                        </div>
+                    </div>
+                </div>
                 <div className="card-body fs-5">
                     <div className="row pt-2">
                         <div className="col-12 col-md-6 datos-de-usuario">
@@ -172,7 +195,7 @@ export const SolicitudDetalle = () => {
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Adopciones:</span>
-                                            <p title="Exitosas: 10 - Interrumpidas: 2"><i className="bi bi-check-circle-fill text-success"></i> 10 <i className="bi bi-x-circle-fill text-danger ps-2"></i> 2</p>
+                                            <p title="Exitosas: 4 - Interrumpidas: 2"><i className="bi bi-check-circle-fill text-success"></i> 4 <i className="bi bi-x-circle-fill text-danger ps-2"></i> 2</p>
                                         </div>
                                     </div>
                                 </div>
@@ -195,8 +218,8 @@ export const SolicitudDetalle = () => {
                                 <div className="col-12 col-md-6">
                                     <div className="d-grid gap-2">
                                         <Link to="/refugios/1/animales/4" className="btn btn-sm btn-primary">Ver ficha completa</Link>
-                                        <Link to="/adoptantes/1/mis-turnos?refugio_id=1" className="btn btn-sm btn-success">Turnos</Link>
-                                        <Link to="/adoptantes/1/seguimientos?veterinaria_id=1" className="btn btn-sm btn-danger">Seguimiento de vacunación</Link>
+                                        <Link to="/refugio/turnos" className="btn btn-sm btn-turnos">Turnos</Link>
+                                        <Link to="/refugio/seguimientos" className="btn btn-sm btn-seguimiento">Seguimiento de vacunación</Link>
                                         <PlanDeVacunacion />
                                     </div>
                                 </div>
@@ -276,7 +299,7 @@ export const SolicitudDetalle = () => {
                     </div>
                     
                 </div>
-                <div className="card-footer text-body-secondary">
+                {/*<div className="card-footer text-body-secondary">
                     <form id="aprobar_solicitud" onSubmit={solicitudAprobada}>
                         <h5 className="text-center pt-4">Seleccione una fecha y hora para reservar un turno:</h5>
                         <div className="row justify-content-center py-4">
@@ -297,7 +320,7 @@ export const SolicitudDetalle = () => {
                             </div>
                         </div>
                     </form>
-                </div>
+                </div>*/}
             </div>
             { contenidoModal.mostrar && 
                 <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons}>
