@@ -1,7 +1,7 @@
 [
     {
         "id": "1",
-        "name": "Refugio San Pedro",
+        "name": "San Pedro",
         "stars": "4.5",
         "address": "Av. del Libertador 4101",
         "district": "Palermo",
@@ -9,7 +9,7 @@
     },
     {
         "id": "2",
-        "name": "Refugio #2",
+        "name": "El arca de Noé",
         "stars": "3",
         "address": "Moreno 1623",
         "district": "Monserrat",
@@ -17,7 +17,7 @@
     },
     {
         "id": "3",
-        "name": "Refugio #3",
+        "name": "Patas Unidas",
         "stars": "5",
         "address": "Hipólito Yrigoyen 1849",
         "district": "Balvanera",
@@ -25,7 +25,7 @@
     },
     {
         "id": "4",
-        "name": "Refugio #4",
+        "name": "Santuario animal",
         "stars": "2.6",
         "address": "Av. San Juan 350",
         "district": "San Telmo",
@@ -33,7 +33,7 @@
     },
     {
         "id": "5",
-        "name": "Refugio #5",
+        "name": "Nuevas oportunidades",
         "stars": "4.1",
         "address": "Adolfo Alsina 940",
         "district": "Monserrat",

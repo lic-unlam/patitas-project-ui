@@ -119,6 +119,13 @@ a{
 	padding-right: 2rem;
 	padding-left: 2rem;
 	border-color: var(--default-border-color);
+	font-family: Inter;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+}
+
+.btn-sm {
+	font-size: 0.75rem !important;
 }
 
 .btn-primary {

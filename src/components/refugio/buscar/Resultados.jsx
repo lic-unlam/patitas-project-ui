@@ -4,11 +4,11 @@ import shelterDb from '../../helpers/sheltersDb.json';
 export const Resultados = () => {
     return (
         <div id="resultados_de_refugios_wrapper" className="py-4">
-            <h5 className="pb-4">La búsqueda ha arrojado 10 resultados.</h5>
+            <h5 className="text-center pb-4">La búsqueda ha arrojado 10 resultados.</h5>
             <div className="row">
             {
                 shelterDb.map((shelter, index) =>
-                    <div className="col-6" key={index}>
+                    <div className="col-12 col-md-6" key={index}>
                         <Link to={`/refugios/${shelter.id}`}>
                             <div className="card shelter-card mb-3">
                                 <div className="row g-0">

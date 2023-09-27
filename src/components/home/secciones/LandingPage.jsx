@@ -19,7 +19,7 @@ function LandingPage() {
                     <div className="legend-wrapper py-4">
                         <h1>¡Se parte de algo maravilloso!</h1>
                         <p>Adoptar siempre es una acción noble para darle a un animal un hogar y familia que lo haga feliz. Por eso, desde Patitas te facilitamos el proceso para que puedas encontrar ese gran amigo que estás buscando sin moverte de tu casa. ¡Anímate!</p>
-                        <Link className="btn btn-lg btn-primary" to={'/refugios'}>Explorar refugios</Link>
+                        <Link className="btn btn-lg btn-primary fs-5" to={'/refugios'}>Explorar refugios</Link>
                     </div>
                 </div>
                 <div className="col-12 col-md-6">

@@ -19,7 +19,9 @@ const VeterinariasAsociadas = (props) => {
                         <p>Av. Sta. Fe 3253, Palermo</p>
                         <h4>Teléfono:</h4>
                         <p>(011) 5555-5555</p>
-                        <h4>Horario:</h4>
+                        <h4>Especialidades:</h4>
+                        <p>Vacunación, Cirugía, Ecografía, Peluquería</p>
+                        <h4>Horario de atención:</h4>
                         <p>Lunes a viernes 10 a 20 hs.</p>
                         <h4>Sitio web:</h4>
                         <p>https://www.instagram.com/veterinaria</p>

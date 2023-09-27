@@ -16,8 +16,8 @@ export const PerfilAdoptante = () => {
                         </div>
                         <div className="col-auto">
                             <span>adoptante.test</span>
-                            <p>adoptante.test@gmail.com</p>
-                            <p className="text-muted"><small>Registrado el 25/12/2022 14:45</small></p>
+                            <p className="mb-1">adoptante.test@gmail.com</p>
+                            <p className="text-muted fst-italic"><small>Registrado el 25/12/2022 14:45</small></p>
                         </div>
                     </div>
                     <div className="text-center mt-4">

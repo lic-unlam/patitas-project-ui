@@ -12,10 +12,10 @@ const MasInformacion = (props) => {
     
     return (
         <div className="row">
-            <div className="col-6">
-                <img className="img-fluid" width={600} src={shelterInfo.map} alt="shelter_map"/>
+            <div className="col-12 col-md-6">
+                <img className="img-fluid pb-4 pb-md-0" width={600} src={shelterInfo.map} alt="shelter_map"/>
             </div>
-            <div className="col-6">
+            <div className="col-12 col-md-6">
                 <h4>Dirección:</h4>
                 <p>{shelterInfo.address}, {shelterInfo.district}</p>
                 <h4>Teléfono:</h4>
