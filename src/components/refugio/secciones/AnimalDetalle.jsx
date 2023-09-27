@@ -42,13 +42,14 @@ const AnimalDetalle = (props) => {
                     <div className="col-6">
                         <div className="post-content">
                             <div className="row">
-                                <div className="col-9">
+                                <div className="col-10">
                                     <div className="request-adoption">
-                                        <h4>¿Te gustaría adoptarme? ¿Quieres verme en persona?</h4>
+                                        <h4>¿Te gustaría adoptarme?</h4>
+                                        <h4>¿Quieres verme en persona?</h4>
                                         <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
                                     </div>
                                 </div>
-                                <div className="col-3">
+                                <div className="col-2">
                                     <div className="close-button">
                                         <button className="btn" type="button" title="Cerrar" onClick={closePublication}>
                                             <i className="bi bi-x"></i>
@@ -56,29 +57,59 @@ const AnimalDetalle = (props) => {
                                     </div>
                                 </div>
                             </div>
-                            <div className="information">
-                                <span>Nombre:</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Chispita</p>
-                                <span>Edad aproximada:</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 4 años</p>
-                                <span>Situación previa:</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> En la calle</p>
-                                <span>Vacunas aplicadas:</span>
-                                <ul>
-                                    <li>Rabia</li>
-                                    <li>Moquillo</li>
-                                    <li>Parvovirus</li>
-                                </ul>
-                                <span>Raza:</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Labrador</p>
-                                <span>Altura:</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 60cm.</p>
-                                <span>Esterilizado</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Si</p>
-                                <span>Desparasitado</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Si</p>
-                                <p>Observaciones:</p>
-                                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+                            <div className="animal-information">
+                                <div className="row">
+                                    <div className="col-4">
+                                        <span>Nombre</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Chispita</p>
+                                    </div>
+                                    <div className='col-4'>
+                                        <span>Raza</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Golden Retriever</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Edad aproximada</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 4 meses</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Género</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Macho</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Peso</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 10 kg.</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Altura</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 35cm.</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Fecha de ingreso</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 14/09/2023</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Esterilizado</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Si</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Desparasitado</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Si</p>
+                                    </div>
+                                    <div className="col-4">
+                                        <span>Vacunas aplicadas:</span>
+                                        <ul>
+                                            <li>Rabia</li>
+                                            <li>Moquillo</li>
+                                            <li>Parvovirus</li>
+                                        </ul>
+                                    </div>
+                                    <div className="col-8">
+                                        <span>Situación previa</span>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> El perro fue traído a nosotros por un vecino porque hacía meses que rondaba su zona y dormía en la vereda.</p>
+                                    </div>
+                                </div>
+                                <span>Observaciones:</span>
+                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Presentaba signos de mala alimentación y bajo peso para su edad. También presentaba algunas raspaduras superficiales que fueron tratadas inmediatamente.</p>
                             </div>
                         </div>
                     </div>

@@ -168,11 +168,20 @@
 }
 
 .request-adoption {
+    font-family: 'Quicksand';
     padding-top: 1rem;
     padding-bottom: 1rem;
 }
 
-.information ul > li {
+.animal-information {
+    padding-right: 0.8rem;
+}
+
+.animal-information span {
+    font-weight: bold;
+}
+
+.animal-information ul > li {
     list-style-type: square;
 }
 
@@ -231,4 +240,22 @@ canvas {
     left: 0px;
     pointer-events: none;
     z-index: 1111 !important;
+}
+
+/* Veterinarias asociadas y Más información */
+
+#veterinarias_asociadas_wrapper h5, #mas_informacion_wrapper h5 {
+    font-weight: bold;
+}
+
+#veterinarias_asociadas_wrapper img {
+    border-radius: 1rem;
+}
+
+.nombre-veterinaria {
+    font-family: 'Quicksand';
+    text-align: center;
+    font-size: larger;
+    font-weight: bold;
+    box-shadow: 0px 2px 0px 0px darkgray;
 }

@@ -333,6 +333,15 @@ blockquote {
 	font-size: large;
 }
 
+#barra_de_busqueda_wrapper {
+	text-align: center;
+}
+
+#barra_de_busqueda_wrapper > h1 {
+	font-family: 'Quicksand';
+	padding-bottom: 1rem;
+}
+
 @media (min-width: 768px) {
 	/*#search_wrapper {
 		width: 50%;

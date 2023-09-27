@@ -57,7 +57,7 @@ export const PerfilAdoptante = () => {
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Adopciones:</span>
-                                    <p title="Exitosas: 10 - Interrumpidas: 2"><i className="bi bi-check-circle-fill text-success"></i> 10 <i className="bi bi-x-circle-fill text-danger ps-2"></i> 2</p>
+                                    <p title="Exitosas: 4 - Interrumpidas: 2"><i className="bi bi-check-circle-fill text-success"></i> 4 <i className="bi bi-x-circle-fill text-danger ps-2"></i> 2</p>
                                 </div>
                             </div>
                         </div>
