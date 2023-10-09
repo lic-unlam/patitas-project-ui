@@ -1,6 +1,6 @@
 /* Vista general */
 
-.shelters-wrapper > h1, .shelters-wrapper > h2 {
+.shelters-wrapper h1, .shelters-wrapper h2 {
     font-family: 'Quicksand';
     padding-bottom: 0.5rem;
 }

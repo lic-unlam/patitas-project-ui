@@ -1,69 +1,72 @@
-import React, { useEffect } from "react";
+import { useState, useCallback, useEffect, useContext } from "react";
 import { Link } from 'react-router-dom';
 
-import shelterDb from '../helpers/sheltersDb.json';
+import { UserContext } from "../layout/LayoutPublic";
+
+import { RefugiosPorMiZona } from "./RefugiosPorMiZona";
+import { TarjetasDeRefugio } from "./TarjetasDeRefugio";
 
 const ExplorarRefugios = (props) => {
-    useEffect(() => {
-        document.title = window.$title.concat(' - ', props.title);
+    const [ refugios, setRefugios ] = useState([]);
+    const [ barrios, setBarrios ] = useState([]);
+    const [ refugiosFiltrados, setRefugiosFiltrados ] = useState([]);
+    const { user, setUser } = useContext(UserContext);
+
+    const getRefugios = useCallback(async () => {
+        try {
+            const response = await fetch("https://localhost:7277/api/refugios", {
+                method: "GET"
+            });
+            
+            if(!response.ok)
+                throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+            
+            const data = await response.json();
+            setBarrios(data.barrios);
+            setRefugios(data.refugios);
+            setRefugiosFiltrados(data.refugios);
+        }
+        catch(error) {
+            console.log(error.message);
+        }
     }, []);
 
-    const sheltersLoop = (district, isMyDistrict) => {
-        let sheltersToShow = [], shelters = [];
+    useEffect(() => {
+        document.title = window.$title.concat(' - ', props.title);
+        getRefugios();
+    }, [getRefugios]);
 
-        if(isMyDistrict)
-            sheltersToShow = shelterDb.filter(shelter => shelter.district === district);
+    const filtrarPorBarrio = (event) => {
+        const barrioSeleccionado = event.target.value;
+
+        if(barrioSeleccionado !== "Todos") {
+            const refugiosFiltrados = refugios.filter(refugio => refugio.barrio === barrioSeleccionado);
+            setRefugiosFiltrados(refugiosFiltrados);
+        }
         else
-            sheltersToShow = shelterDb.filter(shelter => shelter.district !== district);
-
-        sheltersToShow.forEach((shelter, index) => {
-            shelters.push(
-                <div className="col-12 col-md-6" key={index}>
-                    <Link to={`/refugios/${shelter.id}`}>
-                    <div className="card shelter-card mb-3">
-                        <div className="row g-0">
-                            <div className="col-2">
-                                <img className="img-fluid rounded-start" width={100} src="/img/shelter/shelter.png" alt="refugio"/>
-                            </div>
-                            <div className="col-10">
-                                <div className="card-body">
-                                    <span className="list-group-item list-group-item-action" aria-current="true">
-                                        <div className="d-flex w-100 justify-content-between">
-                                            <h5 className="mb-1 title">{shelter.name}</h5>
-                                            <span className="stars">{shelter.stars} <i className="bi bi-star-fill"></i></span>
-                                        </div>
-                                        <p className="mb-1 text-muted location">{shelter.address}, {shelter.district}</p>
-                                    </span>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    </Link>
-                </div>
-            );
-        });
-
-        return shelters;
+            setRefugiosFiltrados(refugios);
     }
 
     return (
         <div className="shelters-wrapper">
-            <h1><i className="bi bi-geo-alt-fill"></i> Refugios encontrados en tu zona: Palermo</h1>
-            <div className="row pb-4">{sheltersLoop('Palermo', true)}</div>
+            {user && <RefugiosPorMiZona miBarrio={"Palermo"} refugios={refugios} />}
             <h2>Nuestros refugios asociados</h2>
             <div className="form-group row pb-4">
                 <label className="col-auto my-auto">Filtrar por barrio porteño:</label>
                 <div className="col-12 col-md-2">
-                    <select id="barrio_selector" className="form-select form-select-sm" aria-label="Seleccionar barrio porteño">
-                        <option value="0" defaultValue>Todos</option>
-                        <option value="1">Recoleta</option>
-                        <option value="2">Congreso</option>
-                        <option value="3">Puerto Madero</option>
-                        <option value="4">Caballito</option>
+                    <select 
+                        id="barrio_selector"
+                        className="form-select form-select-sm"
+                        aria-label="Seleccionar barrio porteño"
+                        onChange={filtrarPorBarrio}>
+                        <option value="Todos" defaultValue>Todos</option>
+                        {barrios.map((barrio, index) =>
+                            <option value={barrio} key={index}>{barrio}</option>
+                        )}
                     </select>
                 </div>
             </div>
-            <div className="row">{sheltersLoop('Palermo', false)}</div>
+            {refugios && <TarjetasDeRefugio refugios={refugiosFiltrados}/>}
         </div>
     );
 }
