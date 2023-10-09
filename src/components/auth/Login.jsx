@@ -1,53 +1,109 @@
-import React from 'react';
+import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import { Formik } from 'formik';
+import * as Yup from 'yup';
+
+import { UserContext } from '../layout/LayoutPublic';
+import { useFetch } from 'src/hooks/useFetch';
+
+const loginSchema = Yup.object().shape({
+	loginEmail: Yup.string().required("Este campo es obligatorio."),
+	loginPassword: Yup.string().required("Este campo es obligatorio.")
+});
 
 function Login(props) {
+	const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-	const doLogin = (event) => {
-		event.preventDefault();
+	const login = async (values, { setSubmitting, setErrors }) => {
+		//event.preventDefault();
 
 		try {
-			const userData = {
+			const response = await fetch("https://localhost:7277/api/auth/login", {
+				method: "POST",
+				headers: {
+					'Content-type': 'application/json'
+				},
+				body: JSON.stringify({
+					email: values.loginEmail,
+					password: values.loginPassword
+				})
+			});
+			/*const userData = {
 				username: 'adoptante.test',
 				email: 'adoptante.test@gmail.com',
 				profilePicture: '/img/default_profile_picture.png'
-			};
+			};*/
 
-			localStorage.setItem('userData', JSON.stringify(userData));
+			if(!response.ok)
+				throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+
+			const data = await response.json();
+			setUser(data, localStorage.setItem('userData', JSON.stringify(data)));
 				
 			navigate('/refugios', {
 				replace: true
 			});
 		}
 		catch(error) {
-			return {
-				title: "Ocurrió un error inesperado. Inténtelo más tarde.",
-				message: error
-			}
+			console.log(error.message);
+		}
+		finally {
+			setSubmitting(false);
 		}
 	}
 
 	return (
 		<div id="login_wrapper" className="card">
 			<div className="card-body">
-				<form id="login_form" name="loginForm" onSubmit={doLogin}>
-					<legend>Accede a tu cuenta</legend>
-					<div className="form-floating py-2">
-						<input type="text" className="form-control" id="login_email" name="loginEmail" placeholder="Correo electrónico"/>
-						<label htmlFor="login_email">Correo electrónico</label>
-					</div>
-					<div className="form-floating pt-2 pb-4">
-						<input type="text" className="form-control" id="login_password" name="loginPassword" placeholder="Contraseña"/>
-						<label htmlFor="login_password">Contraseña</label>
-					</div>
-					<div className="form-floating pb-2">
-						<button type="submit" className="btn btn-primary">Ingresar</button>
-					</div>
-					<div className="py-4">
-						¿Olvidaste tu contraseña? <Link to="/auth/forgottenpassword">Haz clic aquí</Link>
-					</div>
-				</form>
+				<Formik
+					initialValues={{
+						loginEmail: '',
+						loginPassword: ''
+					}}
+					validationSchema={loginSchema}
+					onSubmit={login}
+				>
+					{({ values, errors, touched, handleChange, handleBlur, handleSubmit, isSubmitting }) => (
+					<form id="login_form" onSubmit={handleSubmit}>
+						<legend>Accede a tu cuenta</legend>
+						<div className="form-floating py-2">
+							<input 
+								type="text"
+								className="form-control"
+								id="login_email"
+								name="loginEmail"
+								placeholder="Correo electrónico"
+								value={values.loginEmail}
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
+							<label htmlFor="login_email">Correo electrónico</label>
+							{ errors.loginEmail && touched.loginEmail && <div className="text-danger">{errors.loginEmail}</div> }
+						</div>
+						<div className="form-floating pt-2 pb-4">
+							<input 
+								type="text"
+								className="form-control"
+								id="login_password"
+								name="loginPassword"
+								placeholder="Contraseña"
+								value={values.loginPassword}
+								onChange={handleChange}
+								onBlur={handleBlur}
+							/>
+							<label htmlFor="login_password">Contraseña</label>
+							{ errors.loginPassword && touched.loginPassword && <div className="text-danger">{errors.loginPassword}</div> }
+						</div>
+						<div className="form-floating pb-2">
+							<button type="submit" className="btn btn-primary" disabled={isSubmitting}>Ingresar</button>
+						</div>
+						<div className="py-4">
+							¿Olvidaste tu contraseña? <Link to="/auth/recuperar-password">Haz clic aquí</Link>
+						</div>
+					</form>
+					)}
+				</Formik>
 			</div>
 		</div>
     );

@@ -1,20 +1,25 @@
-import React from 'react';
-import {Link,useNavigate} from 'react-router-dom';
-import {Search} from './Search';
+import { useContext, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
+//import {Search} from './Search';
+import { UserContext } from './LayoutPublic';
 
 function Navbar(props) {
+    const { user, setUser } = useContext(UserContext);
     const navigate = useNavigate();
-    
+
     let userDataObject;
     let userDataString = localStorage.getItem('userData');
     
-    if(userDataString) {
-        userDataObject = JSON.parse(userDataString);
-    }
+    useEffect(() => {
+        if(userDataString) {
+            userDataObject = JSON.parse(userDataString);
+            setUser(userDataObject);
+        }
+    }, [setUser]);
 
     const logout = (event) => {
         event.preventDefault();
-        localStorage.removeItem('userData');
+        setUser(null, localStorage.removeItem('userData'));
         
         navigate('/', {
             replace: true
@@ -70,7 +75,7 @@ function Navbar(props) {
                                 <Link className="nav-link" to="/refugios/buscador"><i className="bi bi-search"></i> Buscar refugios</Link>
                             </li>
                         </ul>
-                        {!userDataString ?
+                        {!user ?
                             <ul className="navbar-nav auth-wrapper">
                                 <li className="nav-item">
                                     <Link id="signin" to="/auth/signin" className="btn btn-primary">Acceder</Link>
@@ -78,14 +83,14 @@ function Navbar(props) {
                             </ul> :
                             <ul className="navbar-nav user-actions">
                                 <li className="nav-item">
-                                    <span className="nav-link nav-text-username" title={userDataObject.email}>{userDataObject.username}</span>
+                                    <span className="nav-link nav-text-username" title={user.email}>{user.nombreDeUsuario}</span>
                                 </li>
                                 {/*<li className="nav-item">
                                     <Link className="nav-link icon" to="/usuarios/notificaciones" title="Notificaciones"><i className="bi bi-bell"></i></Link>
                                 </li>*/}
                                 <li className="nav-item dropdown">
                                     <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Panel de usuario">
-                                    <img className="img-fluid nav-profile-picture" width={24} src={userDataObject.profilePicture} alt="profile_picture" />
+                                    <img className="img-fluid nav-profile-picture" width={24} src={user.fotoDePerfil || window.$defaultProfilePicture} alt="foto_de_perfil" />
                                     </button>
                                     <ul className="dropdown-menu dropdown-menu-end">
                                         <li>

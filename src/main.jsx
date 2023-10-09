@@ -5,6 +5,7 @@ import { RouterProvider } from "react-router-dom";
 import { router } from "./routes";
 
 window.$title = "Patitas";
+window.$defaultProfilePicture = "/img/default_profile_picture.png";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
     <React.StrictMode>

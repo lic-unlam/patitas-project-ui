@@ -1,10 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, createContext } from "react";
 import { Outlet } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 import { ScrollToTopButton } from "./ScrollToTopButton";
 
+export const UserContext = createContext();
+//const userDataString = localStorage.getItem('userData');
+
 const LayoutPublic = () => {
+    const [ user, setUser ] = useState(null);
     const [ mostrarToTopButton, setMostrarToTopButton ] = useState(false);
 
     useEffect(() => {
@@ -21,12 +25,12 @@ const LayoutPublic = () => {
     }
 
     return (
-        <>
-            <Navbar></Navbar>
+        <UserContext.Provider value={{ user, setUser }}>
+            <Navbar />
             <Outlet/>
             { mostrarToTopButton && <ScrollToTopButton /> }
-            <Footer></Footer>
-        </>
+            <Footer />
+        </UserContext.Provider>
     );
 }
 
