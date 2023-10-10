@@ -309,8 +309,40 @@ blockquote {
 
 /* Barra de búsqueda */
 
-#search_wrapper {
-	/*width: 100%;*/
+/* Buscador de refugios */
+
+#barra_de_busqueda_wrapper {
+	text-align: center;
+	padding-top: 4rem;
+}
+
+#barra_de_busqueda_wrapper > h1 {
+	font-family: 'Quicksand';
+	padding-bottom: 1rem;
+}
+
+#buscador_form input {
+    border-top-left-radius: 1.375rem;
+    border-bottom-left-radius: 1.375rem;
+    border: 1px solid var(--default-border-color);
+    border-right: none;
+}
+
+#buscador_form button[type="submit"] {
+    border-color: var(--default-border-color);
+	border-top-right-radius: 1.375rem;
+    border-bottom-right-radius: 1.375rem;
+    border-left: none;
+    background-color: white;
+	padding-left: 1.2rem;
+	padding-right: 1.2rem;
+}
+
+#buscador_form button[type="submit"] > i {
+    font-size: x-large;
+}
+
+/*#search_wrapper {
 	padding-left: 0.4rem;
 	padding-right: 0.4rem;
 }
@@ -331,16 +363,7 @@ blockquote {
 
 #shelter_search_button > i {
 	font-size: large;
-}
-
-#barra_de_busqueda_wrapper {
-	text-align: center;
-}
-
-#barra_de_busqueda_wrapper > h1 {
-	font-family: 'Quicksand';
-	padding-bottom: 1rem;
-}
+}*/
 
 @media (min-width: 768px) {
 	/*#search_wrapper {
