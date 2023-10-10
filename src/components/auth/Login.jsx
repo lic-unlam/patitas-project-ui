@@ -83,7 +83,7 @@ function Login(props) {
 						</div>
 						<div className="form-floating pt-2 pb-4">
 							<input 
-								type="text"
+								type="password"
 								className="form-control"
 								id="login_password"
 								name="loginPassword"

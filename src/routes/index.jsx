@@ -39,6 +39,7 @@ import shelterDb from '../components/helpers/sheltersDb.json';
 import AnimalDetalle from "../components/refugio/secciones/AnimalDetalle";
 import BuscadorDeRefugios from "../components/refugio/buscar/BuscadorDeRefugios";
 import refugioTabs from '../config/refugio/refugioTabs.json';
+import { refugioLoader } from "src/components/refugio/loaders/refugioLoader";
 
 // Foro
 import Forum from "../components/forum/Forum";
@@ -174,6 +175,7 @@ export const router = createBrowserRouter([
                     {
                         path: "/refugios/:id",
                         element: <RefugioDetalle />,
+                        loader: refugioLoader,
                         children: [
                             {
                                 path: "animales",
@@ -194,7 +196,7 @@ export const router = createBrowserRouter([
                                 element: <VeterinariasAsociadas title="Veterinarias asociadas del refugio" />
                             },
                             {
-                                path: "mas-informacion",
+                                path: ":section",
                                 element: <MasInformacion shelterDb={shelterDb} title="Más información del refugio" />
                             }
                         ]

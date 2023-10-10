@@ -1,9 +1,10 @@
 import { useState, useEffect, useCallback } from "react";
+import { useSearchParams } from "react-router-dom";
 
 export const BarraDeBusqueda = (props) => {
     const [ barrios, setBarrios ] = useState([]);
     const setResultados = props.setResultados;
-
+    const [ searchParams, setSearchParams ] = useSearchParams();
     const cargarBarrios = useCallback(async () => {
         const response = await fetch("https://localhost:7277/api/barrios", {
             method: "GET"
@@ -25,6 +26,8 @@ export const BarraDeBusqueda = (props) => {
         event.preventDefault();
         let nombre = event.target.nombre.value;
         let barrio = event.target.barrio.value;
+
+        setSearchParams({ nombre: nombre, barrio: barrio });
 
         try {
             let queryString = '';

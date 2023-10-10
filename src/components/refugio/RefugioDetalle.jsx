@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Link, Outlet, useLocation, useParams, useNavigate } from 'react-router-dom';
+import { Link, Outlet, useLocation, useParams, useNavigate, useLoaderData } from 'react-router-dom';
 import Animales from './secciones/Animales';
 import Comentarios from './secciones/Comentarios';
 import VeterinariasAsociadas from './secciones/VeterinariasAsociadas';
@@ -13,8 +13,7 @@ const RefugioDetalle = (props) => {
     const params = useParams();
     const navigate = useNavigate();
     const cargado = useRef(false);
-
-    let shelterInfo = shelterDb.find(x => x.id === params.id);
+	const refugio = useLoaderData();
 
     useEffect(() => {
 		if(!cargado.current) {
@@ -32,12 +31,12 @@ const RefugioDetalle = (props) => {
         <div className="shelter-details-wrapper">
             <div className="row">
                 <div className="col-12 col-md-9">
-                    <h1 className="display-3">{shelterInfo.name}</h1>
-                    <p className="text-muted"><i className="bi bi-geo-alt-fill"></i> Ubicado en {shelterInfo.address}, {shelterInfo.district}</p>
+                    <h1 className="display-3">{refugio.infoBasica.nombre}</h1>
+                    <p className="text-muted"><i className="bi bi-geo-alt-fill"></i> Ubicado en {refugio.infoBasica.direccion}, {refugio.infoBasica.barrio}</p>
                 </div>
                 <div className="col-12 col-md-3 text-md-end">
-                    <h1 className="display-3">{shelterInfo.stars} <i className="bi bi-star-fill"></i></h1>
-                    <p className="text-muted">500 valoraciones</p>
+                    <h1 className="display-3">{refugio.infoBasica.puntaje} <i className="bi bi-star-fill"></i></h1>
+                    <p className="text-muted">{refugio.infoBasica.cantidadDeComentarios} {refugio.infoBasica.cantidadDeComentarios === 1 ? "valoración" : "valoraciones"}</p>
                 </div>
             </div>
 
@@ -56,7 +55,7 @@ const RefugioDetalle = (props) => {
 						<Link to={`/refugios/${params.id}/mas-informacion`} className={`nav-link ${location.pathname === `/refugios/${params.id}/mas-informacion` ? "active" : "" }`}><img src="/img/refugio/mas_informacion.png" width={32} alt="mas_informacion_icon" /> Más información</Link>
 					</li>
 				</ul>
-				<Outlet />
+				<Outlet context={{refugio}} />
 			</div>
         </div>
     );
