@@ -181,6 +181,12 @@ export const router = createBrowserRouter([
                         path: "/refugios/:id/:seccion",
                         element: <RefugioDetalle />,
                         loader: refugioLoader,
+                        children: [
+                            {
+                                path: ":animalId",
+                                element: <AnimalDetalle title="Ver animal" />
+                            }
+                        ]
                         /*children: [
                             {
                                 path: "animales",

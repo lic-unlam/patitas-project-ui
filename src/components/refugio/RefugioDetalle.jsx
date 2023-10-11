@@ -6,7 +6,6 @@ import VeterinariasAsociadas from './secciones/VeterinariasAsociadas';
 import MasInformacion from './secciones/MasInformacion';
 
 import shelterDb from '../helpers/sheltersDb.json';
-import { createEnumObject } from 'src/utils/createEnumObject';
 
 const RefugioDetalle = (props) => {
 	const location = useLocation();
