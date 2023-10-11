@@ -3,6 +3,8 @@ import { Link, useLocation, Outlet } from 'react-router-dom';
 
 const Animales = (props) => {
     const location = useLocation();
+    const { animales } = props;
+    console.log(animales);
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
@@ -27,7 +29,7 @@ const Animales = (props) => {
             <div className="row thumbnails-wrapper">
                 {thumbnail_loop()}
             </div>
-            <Outlet />
+            {/*<Outlet />*/}
         </>
     );
 }

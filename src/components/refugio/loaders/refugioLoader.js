@@ -1,6 +1,6 @@
 export const refugioLoader = async ({ params }) => {
     try {
-        const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.section}`, {
+        const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion || "animales"}`, {
             method: "GET"
         });
     

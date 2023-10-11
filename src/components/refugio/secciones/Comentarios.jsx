@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useOutletContext } from 'react-router-dom';
 
 import CustomAlert from '../../layout/CustomAlert';
 import { ProhibidoComentario } from './comentarios/ProhibidoComentario';
@@ -16,6 +16,8 @@ const Comentarios = (props) => {
         mensaje: ""
     });
 
+    const { comentarios } = props;
+
     // valoraciones: excelente, muy recomendable, buen lugar, poco recomendable, un desastre
     const leyendasAlReves = ['Un desastre', 'Poco recomendable', 'Buen lugar', 'Muy recomendable', 'Excelente'];
 
@@ -23,7 +25,7 @@ const Comentarios = (props) => {
         document.title = props.title.concat(' - ', window.$title);
     }, []);
 
-    function comments_loop() {
+    /*function comments_loop() {
         let comments = [];
         const estrellas = [5,4,3,2,1];
         const leyendas = ['Excelente', 'Muy recomendable', 'Buen lugar', 'Poco recomendable', 'Un desastre'];
@@ -76,6 +78,15 @@ const Comentarios = (props) => {
         }
 
         return comments;
+    }*/
+
+    const dibujarEstrellas = (cantidadDeEstrellas) => {
+        let estrellas = [];
+        for(let i = 1; i <= cantidadDeEstrellas; i++) {
+            estrellas.push(<i className="bi bi-star-fill" key={i}></i>);
+        }
+
+        return estrellas;
     }
 
     const mostrarDescripcionEstrella = (event) => {
@@ -112,39 +123,9 @@ const Comentarios = (props) => {
             agregarComentario={agregarComentario}
         /> :
         <MostrarComentario setTieneComentario={setTieneComentario} />}
-        {/*<div id="comentar_wrapper" className="row justify-content-center">
-            <div className="col">
-                <div className="card">
-                    <h5 className="card-header fw-bold">Cuentános tu experiencia</h5>
-                    <div className="card-body">
-                        <h5 className="card-title">¿Sabías que tus comentarios son una forma muy importante de apoyar a los refugios?</h5>
-                        <p className="card-text">Al hacerlo, estás ayudando a mejorar su trabajo y atraer más visitantes. Te invitamos a que dejes un comentario y valoración sobre tu experiencia en el camino de la adopción responsable:</p>
-                        <div className="row align-items-center">
-                            <div className="col-12 col-md-9">
-                                <form onSubmit={agregarComentario}>
-                                    <div className="mb-3">
-                                        <i className={`bi ${ descripcionEstrella.nroEstrella >= 1 ? "bi-star-fill" : "bi-star" } pe-2 fs-4`} data-nro="1" onMouseOver={mostrarDescripcionEstrella} onMouseLeave={limpiarDescripcionEstrella}></i>
-                                        <i className={`bi ${ descripcionEstrella.nroEstrella >= 2 ? "bi-star-fill" : "bi-star" } pe-2 fs-4`} data-nro="2" onMouseOver={mostrarDescripcionEstrella} onMouseLeave={limpiarDescripcionEstrella}></i>
-                                        <i className={`bi ${ descripcionEstrella.nroEstrella >= 3 ? "bi-star-fill" : "bi-star" } pe-2 fs-4`} data-nro="3" onMouseOver={mostrarDescripcionEstrella} onMouseLeave={limpiarDescripcionEstrella}></i>
-                                        <i className={`bi ${ descripcionEstrella.nroEstrella >= 4 ? "bi-star-fill" : "bi-star" } pe-2 fs-4`} data-nro="4" onMouseOver={mostrarDescripcionEstrella} onMouseLeave={limpiarDescripcionEstrella}></i>
-                                        <i className={`bi ${ descripcionEstrella.nroEstrella >= 5 ? "bi-star-fill" : "bi-star" } pe-2 fs-4`} data-nro="5" onMouseOver={mostrarDescripcionEstrella} onMouseLeave={limpiarDescripcionEstrella}></i>
-                                        <span className="ps-3">{descripcionEstrella.leyenda}</span>
-                                    </div>
-                                    <div className="mb-3">
-                                        <textarea id="comentario" name="comentario" className="form-control" placeholder="Máximo 300 caracteres..."></textarea>
-                                    </div>
-                                    <button type="submit" className="btn btn-dark">Dejar un comentario</button>
-                                </form>
-                            </div>
-                            <div className="col-12 col-md-3">
-                                <img className="img-fluid" width={200} src="/img/posts/gato-trabajando-portatil.avif" alt="gato_escribiendo" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-    </div>*/}
         <hr/>
+        {comentarios.length > 0 ?
+        <>
         <div id="ordenar_comentarios" className="form-group row py-2">
             <label className="col-auto my-auto">Ordenar por:</label>
             <div className="col-12 col-md-3 pt-2 pt-md-0">
@@ -155,8 +136,34 @@ const Comentarios = (props) => {
             </div>
         </div>
         <div id="comentarios_wrapper" className="row pt-4">
-            {comments_loop()}
+            {comentarios.map((comentario, index) =>
+                <div className="col-12 col-md-6" key={index}>
+                    <div className="comment-wrapper">
+                        <div className="row">
+                            <div className="col-auto">
+                                <img className="img-fluid nav-profile-picture" src={comentario.fotoDePerfil || $defaultProfilePicture} alt="profile_picture"/>
+                            </div>
+                            <div className="col-auto">
+                                <Link to={`/usuarios/${comentario.id_Adoptante}`}><p className="comment-name">{comentario.nombreDeUsuario}</p></Link>
+                                <p className="comment-date">{new Date(comentario.fechaCreacion).toLocaleString('es-ES')}</p>
+                            </div>
+                            <div>
+                                <h4 className="d-inline-block">{dibujarEstrellas(comentario.nro_Estrellas)}</h4>
+                                {<span className="ps-2">{comentario.descripcionEstrella}</span>}
+                            </div>
+                        </div>
+                        <div className="row">
+                            <div className="col">
+                                <p>{comentario.descripcion}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
+        </> : <div className="text-center">
+                    <h4>Este refugio aún no tiene comentarios.</h4>
+                </div>}
         </>
     );
 }

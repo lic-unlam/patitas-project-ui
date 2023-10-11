@@ -175,8 +175,13 @@ export const router = createBrowserRouter([
                     {
                         path: "/refugios/:id",
                         element: <RefugioDetalle />,
+                        loader: refugioLoader
+                    },
+                    {
+                        path: "/refugios/:id/:seccion",
+                        element: <RefugioDetalle />,
                         loader: refugioLoader,
-                        children: [
+                        /*children: [
                             {
                                 path: "animales",
                                 element: <Animales title="Animales en el refugio" />,
@@ -199,7 +204,7 @@ export const router = createBrowserRouter([
                                 path: ":section",
                                 element: <MasInformacion shelterDb={shelterDb} title="Más información del refugio" />
                             }
-                        ]
+                        ]*/
                     },
                     {
                         path: "/usuarios/:id",

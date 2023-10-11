@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 
 const VeterinariasAsociadas = (props) => {
+    const { veterinarias } = props;
+
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
     }, []);
@@ -43,7 +45,47 @@ const VeterinariasAsociadas = (props) => {
     }
 
     return (
-        <div id="veterinarias_asociadas_wrapper">{veterinarians_loop()}</div>
+        <div id="veterinarias_asociadas_wrapper">
+            {veterinarias.length > 0 ?
+                veterinarias.map((veterinaria, index) =>
+                <div className="row py-4" key={index}>
+                    <div className="col-12 col-md-6">
+                        <p className="nombre-veterinaria">Veterinaria "{veterinaria.nombre}"</p>
+                        <img className="img-fluid pb-4 pb-md-0" src={veterinaria.fotografia || "/img/shelter/veterinary.jpg"} alt="veterinary"/>
+                    </div>
+                    <div className="col-12 col-md-6">
+                        <h5>Razón social:</h5>
+                        <p>{veterinaria.razonSocial}</p>
+                        <h5>Dirección:</h5>
+                        <p>{veterinaria.direccion}, {veterinaria.barrio}</p>
+                        <h5>Teléfono:</h5>
+                        <p>{veterinaria.telefono}</p>
+                        {veterinaria.telefonoAlternativo && <p>{veterinaria.telefonoAlternativo}</p>}
+                        <h5>Especialidades:</h5>
+                        <p>{veterinaria.especialidades}</p>
+                        <h5>Correo electrónico:</h5>
+                        <p>{veterinaria.email}</p>
+                        <h5>Horario de atención:</h5>
+                        <p>{veterinaria.diasDeAtencion} de {veterinaria.horarioApertura} a {veterinaria.horarioCierre} hs.</p>
+                        {veterinaria.sitioWeb && 
+                        <>
+                            <h5>Sitio web:</h5>
+                            <p>{veterinaria.sitioWeb}</p>
+                        </>}
+                        <h5>Fecha de fundación:</h5>
+                        <p>{new Date(veterinaria.fechaFundacion).toLocaleDateString('es-ES')}</p>
+                        {veterinaria.descripcion &&
+                        <>
+                            <h5>Descripción:</h5>
+                            <p>{veterinaria.descripcion}</p>
+                        </>}
+                    </div>
+                </div>
+                )
+                : <div className="text-center">
+                    <h4>Este refugio aún no tiene veterinarias asociadas.</h4>
+                </div>}
+        </div>
     );
 }
 

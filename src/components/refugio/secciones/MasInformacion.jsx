@@ -3,7 +3,8 @@ import { useParams, useOutletContext } from "react-router-dom";
 
 const MasInformacion = (props) => {
     const params = useParams();
-    const { refugio } = useOutletContext();
+    //const { refugio } = useOutletContext();
+    const { refugio } = props;
     const shelterInfo = props.shelterDb.find(x => x.id === '3');
 
     useEffect(() => {
