@@ -15,9 +15,7 @@ function Login(props) {
 	const { setUser } = useContext(UserContext);
     const navigate = useNavigate();
 
-	const login = async (values, { setSubmitting, setErrors }) => {
-		//event.preventDefault();
-
+	const login = async (values, { setSubmitting, setFieldError }) => {
 		try {
 			const response = await fetch("https://localhost:7277/api/auth/login", {
 				method: "POST",
@@ -29,14 +27,15 @@ function Login(props) {
 					password: values.loginPassword
 				})
 			});
-			/*const userData = {
-				username: 'adoptante.test',
-				email: 'adoptante.test@gmail.com',
-				profilePicture: '/img/default_profile_picture.png'
-			};*/
 
-			if(!response.ok)
+			if(!response.ok) {
+				if(response.status === 404) {
+					setFieldError("userNotFoundError", await response.text());
+					return;
+				}
+
 				throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+			}
 
 			const data = await response.json();
 			setUser(data, localStorage.setItem('userData', JSON.stringify(data)));
@@ -59,7 +58,8 @@ function Login(props) {
 				<Formik
 					initialValues={{
 						loginEmail: '',
-						loginPassword: ''
+						loginPassword: '',
+						userNotFoundError: ''
 					}}
 					validationSchema={loginSchema}
 					onSubmit={login}
@@ -98,6 +98,7 @@ function Login(props) {
 						<div className="form-floating pb-2">
 							<button type="submit" className="btn btn-primary" disabled={isSubmitting}>Ingresar</button>
 						</div>
+						{errors.userNotFoundError && <div className="text-danger pt-2">{errors.userNotFoundError}</div>}
 						<div className="py-4">
 							¿Olvidaste tu contraseña? <Link to="/auth/recuperar-password">Haz clic aquí</Link>
 						</div>
