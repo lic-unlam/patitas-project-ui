@@ -93,7 +93,7 @@ a, button, select {
 }
 
 #root > :nth-child(2):not(section) {
-	padding-top: 4rem;
+	margin-top: 4rem;
 }
 
 :root {
@@ -203,7 +203,7 @@ button[class*="btn-"]:hover, a[class*="btn-"]:hover {
 	box-shadow: unset;
 }
 
-legend {
+legend, .form-legend {
 	font-family: 'Quicksand';
 }
 
@@ -625,6 +625,11 @@ form button[type="submit"] {
 	position: sticky;
 	z-index: 1029; /* el z-index del navbar es 1030 */
 	top: 3.5rem;
+	text-align: center;
+}
+
+.alert-sticky > .btn-close {
+	box-shadow: none !important;
 }
 
 .alert.sticky-bottom {

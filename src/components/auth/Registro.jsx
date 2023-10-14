@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { AdoptanteForm } from './formularios/AdoptanteForm';
@@ -26,7 +26,7 @@ const barriosData = [
 
 const Registro = (props) => {
     const navigate = useNavigate();
-    const [rolSeleccionado, setRolSeleccionado] = useState('0');
+    const [rolSeleccionado, setRolSeleccionado] = useState("adoptante");
 
     const doRegister = (event) => {
 		event.preventDefault();
@@ -58,11 +58,11 @@ const Registro = (props) => {
 
     const mostrarFormularioPorRol = (rol) => {
         switch(rol) {
-            case '0':
-                return <AdoptanteForm barriosData={barriosData} />;
-            case '1':
+            case "adoptante":
+                return <AdoptanteForm />;
+            case "refugio":
                 return <RefugioForm barriosData={barriosData} getListaDeHoras={() => getListaDeHoras} />;
-            case '2':
+            case "veterinaria":
                 return <VeterinariaForm barriosData={barriosData} getListaDeHoras={() => getListaDeHoras} />;
             default:
                 return;
@@ -83,27 +83,18 @@ const Registro = (props) => {
     return (
         <div id="register_wrapper" className="card">
             <div className="card-body">
-                <form id="register_form" onSubmit={doRegister}>
-                    <legend>Únete a la experiencia</legend>
-                    <div className="form-group row py-2 role-selector-wrapper justify-content-center">
-                        <label className="col-auto">¿Qué tipo de usuario eres?</label>
-                        <div className="col-4">
-                            <select id="role_selector" onChange={capturarRolSeleccionado} className="form-select form-select-sm" aria-label="Seleccionar tipo de usuario">
-                                <option value="0" defaultValue>Adoptante</option>
-                                <option value="1">Refugio</option>
-                                <option value="2">Veterinaria</option>
-                            </select>
-                        </div>
+                <h4 className="form-legend text-center">Únete a la experiencia</h4>
+                <div className="form-group row py-2 role-selector-wrapper justify-content-center">
+                    <label className="col-auto">¿Qué tipo de usuario eres?</label>
+                    <div className="col-4">
+                        <select id="role_selector" onChange={capturarRolSeleccionado} className="form-select form-select-sm" aria-label="Seleccionar tipo de usuario">
+                            <option value="adoptante" defaultValue>Adoptante</option>
+                            <option value="refugio">Refugio</option>
+                            <option value="veterinaria">Veterinaria</option>
+                        </select>
                     </div>
-                    {mostrarFormularioPorRol(rolSeleccionado)}
-                    <div className="pt-2 pb-4 form-check text-start">
-                        <input type="checkbox" className="form-check-input" id="terms_and_conditions"/>
-                        <label className="form-check-label" htmlFor="terms_and_conditions">Comprendo y acepto los <Link to="/auth/terms">términos y condiciones</Link>.</label>
-                    </div>
-                    <div className="pb-2">
-                        <button type="submit" className="btn btn-primary">Crea tu cuenta</button>
-                    </div>
-                </form>
+                </div>
+                {mostrarFormularioPorRol(rolSeleccionado)}
             </div>
         </div>
     );
