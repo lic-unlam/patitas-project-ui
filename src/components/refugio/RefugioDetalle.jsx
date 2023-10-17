@@ -1,5 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { Link, Outlet, useLocation, useParams, useNavigate, useLoaderData } from 'react-router-dom';
+
+import { secciones } from 'src/utils/constants/refugio';
+
 import Animales from './secciones/Animales';
 import Comentarios from './secciones/Comentarios';
 import VeterinariasAsociadas from './secciones/VeterinariasAsociadas';
@@ -8,21 +11,48 @@ import MasInformacion from './secciones/MasInformacion';
 import shelterDb from '../helpers/sheltersDb.json';
 
 const RefugioDetalle = (props) => {
-	const location = useLocation();
-    const {pathname} = location;
+	//const location = useLocation();
+    //const {pathname} = location;
     const params = useParams();
     const navigate = useNavigate();
     const cargado = useRef(false);
 	const refugio = useLoaderData();
+	//const [ refugio, setRefugio ] = useState(null);
+	//const [ loading, setLoading ] = useState(true);
 
-	const secciones = {
-		animales: "animales",
-		comentarios: "comentarios",
-		veterinariasAsociadas: "veterinarias-asociadas",
-		masInformacion: "mas-informacion"
-	};
+	/*const refugioLoader = useCallback(async () => {
+		try {
+			let requestOptions = {
+				method: "GET"
+			};
 
-    useEffect(() => {
+			if(user && params.seccion === secciones.comentarios) {
+				requestOptions = {
+					method: "GET",
+					headers: {
+						Authorization: `Bearer ${user.accessToken}`
+					}
+				}
+			}
+
+			const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion || "animales"}`, requestOptions);
+		
+			if(!response.ok)
+				throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+	
+			const data = await response.json();
+			setRefugio(data);
+		}
+		catch(error) {
+			console.log(error);
+		}
+		finally {
+			setLoading(false);
+		}
+	}, []);*/
+
+    /*useEffect(() => {
+		refugioLoader();
 		if(!cargado.current) {
 			cargado.current = true;
 			let regExp = new RegExp("/", "gi"); // g: buscar todas las ocurrencias, i: no sensible a mayúsculas
@@ -32,14 +62,14 @@ const RefugioDetalle = (props) => {
 					replace: true
 				});
 		}
-	}, []);
+	}, [refugioLoader]);*/
 
 	const cargarSeccion = (seccion) => {
 		switch(seccion) {
 			case secciones.animales:
 				return <Animales animales={refugio.animales} title="Animales en el refugio" />
 			case secciones.comentarios:
-				return <Comentarios comentarios={refugio.comentarios} title="Comentarios del refugio" />
+				return <Comentarios comentarios={refugio.comentarios} sesionExpirada={refugio.sesionExpirada} title="Comentarios del refugio" />
 			case secciones.veterinariasAsociadas:
 				return <VeterinariasAsociadas veterinarias={refugio.veterinariasAsociadas} title="Veterinarias asociadas del refugio" />
 			case secciones.masInformacion:
@@ -47,6 +77,10 @@ const RefugioDetalle = (props) => {
 			default:
 				return <Animales animales={refugio.animales} title="Animales en el refugio" />
 		}
+	}
+
+	if(refugio.error) {
+		return <div>{refugio.error}</div>
 	}
 
     return (
@@ -65,7 +99,7 @@ const RefugioDetalle = (props) => {
 			<div id="refugio_wrapper">
 				<ul className="nav nav-underline nav-fill p-4">
 					<li className="nav-item">
-						<Link to={`/refugios/${params.id}/${secciones.animales}`} className={`nav-link ${(params.seccion === secciones.animales) ? "active" : "" }`}><img src="/img/refugio/animales.png" width={32} alt="animales_icon" /> Animales</Link>
+						<Link to={`/refugios/${params.id}/${secciones.animales}`} className={`nav-link ${(!params.seccion || params.seccion === secciones.animales) ? "active" : "" }`}><img src="/img/refugio/animales.png" width={32} alt="animales_icon" /> Animales</Link>
 					</li>
 					<li className="nav-item">
 						<Link to={`/refugios/${params.id}/${secciones.comentarios}`} className={`nav-link ${(params.seccion === secciones.comentarios) ? "active" : "" }`}><img src="/img/refugio/comentarios.png" width={32} alt="comentarios_icon" /> Comentarios</Link>

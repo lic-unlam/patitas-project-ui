@@ -29,7 +29,7 @@ const AnimalDetalle = (props) => {
             document.body.style.overflow = '';
             return true;
 		}
-	}, [navigate,closePublication]);
+	}, [closePublication]);
 
     return (
         <>
@@ -44,8 +44,8 @@ const AnimalDetalle = (props) => {
                             <div className="row">
                                 <div className="col-10">
                                     <div className="request-adoption">
-                                        <h4>¿Te gustaría adoptarme?</h4>
-                                        <h4>¿Quieres verme en persona?</h4>
+                                        <h3>¿Te gustaría adoptarme?</h3>
+                                        <h3>¿Quieres verme en persona?</h3>
                                         <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
                                     </div>
                                 </div>
