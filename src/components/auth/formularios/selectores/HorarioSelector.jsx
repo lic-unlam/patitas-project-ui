@@ -1,9 +1,17 @@
 export const HorarioSelector = (props) => {
+    let { handleChange, handleBlur } = props;
+
     return (
-        <select id={props.id} className="form-select form-select-sm">
-            <option value="0" defaultValue>Elegir hora...</option>
+        <select
+            id={props.id}
+            name={props.name}
+            className="form-select form-select-sm"
+            onChange={handleChange}
+            onBlur={handleBlur}
+        >
+            <option value="">Elegir hora...</option>
             {props.listaDeHoras.map((hora, index) =>
-                <option value={index + 1} key={index}>{hora} hs.</option>
+                <option value={hora} key={index}>{hora} hs.</option>
             )}
         </select>
     );

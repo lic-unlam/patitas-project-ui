@@ -49,7 +49,7 @@ const ExplorarRefugios = (props) => {
 
     return (
         <div className="shelters-wrapper">
-            {user && <RefugiosPorMiZona miBarrio={"Palermo"} refugios={refugios} />}
+            {user && <RefugiosPorMiZona miBarrio={user.barrio} refugios={refugios} />}
             <h2>Nuestros refugios asociados</h2>
             <div className="form-group row pb-4">
                 <label className="col-auto my-auto">Filtrar por barrio porteño:</label>

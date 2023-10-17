@@ -6,7 +6,7 @@ export const RefugiosPorMiZona = (props) => {
 
     return (
         <div id="refugios_por_mi_zona_wrapper">
-            <h2><i className="bi bi-geo-alt-fill"></i> Refugios encontrados en tu zona: <strong>{props.miBarrio}</strong></h2>
+            <h2><i className="bi bi-geo-alt-fill"></i> Refugios encontrados en tu zona: <strong>{miBarrio}</strong></h2>
             <TarjetasDeRefugio refugios={refugiosDeMiBarrio} />
         </div>
     )
