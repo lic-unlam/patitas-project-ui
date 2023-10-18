@@ -2,50 +2,15 @@ import { Formik, Form } from "formik";
 import * as Yup from 'yup';
 
 import FormularioPreAdopcion from "../../usuario/secciones/FormularioPreAdopcion";
-
-const initialValues = {
-    motivo: '',
-    tuvoMascota: '',
-    tieneMascotas: '',
-    descripcionMascotas: '',
-    viveSolo: '',
-    tieneVeterinariaCerca: '',
-    viveEnCasa: '',
-    cantidadDeAmbientes: '',
-    tienePatio: null,
-    tieneBalcon: null,
-    tieneRedEnVentanas: null,
-    conoceLeyDeMaltratoAnimal: null,
-    frecuenciaAnimalSolo: "",
-    tieneConocidosEnCasoDeEmergencia: null,
-    tieneSalarioAcordeAGastos: null,
-    tieneConocidosQueLoAconsejen: null
-}
-
-const validationSchema = Yup.object().shape({
-    motivo: Yup.string()
-                .required("Este campo es obligatorio."),
-    tuvoMascota: Yup.boolean()
-                .required("Debe seleccionar una opción."),
-    tieneMascotas: Yup.boolean()
-                .required("Debe seleccionar una opción."),
-    viveSolo: Yup.boolean()
-                .required("Debe seleccionar una opción."),
-    tieneVeterinariaCerca: Yup.boolean()
-                .required("Debe seleccionar una opción."),
-    viveEnCasa: Yup.boolean()
-                .required("Debe seleccionar una opción."),
-    cantidadDeAmbientes: Yup.number()
-                .required("Debe seleccionar una opción.")
-});
+import { PreAdopcionParameters } from "src/components/usuario/adoptante/formularioPreAdopcion/PreAdopcionParameters";
 
 const PreAdopcionModal = () => {
     return (
         <div className="modal fade" id="preAdoptionModal" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel1" aria-hidden="true">
             <div className="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
                 <Formik
-                    initialValues={initialValues}
-                    validationSchema={validationSchema}
+                    initialValues={PreAdopcionParameters.initialValues}
+                    validationSchema={PreAdopcionParameters.validationSchema}
                     onSubmit={(values) => console.log(values)}
                 >
                 <Form id="solicitud_adopcion_form">

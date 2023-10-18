@@ -1,6 +1,7 @@
 import { Field, ErrorMessage } from "formik";
 
 import { AuthFormErrorMessage } from "src/components/auth/formularios/AuthFormErrorMessage";
+import { PreAdopcionConstants } from "../adoptante/formularioPreAdopcion/PreAdopcionConstants";
 
 const FormularioPreAdopcion = (props) => {
     return (
@@ -18,7 +19,7 @@ const FormularioPreAdopcion = (props) => {
                     <p className="fw-bold">Tus respuestas serán evaluadas por los responsables del refugio y, en base a su criterio, tu solicitud de adopción será aceptada o rechazada.</p>
                             <div className="col">
                                 <div className="row form-field justify-content-center">
-                                    <div className="col-12 col-md-6">
+                                    <div className="col-12 col-md-7">
                                         <label className="form-label" htmlFor="motivo">¿Cuál fue el motivo de la decisión de adoptar? *</label>
                                         <Field as="textarea" 
                                             id="motivo"
@@ -54,6 +55,19 @@ const FormularioPreAdopcion = (props) => {
                                         <label className="form-check-label" htmlFor="tiene_mascotas_no">No</label>
                                     </div>
                                     <ErrorMessage name="tieneMascotas">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
+                                </div>
+                                <div className="row form-field justify-content-center">
+                                    <div className="col-12 col-md-7">
+                                        <label className="form-label" htmlFor="motivo">Descripción de sus mascotas (opcional):</label>
+                                        <Field as="textarea"
+                                            id="descripcion_mascotas"
+                                            name="descripcionMascotas"
+                                            className="form-control"
+                                            rows={3}
+                                            placeholder="Máximo 200 caracteres..."
+                                        />
+                                        <ErrorMessage name="descripcionMascotas">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
+                                    </div>
                                 </div>
                                 <div className="form-field">
                                     <p>¿Convive con más personas? *</p>
@@ -107,79 +121,87 @@ const FormularioPreAdopcion = (props) => {
                                     </div>
                                     <ErrorMessage name="cantidadDeAmbientes">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
-                                <div className="form-field">
+                                <div className="form-field row justify-content-center">
                                     <p>Su hogar tiene... *</p>
-                                    <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox1" value="option1"/>
-                                        <label className="form-check-label" htmlFor="inlineCheckbox1">Patio (para perros)</label>
+                                    <div className="text-start col-auto">
+                                        <div className="form-check">
+                                            <Field className="form-check-input" type="checkbox" id="hogar_tiene_patio" name="hogarTiene" value={PreAdopcionConstants.caracteristicasHogar.tienePatio} />
+                                            <label className="form-check-label" htmlFor="hogar_tiene_patio">Patio</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field className="form-check-input" type="checkbox" id="hogar_tiene_balcon" name="hogarTiene" value={PreAdopcionConstants.caracteristicasHogar.tieneBalcon} />
+                                            <label className="form-check-label" htmlFor="hogar_tiene_balcon">Balcón (para perros)</label>
+                                        </div>
+                                        <div className="form-check">
+                                            <Field className="form-check-input" type="checkbox" id="hogar_tiene_redes" name="hogarTiene" value={PreAdopcionConstants.caracteristicasHogar.tieneRedesEnVentanas} />
+                                            <label className="form-check-label" htmlFor="hogar_tiene_redes">Redes en ventanas a altura (para gatos)</label>
+                                        </div>
                                     </div>
-                                    <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox2" value="option2" defaultChecked/>
-                                        <label className="form-check-label" htmlFor="inlineCheckbox2">Balcón (para perros)</label>
-                                    </div>
-                                    <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="checkbox" id="inlineCheckbox3" value="option3"/>
-                                        <label className="form-check-label" htmlFor="inlineCheckbox3">Redes en ventanas a altura (para gatos)</label>
-                                    </div>
+                                    <ErrorMessage name="hogarTiene">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <div className="form-field">
                                     <p>¿Tiene conocimiento acerca de la <a href="https://www.argentina.gob.ar/normativa/nacional/ley-14346-153011/texto" target="_blank">Ley 14.346</a> referida al maltrato animal? *</p>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioV" id="inlineRadio10" value="option1" defaultChecked/>
-                                        <label className="form-check-label" htmlFor="inlineRadio10">Si</label>
+                                        <Field className="form-check-input" type="radio" name="conoceLeyDeMaltratoAnimal" id="conoce_ley_de_maltrato_animal_si" value="true" />
+                                        <label className="form-check-label" htmlFor="conoce_ley_de_maltrato_animal_si">Si</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioV" id="inlineRadio11" value="option2"/>
-                                        <label className="form-check-label" htmlFor="inlineRadio11">No</label>
+                                        <Field className="form-check-input" type="radio" name="conoceLeyDeMaltratoAnimal" id="conoce_ley_de_maltrato_animal_no" value="false" />
+                                        <label className="form-check-label" htmlFor="conoce_ley_de_maltrato_animal_no">No</label>
                                     </div>
+                                    <ErrorMessage name="conoceLeyDeMaltratoAnimal">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <div className="form-field">
                                     <p>¿Con que frecuencia dejaría solo al animal en el hogar? *</p>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioVI" id="inlineRadio12" value="option1"/>
-                                        <label className="form-check-label" htmlFor="inlineRadio12">Poco frecuente</label>
+                                        <Field className="form-check-input" type="radio" name="frecuenciaAnimalSolo" id="frecuencia_animal_solo_poco" value={PreAdopcionConstants.frecuenciaAnimalSolo.pocoFrecuente} />
+                                        <label className="form-check-label" htmlFor="frecuencia_animal_solo_poco">Poco frecuente</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioVI" id="inlineRadio13" value="option2" defaultChecked/>
-                                        <label className="form-check-label" htmlFor="inlineRadio13">Algo frecuente</label>
+                                        <Field className="form-check-input" type="radio" name="frecuenciaAnimalSolo" id="frecuencia_animal_solo_algo" value={PreAdopcionConstants.frecuenciaAnimalSolo.algoFrecuente} />
+                                        <label className="form-check-label" htmlFor="frecuencia_animal_solo_algo">Algo frecuente</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioVI" id="inlineRadio14" value="option3"/>
-                                        <label className="form-check-label" htmlFor="inlineRadio14">Muy frecuente</label>
+                                        <Field className="form-check-input" type="radio" name="frecuenciaAnimalSolo" id="frecuencia_animal_solo_muy" value={PreAdopcionConstants.frecuenciaAnimalSolo.muyFrecuente} />
+                                        <label className="form-check-label" htmlFor="frecuencia_animal_solo_muy">Muy frecuente</label>
                                     </div>
+                                    <ErrorMessage name="frecuenciaAnimalSolo">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <div className="form-field">
                                     <p>Si hubiera una emergencia con el animal, ¿tendria alguien a quien recurrir para que lo lleve al veterinario? *</p>
                                     <div className="form-check form-check-inline">
-                                            <input className="form-check-input" type="radio" name="radioVII" id="inlineRadio15" value="option1" defaultChecked/>
-                                            <label className="form-check-label" htmlFor="inlineRadio15">Si</label>
+                                        <Field className="form-check-input" type="radio" name="tieneConocidosEnCasoDeEmergencia" id="tieneConocidos_en_caso_de_emergencia_si" value="true" />
+                                        <label className="form-check-label" htmlFor="tieneConocidos_en_caso_de_emergencia_si">Si</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioVII" id="inlineRadio16" value="option2"/>
-                                        <label className="form-check-label" htmlFor="inlineRadio16">No</label>
+                                        <Field className="form-check-input" type="radio" name="tieneConocidosEnCasoDeEmergencia" id="tieneConocidos_en_caso_de_emergencia_no" value="false" />
+                                        <label className="form-check-label" htmlFor="tieneConocidos_en_caso_de_emergencia_no">No</label>
                                     </div>
+                                    <ErrorMessage name="tieneConocidosEnCasoDeEmergencia">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <div className="form-field">
                                     <p>¿Su remuneración es acorde a los gastos que estima tener para el cuidado del animal? *</p>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioVIII" id="inlineRadio17" value="option1" defaultChecked/>
-                                        <label className="form-check-label" htmlFor="inlineRadio17">Si</label>
+                                        <Field className="form-check-input" type="radio" name="tieneSalarioAcordeAGastos" id="tiene_salario_acorde_a_gastos_si" value="true" />
+                                        <label className="form-check-label" htmlFor="tiene_salario_acorde_a_gastos_si">Si</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioVIII" id="inlineRadio18" value="option2"/>
-                                        <label className="form-check-label" htmlFor="inlineRadio18">No</label>
+                                        <Field className="form-check-input" type="radio" name="tieneSalarioAcordeAGastos" id="tiene_salario_acorde_a_gastos_no" value="false" />
+                                        <label className="form-check-label" htmlFor="tiene_salario_acorde_a_gastos_no">No</label>
                                     </div>
+                                    <ErrorMessage name="tieneSalarioAcordeAGastos">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <div className="form-field">
                                     <p>¿Tiene familiares o conocidos que lo aconsejen acerca de la crianza del animal? *</p>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioIX" id="inlineRadio19" value="option1" defaultChecked/>
-                                        <label className="form-check-label" htmlFor="inlineRadio19">Si</label>
+                                        <Field className="form-check-input" type="radio" name="tieneConocidosQueLoAconsejen" id="tiene_conocidos_que_lo_aconsejen_si" value="true" />
+                                        <label className="form-check-label" htmlFor="tiene_conocidos_que_lo_aconsejen_si">Si</label>
                                     </div>
                                     <div className="form-check form-check-inline">
-                                        <input className="form-check-input" type="radio" name="radioIX" id="inlineRadio20" value="option2"/>
-                                        <label className="form-check-label" htmlFor="inlineRadio20">No</label>
+                                        <Field className="form-check-input" type="radio" name="tieneConocidosQueLoAconsejen" id="tiene_conocidos_que_lo_aconsejen_no" value="false" />
+                                        <label className="form-check-label" htmlFor="tiene_conocidos_que_lo_aconsejen_no">No</label>
                                     </div>
+                                    <ErrorMessage name="tieneConocidosQueLoAconsejen">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <p><small><i>(*) Todos los campos son obligatorios</i></small></p>
                                 {props.mostrarGuardado && <button className="btn btn-primary">Guardar cambios</button>}
