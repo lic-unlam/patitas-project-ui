@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { Link, Outlet, useLocation, useParams, useNavigate, useLoaderData } from 'react-router-dom';
 
 import { secciones } from 'src/utils/constants/refugio';
+import NotFound from '../errors/NotFound';
 
 import Animales from './secciones/Animales';
 import Comentarios from './secciones/Comentarios';
@@ -52,7 +53,7 @@ const RefugioDetalle = (props) => {
 	}, []);*/
 
     /*useEffect(() => {
-		refugioLoader();
+		//refugioLoader();
 		if(!cargado.current) {
 			cargado.current = true;
 			let regExp = new RegExp("/", "gi"); // g: buscar todas las ocurrencias, i: no sensible a mayúsculas
@@ -62,12 +63,12 @@ const RefugioDetalle = (props) => {
 					replace: true
 				});
 		}
-	}, [refugioLoader]);*/
+	}, []);*/
 
 	const cargarSeccion = (seccion) => {
 		switch(seccion) {
-			case secciones.animales:
-				return <Animales animales={refugio.animales} title="Animales en el refugio" />
+			/*case secciones.animales:
+				return <Animales animales={refugio.animales} title="Animales en el refugio" />*/
 			case secciones.comentarios:
 				return <Comentarios comentarios={refugio.comentarios} sesionExpirada={refugio.sesionExpirada} title="Comentarios del refugio" />
 			case secciones.veterinariasAsociadas:
@@ -80,7 +81,7 @@ const RefugioDetalle = (props) => {
 	}
 
 	if(refugio.error) {
-		return <div>{refugio.error}</div>
+		return <NotFound message={refugio.error} />
 	}
 
     return (

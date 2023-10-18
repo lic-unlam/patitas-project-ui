@@ -1,12 +1,21 @@
-import { useEffect, useCallback } from 'react';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useEffect, useCallback, useContext } from 'react';
+import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import PreAdopcionModal from './PreAdopcionModal';
 import AdoptionProcessStarted from './AdoptionProcessStarted';
 
+import { UserContext } from 'src/components/layout/LayoutPublic';
+
+import { genero } from 'src/utils/constants/refugio';
+
 const AnimalDetalle = (props) => {
     const navigate = useNavigate();
     const { animalId } = useParams();
+    let { user } = useContext(UserContext);
+    let { state } = useLocation();
+
+    let fecha_ingreso = new Date(state.fechaIngreso).toLocaleDateString();
+    let edadAproximada = new Date().getFullYear() - state.nacimiento;
 
     const closePublication = useCallback(() => {
         navigate('..');
@@ -27,7 +36,7 @@ const AnimalDetalle = (props) => {
 		return () => {
 			document.removeEventListener("keydown", goBack);
             document.body.style.overflow = '';
-            return true;
+            //return true;
 		}
 	}, [closePublication]);
 
@@ -46,7 +55,12 @@ const AnimalDetalle = (props) => {
                                     <div className="request-adoption">
                                         <h3>¿Te gustaría adoptarme?</h3>
                                         <h3>¿Quieres verme en persona?</h3>
-                                        <button className="btn btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
+                                        {user ?
+                                        <div>
+                                            <button className="btn btn-primary py-2 my-2" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
+                                            <img src="https://cdn-icons-png.flaticon.com/512/3047/3047928.png" className="ps-2" width={50} />
+                                        </div>
+                                            : <h5 className="pt-2"><Link to="/auth/signin">Crea una cuenta</Link> y conóceme <i className="bi bi-heart-fill align-middle text-danger"></i></h5>}
                                     </div>
                                 </div>
                                 <div className="col-2">
@@ -61,55 +75,60 @@ const AnimalDetalle = (props) => {
                                 <div className="row">
                                     <div className="col-4">
                                         <span>Nombre</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Chispita</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.nombre}</p>
                                     </div>
                                     <div className='col-4'>
                                         <span>Raza</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Golden Retriever</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.raza}</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Edad aproximada</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 4 meses</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {edadAproximada > 0 ? edadAproximada + ((edadAproximada !== 1) ? " años" : " año") : "Menos de un año"}</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Género</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Macho</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.genero === 'H' ? genero.hembra : genero.macho}</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Peso</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 10 kg.</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.peso} kg.</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Altura</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 35cm.</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {Math.round(state.altura * 100)} cm.</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Fecha de ingreso</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> 14/09/2023</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {fecha_ingreso}</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Esterilizado</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Si</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.esterilizado ? "Si" : "No"}</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Desparasitado</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Si</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.desparasitado ? "Si" : "No"}</p>
                                     </div>
                                     <div className="col-4">
                                         <span>Vacunas aplicadas:</span>
+                                        { state.vacunas.length > 0 ?
                                         <ul>
-                                            <li>Rabia</li>
-                                            <li>Moquillo</li>
-                                            <li>Parvovirus</li>
+                                            {state.vacunas.map((vacuna, index) => <li key={index}>{vacuna}</li>)}
                                         </ul>
+                                        : <div>-</div>}
                                     </div>
                                     <div className="col-8">
                                         <span>Situación previa</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> El perro fue traído a nosotros por un vecino porque hacía meses que rondaba su zona y dormía en la vereda.</p>
+                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.situacionPrevia}</p>
                                     </div>
                                 </div>
                                 <span>Observaciones:</span>
-                                <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> Presentaba signos de mala alimentación y bajo peso para su edad. También presentaba algunas raspaduras superficiales que fueron tratadas inmediatamente.</p>
+                                {state.descripcionAdicional ?
+                                    <p>
+                                        <img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.descripcionAdicional}
+                                    </p>
+                                    : <p>-</p>
+                                }
                             </div>
                         </div>
                     </div>

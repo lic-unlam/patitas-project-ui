@@ -1,11 +1,12 @@
 import React, { useEffect } from 'react';
 import { Link, useLocation, useParams, Outlet } from 'react-router-dom';
 
+import { secciones } from 'src/utils/constants/refugio';
+
 const Animales = (props) => {
     const location = useLocation();
-    const { id } = useParams();
+    const { id, seccion } = useParams();
     const { animales } = props;
-    console.log(animales);
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
@@ -27,12 +28,13 @@ const Animales = (props) => {
 
     const mostrarAnimales = () => {
         let imagenes = [];
+        const urlPrefix = `${location.pathname}${!seccion ? '/' + secciones.animales : ''}`;
 
         if(animales.length > 0) {
             animales.map((animal, index) => {
                 imagenes.push(
-                    <div className="col-md-4 col-xl-3" key={index}>
-                        <Link to={`${location.pathname}/${animal.id}`}><img className="img-fluid animal-thumbnail" src={`https://localhost:7277/api/refugios/${id}/animales/images/animal_${animal.id}.jpg`} alt={`foto_animal_${animal.nombre}`} /></Link>
+                    <div className="col-md-4 col-xl-3" key={index} title={animal.nombre}>
+                        <Link to={`${urlPrefix}/${animal.id}`} state={animal}><img className="img-fluid animal-thumbnail" src={`https://localhost:7277/api/refugios/${id}/animales/images/animal_${animal.id}.jpg`} alt={`foto_animal_${animal.nombre}`} /></Link>
                     </div>
                 );
             });

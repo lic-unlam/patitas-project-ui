@@ -20,7 +20,7 @@ export const CustomModal = (props) => {
 		return () => {
             document.removeEventListener("keydown", goBack);
             document.body.style.overflow = '';
-            return true;
+            //return true;
         };
 	}, [navigate, cerrarCustomModal]);
 

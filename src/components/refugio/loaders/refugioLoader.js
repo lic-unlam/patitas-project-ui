@@ -16,7 +16,7 @@ export const refugioLoader = async ({ params }) => {
             }
         }
 
-        const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion || "animales"}`, requestOptions);
+        const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion || secciones.animales}`, requestOptions);
     
         if(!response.ok)
             throw new Error("Hubo un problema con la solicitud. Código: " + response.status);

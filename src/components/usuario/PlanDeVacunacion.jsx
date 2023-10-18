@@ -11,7 +11,7 @@ const PlanDeVacunacion = () => {
         return () => {
             collapsePlanDeVacunacion.removeEventListener('show.bs.collapse', event => setListaCerrada(false));
             collapsePlanDeVacunacion.removeEventListener('hide.bs.collapse', event => setListaCerrada(true));
-            return true;
+            //return true;
         }
     }, []);
     
