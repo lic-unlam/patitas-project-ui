@@ -29,7 +29,7 @@ export const BarraDeBusqueda = (props) => {
         let barrio = event.target.barrio.value;
         //console.log(event.target.barrio[event.target.barrio.value].text);
 
-        setSearchParams({ nombre: nombre, barrio: barrio });
+        //setSearchParams({ nombre: nombre, barrio: barrio });
 
         try {
             /*let queryString = '';

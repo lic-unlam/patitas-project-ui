@@ -7,9 +7,12 @@ import { RefugiosPorMiZona } from "./RefugiosPorMiZona";
 import { TarjetasDeRefugio } from "./TarjetasDeRefugio";
 
 const ExplorarRefugios = (props) => {
-    const [ refugios, setRefugios ] = useState([]);
+    const [ refugios, setRefugios ] = useState({
+        todos: undefined,
+        filtrados: undefined
+    });
     const [ barrios, setBarrios ] = useState([]);
-    const [ refugiosFiltrados, setRefugiosFiltrados ] = useState([]);
+    //const [ refugiosFiltrados, setRefugiosFiltrados ] = useState(undefined);
     const { user, setUser } = useContext(UserContext);
 
     const getRefugios = useCallback(async () => {
@@ -23,8 +26,12 @@ const ExplorarRefugios = (props) => {
             
             const data = await response.json();
             setBarrios(data.barrios);
-            setRefugios(data.refugios);
-            setRefugiosFiltrados(data.refugios);
+            setRefugios({
+                todos: data.refugios,
+                filtrados: data.refugios
+            });
+            //setRefugios(data.refugios);
+            //setRefugiosFiltrados(data.refugios);
         }
         catch(error) {
             console.log(error.message);
@@ -41,15 +48,15 @@ const ExplorarRefugios = (props) => {
 
         if(barrioSeleccionado !== "Todos") {
             const refugiosFiltrados = refugios.filter(refugio => refugio.barrio === barrioSeleccionado);
-            setRefugiosFiltrados(refugiosFiltrados);
+            setRefugiosFiltrados({...refugios, filtrados: refugiosFiltrados});
         }
         else
-            setRefugiosFiltrados(refugios);
+            setRefugiosFiltrados({...refugios, filtrados: refugios});
     }
 
     return (
         <div className="shelters-wrapper">
-            {user && <RefugiosPorMiZona miBarrio={user.barrio} refugios={refugios} />}
+            {user && <RefugiosPorMiZona miBarrio={user.barrio} refugios={refugios.todos} />}
             <h2>Nuestros refugios asociados</h2>
             <div className="form-group row pb-4">
                 <label className="col-auto my-auto">Filtrar por barrio porteño:</label>
@@ -66,7 +73,7 @@ const ExplorarRefugios = (props) => {
                     </select>
                 </div>
             </div>
-            {refugios && <TarjetasDeRefugio refugios={refugiosFiltrados}/>}
+            {refugios && <TarjetasDeRefugio refugios={refugios.filtrados}/>}
         </div>
     );
 }

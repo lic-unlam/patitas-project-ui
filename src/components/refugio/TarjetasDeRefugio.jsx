@@ -1,7 +1,14 @@
 import { Link } from "react-router-dom";
 
+import Loading from "../layout/Loading";
+
 export const TarjetasDeRefugio = (props) => {
     const { refugios } = props;
+
+    if(refugios === undefined)
+        return (
+            <Loading />
+        );
 
     if(refugios.length < 1)
         return (
