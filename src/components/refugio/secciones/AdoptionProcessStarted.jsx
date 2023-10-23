@@ -1,8 +1,12 @@
 import {useRef, useEffect} from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
-function AdoptionProcessStarted() {
+function AdoptionProcessStarted(props) {
     const ref = useRef(null);
+    const confetisRef = useRef();
+    const navigate = useNavigate();
+    const location = useLocation();
 
     useEffect(() => {
         const element = ref.current;
@@ -14,7 +18,7 @@ function AdoptionProcessStarted() {
         };
     });
 
-    var myConfetti = confetti.create(document.getElementById('confetis'), {
+    var myConfetti = confetti.create(confetisRef.current, {
         resize: true,
         useWorker: true
     });
@@ -55,6 +59,17 @@ function AdoptionProcessStarted() {
         });
     }
 
+    const redirectToPublication = () => {
+        var adoptionStartedModal = bootstrap.Modal.getInstance(ref.current);
+        var preAdoptionModal = bootstrap.Modal.getInstance(document.querySelector("#preAdoptionModal"));
+        adoptionStartedModal.hide();
+        preAdoptionModal.hide();
+        
+        navigate(location.pathname, {
+            state: props.state
+        });
+    }
+
     return (
         <div ref={ref} className="modal fade" id="startAdoptionModal" tabIndex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="exampleModalLabel2" aria-hidden="true">
             <div className="modal-dialog modal-dialog-centered">
@@ -63,14 +78,14 @@ function AdoptionProcessStarted() {
                         <img className="img-fluid" width={200} src="/img/posts/perro_saludando.png" alt="perro_saludando"/>
                         <h2>¡Felicitaciones!</h2>
                         <p>Estás un paso más cerca de ese gran amigo que estás buscando.</p>
-                        <p>El refugio se contactará contigo para coordinar una cita.</p>
+                        <p>El refugio analizará tu solicitud y programará un turno para tu visita.</p>
                     </div>
                     <div className="modal-footer">
-                        <button type="button" className="btn btn-primary" data-bs-dismiss="modal">De acuerdo</button>
+                        <button type="button" className="btn btn-primary" onClick={redirectToPublication} data-bs-dismiss="modal">De acuerdo</button>
                     </div>
                 </div>
             </div>
-            <canvas id="confetis"></canvas>
+            <canvas id="confetis" ref={confetisRef}></canvas>
         </div>
     );
 }

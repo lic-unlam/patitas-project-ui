@@ -92,7 +92,7 @@
 
 .post-wrapper {
     position: fixed;
-    height: 90vh;
+    height: 95vh;
     width: 90vw;
     top: 50%;
     left: 50%;
@@ -148,6 +148,7 @@
 
 .close-button button {
     border: none;
+    text-shadow: none !important;
 }
 
 .close-button i {
@@ -170,7 +171,7 @@
 
 .request-adoption {
     padding-top: 1rem;
-    padding-bottom: 1rem;
+    /*padding-bottom: 1rem;*/
 }
 
 .request-adoption > h3 {
@@ -187,10 +188,26 @@
 
 .animal-information {
     padding-right: 0.8rem;
+    font-family: 'Quicksand';
 }
 
-.animal-information span {
-    font-weight: bold;
+.animal-information > .row {
+    padding-top: 1rem;
+}
+
+.animal-information .info-title {
+    font-size: 1.2rem;
+}
+
+.animal-information .info-content {
+    font-size: 1.2rem;
+    /*font-weight: bold;*/
+    padding-left: 1rem;
+    padding-right: 1rem;
+    color: black;
+    /*background-color: #e8eaed;*/
+    background-color: #e8f9e4;
+    border-radius: 50rem;
 }
 
 .animal-information ul > li {

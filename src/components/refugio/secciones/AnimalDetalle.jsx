@@ -72,70 +72,109 @@ const AnimalDetalle = (props) => {
                                 </div>
                             </div>
                             <div className="animal-information">
-                                <div className="row">
+                                <div className="row align-items-center">
                                     <div className="col-4">
-                                        <span>Nombre</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.nombre}</p>
-                                    </div>
-                                    <div className='col-4'>
-                                        <span>Raza</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.raza}</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Edad aproximada</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {edadAproximada > 0 ? edadAproximada + ((edadAproximada !== 1) ? " años" : " año") : "Menos de un año"}</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Género</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.genero === 'H' ? genero.hembra : genero.macho}</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Peso</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.peso} kg.</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Altura</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {Math.round(state.altura * 100)} cm.</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Fecha de ingreso</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {fecha_ingreso}</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Esterilizado</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.esterilizado ? "Si" : "No"}</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Desparasitado</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.desparasitado ? "Si" : "No"}</p>
-                                    </div>
-                                    <div className="col-4">
-                                        <span>Vacunas aplicadas:</span>
-                                        { state.vacunas.length > 0 ?
-                                        <ul>
-                                            {state.vacunas.map((vacuna, index) => <li key={index}>{vacuna}</li>)}
-                                        </ul>
-                                        : <div>-</div>}
+                                        <span className="info-title">Nombre</span>
                                     </div>
                                     <div className="col-8">
-                                        <span>Situación previa</span>
-                                        <p><img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.situacionPrevia}</p>
+                                        <span className="info-content">{state.nombre}</span>
                                     </div>
                                 </div>
-                                <span>Observaciones:</span>
-                                {state.descripcionAdicional ?
-                                    <p>
-                                        <img className="img-fluid" width={20} src="/img/huellas.png" alt="huella"/> {state.descripcionAdicional}
-                                    </p>
-                                    : <p>-</p>
-                                }
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Raza</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.raza}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Edad aproximada</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{edadAproximada > 0 ? edadAproximada + ((edadAproximada !== 1) ? " años" : " año") : "Menos de un año"}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Género</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.genero === 'H' ? genero.hembra : genero.macho}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Peso</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.peso} kg.</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Altura</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{Math.round(state.altura * 100)} cm.</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Fecha de ingreso</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{fecha_ingreso}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Esterilizado</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.esterilizado ? "Si" : "No"}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Desparasitado</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.desparasitado ? "Si" : "No"}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Situación previa</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.situacionPrevia}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Vacunas aplicadas</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.vacunas.length > 0 ? state.vacunas.join(", ") : "-"}</span>
+                                    </div>
+                                </div>
+                                <div className="row align-items-center">
+                                    <div className="col-4">
+                                        <span className="info-title">Observaciones</span>
+                                    </div>
+                                    <div className="col-8">
+                                        <span className="info-content">{state.descripcionAdicional ? state.descripcionAdicional : "-"}</span>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <PreAdopcionModal />
-            <AdoptionProcessStarted/>
+            <AdoptionProcessStarted state={state} />
         </>
     );
 }

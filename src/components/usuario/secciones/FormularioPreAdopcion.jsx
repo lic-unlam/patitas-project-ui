@@ -5,8 +5,8 @@ import { PreAdopcionConstants } from "../adoptante/formularioPreAdopcion/PreAdop
 
 const FormularioPreAdopcion = (props) => {
     return (
-        <div id="adoption_form_wrapper">
-            <p className='alert alert-warning border-warning'>Para poder postularse, es necesario que completes este formulario para brindarle información a los refugios sobre tu persona y te tengan en consideración.</p>
+        <div>
+            <p className='alert alert-warning border-warning'><strong>AVISO:</strong> Para poder postularse, es necesario que completes este formulario para brindarle información a los refugios sobre tu persona y te tengan en consideración.</p>
             <img className="img-fluid" width={300} src="/img/gato_guiñando_ojo.png" alt="gato_guiñando_ojo"/>
             <div className="card marco-formulario">
                 <div className="row">
@@ -168,7 +168,7 @@ const FormularioPreAdopcion = (props) => {
                                     <ErrorMessage name="frecuenciaAnimalSolo">{message => <AuthFormErrorMessage field={message} />}</ErrorMessage>
                                 </div>
                                 <div className="form-field">
-                                    <p>Si hubiera una emergencia con el animal, ¿tendria alguien a quien recurrir para que lo lleve al veterinario? *</p>
+                                    <p>Si hubiera alguna emergencia con el animal en su ausencia, ¿tendria alguien a quien recurrir para que lo asista? *</p>
                                     <div className="form-check form-check-inline">
                                         <Field className="form-check-input" type="radio" name="tieneConocidosEnCasoDeEmergencia" id="tieneConocidos_en_caso_de_emergencia_si" value="true" />
                                         <label className="form-check-label" htmlFor="tieneConocidos_en_caso_de_emergencia_si">Si</label>
