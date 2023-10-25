@@ -173,11 +173,6 @@ export const router = createBrowserRouter([
                         element: <BuscadorDeRefugios />
                     },
                     {
-                        path: "/refugios/:id",
-                        element: <RefugioDetalle />,
-                        loader: refugioLoader
-                    },
-                    {
                         path: "/refugios/:id/:seccion",
                         element: <RefugioDetalle />,
                         loader: refugioLoader,

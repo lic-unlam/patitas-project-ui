@@ -21,7 +21,7 @@ export const TarjetasDeRefugio = (props) => {
         <div className="row tarjetas-de-refugio-wrapper">
             {refugios.map((refugio, index) => (
                 <div className="col-12 col-md-6" key={index}>
-                    <Link to={`/refugios/${refugio.id}`}>
+                    <Link to={`/refugios/${refugio.id}/animales`}>
                     <div className="card shelter-card mb-3">
                         <div className="row g-0">
                             <div className="col-2">

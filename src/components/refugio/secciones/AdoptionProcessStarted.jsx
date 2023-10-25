@@ -5,6 +5,7 @@ import confetti from 'canvas-confetti';
 function AdoptionProcessStarted(props) {
     const ref = useRef(null);
     const confetisRef = useRef();
+    const { setTieneSolicitudActiva } = props;
     const navigate = useNavigate();
     const location = useLocation();
 
@@ -64,10 +65,12 @@ function AdoptionProcessStarted(props) {
         var preAdoptionModal = bootstrap.Modal.getInstance(document.querySelector("#preAdoptionModal"));
         adoptionStartedModal.hide();
         preAdoptionModal.hide();
+
+        setTieneSolicitudActiva(true);
         
-        navigate(location.pathname, {
+        /*navigate(location.pathname, {
             state: props.state
-        });
+        });*/
     }
 
     return (

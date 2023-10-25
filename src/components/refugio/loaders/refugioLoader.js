@@ -5,7 +5,7 @@ export const refugioLoader = async ({ params }) => {
         let requestOptions = { method: "GET" };
         let token = localStorage.getItem("userData");
 
-        if(token && params.seccion === secciones.comentarios) {
+        if(token && (params.seccion === secciones.animales || params.seccion === secciones.comentarios)) {
             token = JSON.parse(token);
 
             requestOptions = {
@@ -15,8 +15,8 @@ export const refugioLoader = async ({ params }) => {
                 }
             }
         }
-
-        const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion || secciones.animales}`, requestOptions);
+        
+        const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion}`, requestOptions);
     
         if(!response.ok)
             throw new Error("Hubo un problema con la solicitud. Código: " + response.status);

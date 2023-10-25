@@ -47,11 +47,11 @@ const ExplorarRefugios = (props) => {
         const barrioSeleccionado = event.target.value;
 
         if(barrioSeleccionado !== "Todos") {
-            const refugiosFiltrados = refugios.filter(refugio => refugio.barrio === barrioSeleccionado);
-            setRefugiosFiltrados({...refugios, filtrados: refugiosFiltrados});
+            const refugiosFiltrados = refugios.todos.filter(refugio => refugio.barrio === barrioSeleccionado);
+            setRefugios({...refugios, filtrados: refugiosFiltrados});
         }
         else
-            setRefugiosFiltrados({...refugios, filtrados: refugios});
+            setRefugios({...refugios, filtrados: refugios.todos});
     }
 
     return (

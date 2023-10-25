@@ -1,4 +1,4 @@
-import { useEffect, useCallback, useContext } from 'react';
+import { useEffect, useCallback, useContext, useState } from 'react';
 import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import PreAdopcionModal from './PreAdopcionModal';
@@ -10,10 +10,15 @@ import { genero } from 'src/utils/constants/refugio';
 
 const AnimalDetalle = (props) => {
     const navigate = useNavigate();
-    const { animalId } = useParams();
-    let { user } = useContext(UserContext);
+    const { animalId } = useParams(); // obtengo el id del animal desde la url
+    let { user } = useContext(UserContext); // datos del estado del usuario
+    
+    // los datos del animal obtenidos desde la API en el componente padre y pasados como 'state' al redireccionarse a este componente
     let { state } = useLocation();
+    // utilizo el valor de 'solicitudActiva' para saber si mostrar el botón de "preguntar por mi"
+    const [ tieneSolicitudActiva, setTieneSolicitudActiva ] = useState(state.solicitudActiva);
 
+    // formateo los datos recibidos de fecha de ingreso y nacimiento para presentarlos
     let fecha_ingreso = new Date(state.fechaIngreso).toLocaleDateString();
     let edadAproximada = new Date().getFullYear() - state.nacimiento;
 
@@ -21,24 +26,21 @@ const AnimalDetalle = (props) => {
         navigate('..');
     }, [navigate]); // uso 'useCallback' porque voy a utilizar esta función dentro de useEffect
 
+    const goBack = useCallback((event) => {
+        if((event.key === 'Escape') && !document.querySelector('#preAdoptionModal').classList.contains('show') && !document.querySelector('#startAdoptionModal').classList.contains('show'))
+            closePublication();
+    }, [closePublication]);
+
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
-
-		const goBack = (event) => {
-			if((event.key === 'Escape') && !document.querySelector('#preAdoptionModal').classList.contains('show') && !document.querySelector('#startAdoptionModal').classList.contains('show'))
-				closePublication();
-		}
-		
 		document.addEventListener("keydown", goBack);
-        
         document.body.style.overflow = "hidden";
 
 		return () => {
 			document.removeEventListener("keydown", goBack);
             document.body.style.overflow = '';
-            //return true;
 		}
-	}, [closePublication]);
+	}, [goBack]);
 
     return (
         <>
@@ -53,14 +55,19 @@ const AnimalDetalle = (props) => {
                             <div className="row">
                                 <div className="col-10">
                                     <div className="request-adoption">
-                                        <h3>¿Te gustaría adoptarme?</h3>
-                                        <h3>¿Quieres verme en persona?</h3>
-                                        {user ?
-                                        <div>
-                                            <button className="btn btn-primary py-2 my-2" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
-                                            <img src="https://cdn-icons-png.flaticon.com/512/3047/3047928.png" className="ps-2" width={50} />
-                                        </div>
-                                            : <h5 className="pt-2"><Link to="/auth/signin">Crea una cuenta</Link> y conóceme <i className="bi bi-heart-fill align-middle text-danger"></i></h5>}
+                                        {tieneSolicitudActiva ?
+                                        <h3>Ya tienes una <Link to="/usuario/mis-adopciones">solicitud activa</Link> para adoptar a {state.nombre}.<img src="/img/check.png" width={50} className="d-inline" alt="check" /></h3> :
+                                        <>
+                                            <h3>¿Te gustaría adoptarme?</h3>
+                                            <h3>¿Quieres verme en persona?</h3>
+                                            {user ?
+                                            <div>
+                                                <button className="btn btn-primary py-2 my-2" type="button" data-bs-toggle="modal" data-bs-target="#preAdoptionModal">Pregunta por mí</button>
+                                                <img src="/img/shelter/perro_gato_corazon.png" className="ps-2" width={50} />
+                                            </div>
+                                                : <h5 className="pt-2"><Link to="/auth/signin">Crea una cuenta</Link> y conóceme <i className="bi bi-heart-fill align-middle text-danger"></i></h5>}
+                                        </>
+                                        }
                                     </div>
                                 </div>
                                 <div className="col-2">
@@ -174,7 +181,7 @@ const AnimalDetalle = (props) => {
                 </div>
             </div>
             <PreAdopcionModal />
-            <AdoptionProcessStarted state={state} />
+            <AdoptionProcessStarted state={state} setTieneSolicitudActiva={setTieneSolicitudActiva} />
         </>
     );
 }

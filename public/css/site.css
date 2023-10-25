@@ -637,6 +637,7 @@ form button[type="submit"] {
 
 .not-found-wrapper {
 	text-align: center;
+	padding-top: 1.5rem;
 }
 
 .not-found-wrapper img {
@@ -698,6 +699,7 @@ form button[type="submit"] {
 	font-size: larger;
 	padding: 0.5rem 1rem !important;
 	border: 0;
+	text-shadow: none !important;
 }
 
 #go_top > button:hover {
