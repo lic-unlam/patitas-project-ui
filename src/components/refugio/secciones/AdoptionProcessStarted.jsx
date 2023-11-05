@@ -1,13 +1,11 @@
 import {useRef, useEffect} from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import confetti from 'canvas-confetti';
 
 function AdoptionProcessStarted(props) {
     const ref = useRef(null);
     const confetisRef = useRef();
-    const { setTieneSolicitudActiva } = props;
     const navigate = useNavigate();
-    const location = useLocation();
 
     useEffect(() => {
         const element = ref.current;
@@ -66,11 +64,12 @@ function AdoptionProcessStarted(props) {
         adoptionStartedModal.hide();
         preAdoptionModal.hide();
 
-        setTieneSolicitudActiva(true);
+        let animalUpdated = props.animalData;
+        animalUpdated.solicitudActiva = true;
         
-        /*navigate(location.pathname, {
-            state: props.state
-        });*/
+        navigate(location.pathname, {
+            state: animalUpdated
+        });
     }
 
     return (

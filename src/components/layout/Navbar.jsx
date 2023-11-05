@@ -1,7 +1,9 @@
 import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-//import {Search} from './Search';
+
 import { UserContext } from './LayoutPublic';
+import { AdministradorMenu, AdoptanteMenu, RefugioMenu } from './paneles_usuario';
+import { roles } from 'src/utils/constants/user';
 
 function Navbar(props) {
     const { user, setUser } = useContext(UserContext);
@@ -16,6 +18,19 @@ function Navbar(props) {
             setUser(userDataObject);
         }
     }, [setUser]);
+
+    const mostrarAccesos = (rol) => {
+        switch(rol) {
+            case roles.administrador:
+                return <AdministradorMenu />
+            case roles.adoptante:
+                return <AdoptanteMenu />
+            case roles.refugio:
+                return <RefugioMenu />
+            default:
+                break;
+        }
+    }
 
     const logout = (event) => {
         event.preventDefault();
@@ -67,9 +82,6 @@ function Navbar(props) {
                                 <Link className="nav-link" to="/refugios">Explorar refugios</Link>
                             </li>
                         </ul>
-                        {/*<form id="search_wrapper" className="d-flex ms-auto">
-                            <Search/>
-                        </form>*/}
                         <ul className="navbar-nav mx-auto">
                             <li className="nav-item">
                                 <Link className="nav-link" to="/refugios/buscador"><i className="bi bi-search"></i> Buscar refugios</Link>
@@ -85,50 +97,12 @@ function Navbar(props) {
                                 <li className="nav-item">
                                     <span className="nav-link nav-text-username" title={user.email}>{user.nombreDeUsuario}</span>
                                 </li>
-                                {/*<li className="nav-item">
-                                    <Link className="nav-link icon" to="/usuarios/notificaciones" title="Notificaciones"><i className="bi bi-bell"></i></Link>
-                                </li>*/}
                                 <li className="nav-item dropdown">
                                     <button className="btn dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false" title="Panel de usuario">
                                     <img className="img-fluid nav-profile-picture" width={24} src={user.fotoDePerfil || window.$defaultProfilePicture} alt="foto_de_perfil" />
                                     </button>
                                     <ul className="dropdown-menu dropdown-menu-end">
-                                        <li>
-                                            <Link className="dropdown-item" to="/adoptantes/1/datos-personales">Datos personales</Link>
-                                        </li>
-                                        <div className="dropdown-divider"></div>
-                                        <li>
-                                            <Link className="dropdown-item" to="/adoptantes/1/formulario-pre-adopcion">Formulario pre-adopción</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/adoptantes/1/mis-adopciones">Mis adopciones</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/adoptantes/1/mis-turnos">Mis turnos</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/adoptantes/1/seguimientos">Seguimientos</Link>
-                                        </li>
-                                        <div className="dropdown-divider"></div>
-                                        <li>
-                                            <Link className="dropdown-item" to="/administradores/1/activaciones">Activar refugio/veterinaria</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/administradores/1/aprobar-comentarios">Aprobar comentarios</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/administradores/1/moderar-foro">Moderar foro</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/administradores/1/abm-usuarios">ABM de usuarios</Link>
-                                        </li>
-                                        <div className="dropdown-divider"></div>
-                                        <li>
-                                            <Link className="dropdown-item" to="/usuarios/1/perfil">Datos de perfil</Link>
-                                        </li>
-                                        <li>
-                                            <Link className="dropdown-item" to="/usuarios/1/solicitudes-de-adopcion">Adopciones</Link>
-                                        </li>
+                                        {mostrarAccesos(user.rol)}
                                     </ul>
                                 </li>
                                 <li className="nav-item">

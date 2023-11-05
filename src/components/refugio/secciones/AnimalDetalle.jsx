@@ -15,8 +15,6 @@ const AnimalDetalle = (props) => {
     
     // los datos del animal obtenidos desde la API en el componente padre y pasados como 'state' al redireccionarse a este componente
     let { state } = useLocation();
-    // utilizo el valor de 'solicitudActiva' para saber si mostrar el botón de "preguntar por mi"
-    const [ tieneSolicitudActiva, setTieneSolicitudActiva ] = useState(state.solicitudActiva);
 
     // formateo los datos recibidos de fecha de ingreso y nacimiento para presentarlos
     let fecha_ingreso = new Date(state.fechaIngreso).toLocaleDateString();
@@ -55,7 +53,7 @@ const AnimalDetalle = (props) => {
                             <div className="row">
                                 <div className="col-10">
                                     <div className="request-adoption">
-                                        {tieneSolicitudActiva ?
+                                        {state.solicitudActiva ?
                                         <h3>Ya tienes una <Link to="/usuario/mis-adopciones">solicitud activa</Link> para adoptar a {state.nombre}.<img src="/img/check.png" width={50} className="d-inline" alt="check" /></h3> :
                                         <>
                                             <h3>¿Te gustaría adoptarme?</h3>
@@ -181,7 +179,7 @@ const AnimalDetalle = (props) => {
                 </div>
             </div>
             <PreAdopcionModal />
-            <AdoptionProcessStarted state={state} setTieneSolicitudActiva={setTieneSolicitudActiva} />
+            <AdoptionProcessStarted animalData={state} />
         </>
     );
 }
