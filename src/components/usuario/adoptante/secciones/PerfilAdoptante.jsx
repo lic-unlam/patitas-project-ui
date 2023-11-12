@@ -1,4 +1,53 @@
-export const PerfilAdoptante = () => {
+import { useEffect, useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+import { UserContext } from "src/components/layout/LayoutPublic";
+import Loading from "src/components/layout/Loading";
+
+export const PerfilAdoptante = (props) => {
+    const navigate = useNavigate();
+    let { user } = useContext(UserContext);
+    const [ datosPerfil, setDatosPerfil ] = useState();
+    const datoNoEspecificado = "No especificado";
+
+    const loadPerfil = useCallback(async () => {
+        try {
+            if(user === null)
+                throw new Error("No hay usuario logueado.");
+
+            const response = await fetch("https://localhost:7277/api/adoptante/perfil", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${user.accessToken}`
+                }
+            });
+
+            if(!response.ok) {
+                if(response.status === 403)
+                    navigate("/error/forbidden");
+
+                if(response.status === 401)
+                    navigate("/error/unauthorized");
+                
+                throw new Error("Hubo un problema con la solicitud. Código de error " + response.status);
+            }
+            
+            const data = await response.json();
+            setDatosPerfil(data);
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        document.title = props.title.concat(' - ', window.$title);
+        loadPerfil();
+    }, []);
+
+    if(!datosPerfil)
+        return <Loading />
+
     return (
         <div id="perfil_wrapper">
             <div className="card">
@@ -12,12 +61,12 @@ export const PerfilAdoptante = () => {
                 <div className="card-body datos-de-usuario">
                     <div className="row justify-content-center">
                         <div className="col-auto">
-                            <img src="/img/default_profile_picture.png" width={100} alt="foto_perfil" />
+                            <img src={datosPerfil.fotoDePerfil ? datosPerfil.fotoDePerfil : window.$defaultProfilePicture} width={100} alt="foto_perfil" />
                         </div>
                         <div className="col-auto">
-                            <span>adoptante.test</span>
-                            <p className="mb-1">adoptante.test@gmail.com</p>
-                            <p className="text-muted fst-italic"><small>Registrado el 25/12/2022 14:45</small></p>
+                            <span>{datosPerfil.nombreUsuario}</span>
+                            <p className="mb-1">{datosPerfil.email}</p>
+                            <p className="text-muted fst-italic"><small>Registrado el {datosPerfil.fechaCreacion}</small></p>
                         </div>
                     </div>
                     <div className="text-center mt-4">
@@ -29,35 +78,35 @@ export const PerfilAdoptante = () => {
                             <div className="row">
                                 <div className="col-12 col-md-6">
                                     <span>Nombre:</span>
-                                    <p>Adoptante</p>
+                                    <p>{datosPerfil.nombre}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Apellido:</span>
-                                    <p>Test</p>
+                                    <p>{datosPerfil.apellido}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Barrio:</span>
-                                    <p>Recoleta</p>
+                                    <p>{datosPerfil.nombreBarrio}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Dirección:</span>
-                                    <p>Av. Hipólito Yrigoyen 1849</p>
+                                    <p>{datosPerfil.direccion ? datosPerfil.direccion : datoNoEspecificado}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Fecha de nacimiento:</span>
-                                    <p>9/07/1995</p>
+                                    <p>{datosPerfil.fechaNacimiento ? datosPerfil.fechaNacimiento : datoNoEspecificado}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Documento:</span>
-                                    <p>40.579.842</p>
+                                    <p>{datosPerfil.dni ? datosPerfil.dni : datoNoEspecificado}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Teléfono:</span>
-                                    <p>5555-5555</p>
+                                    <p>{datosPerfil.telefono ? datosPerfil.telefono : datoNoEspecificado}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <span>Adopciones:</span>
-                                    <p title="Exitosas: 4 - Interrumpidas: 2"><i className="bi bi-check-circle-fill text-success"></i> 4 <i className="bi bi-x-circle-fill text-danger ps-2"></i> 2</p>
+                                    <p title={`Exitosas: ${datosPerfil.cantidadAdopcionesExitosas} - Interrumpidas: ${datosPerfil.cantidadAdopcionesFalladas}`}><i className="bi bi-check-circle-fill text-success"></i> {datosPerfil.cantidadAdopcionesExitosas} <i className="bi bi-x-circle-fill text-danger ps-2"></i> {datosPerfil.cantidadAdopcionesFalladas}</p>
                                 </div>
                             </div>
                         </div>

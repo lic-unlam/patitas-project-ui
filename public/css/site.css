@@ -129,6 +129,10 @@ a{
 	font-size: 0.75rem !important;
 }
 
+button[class*='btn-outline-'] {
+	text-shadow: none !important;
+}
+
 .btn-primary {
 	background-color: var(--default-color-theme) !important;
 	border-color: var(--default-border-color);

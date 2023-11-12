@@ -91,6 +91,11 @@
     width: 100px;
 }
 
+.datos-de-usuario figure > img {
+    border-radius: unset;
+    width: 50%;
+}
+
 .accordion-button:focus {
     border-color: transparent;
     box-shadow: none;

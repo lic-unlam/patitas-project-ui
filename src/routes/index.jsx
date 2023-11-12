@@ -25,6 +25,7 @@ import PanelDeRefugio from "../components/usuario/refugio/PanelDeRefugio";
 import { PerfilDeRefugio } from "../components/usuario/refugio/secciones/PerfilDeRefugio";
 import { SolicitudesDeAdopcion } from "../components/usuario/refugio/secciones/SolicitudesDeAdopcion";
 import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detalles/SolicitudDetalle";
+import refugioUserTabs from "src/config/usuario/refugioUserTabs.json";
 
 // Refugios
 import ExplorarRefugios from '../components/refugio/ExplorarRefugios';
@@ -49,7 +50,9 @@ import Missing from "../components/forum/Missing";
 
 import LayoutPublic from "../components/layout/LayoutPublic";
 import NotFound from '../components/errors/NotFound';
+import Forbidden from "src/components/errors/Forbidden";
 import PostList from "../components/forum/PostList";
+import ExpiredSession from "src/components/errors/ExpiredSession";
 
 export const router = createBrowserRouter([
     {
@@ -69,47 +72,51 @@ export const router = createBrowserRouter([
                         element: <Autenticacion />
                     },
                     {
-                        path: `/adoptantes/:id/${adoptanteTabs.datosPersonales}`,
+                        path: "/error/forbidden",
+                        element: <Forbidden />
+                    },
+                    {
+                        path: "/error/unauthorized",
+                        element: <ExpiredSession />
+                    },
+                    {
+                        path: `/adoptante/${adoptanteTabs.datosPersonales}`,
                         element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.datosPersonales} />
                     },
                     {
-                        path: `/adoptantes/:id/${adoptanteTabs.formularioPreAdopcion}`,
-                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.formularioPreAdopcion} />
-                    },
-                    {
-                        path: `/adoptantes/:id/${adoptanteTabs.misAdopciones}`,
+                        path: `/adoptante/${adoptanteTabs.misAdopciones}`,
                         element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misAdopciones} />,
                         children: [
                             {
-                                path: `/adoptantes/:id/${adoptanteTabs.misAdopciones}/:solicitudId`,
+                                path: `/adoptante/${adoptanteTabs.misAdopciones}/:solicitudId`,
                                 element: <AdopcionDetalle />
                             }
                         ]
                     },
                     {
-                        path: `/adoptantes/:id/${adoptanteTabs.misTurnos}`,
+                        path: `/adoptante/${adoptanteTabs.misTurnos}`,
                         element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misTurnos} />,
                         children: [
                             {
-                                path: `/adoptantes/:id/${adoptanteTabs.misTurnos}/:turnoId`,
+                                path: `/adoptante/${adoptanteTabs.misTurnos}/:turnoId`,
                                 element: <TurnoDetalle />
                             }
                         ]
                     },
                     {
-                        path: `/adoptantes/:id/${adoptanteTabs.seguimientos}`,
+                        path: `/adoptante/${adoptanteTabs.seguimientos}`,
                         element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.seguimientos} />,
                         children: [
                             {
-                                path: `/adoptantes/:id/${adoptanteTabs.seguimientos}/:seguimientoId`,
+                                path: `/adoptante/${adoptanteTabs.seguimientos}/:seguimientoId`,
                                 element: <SeguimientoDetalle />
                             }
                         ]
                     },
-                    {
-                        path: `/adoptantes/:id/${adoptanteTabs.seguimientos}`,
-                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.seguimientos} />
-                    },
+                    /*{
+                        path: `/refugio/${refugioUserTabs.perfil}`,
+                        element: <PanelDeRefugio />
+                    },*/
                     {
                         path: "usuarios/notificaciones",
                         element: <Notificaciones />
@@ -182,42 +189,18 @@ export const router = createBrowserRouter([
                                 element: <AnimalDetalle title="Ver animal" />
                             }
                         ]
-                        /*children: [
-                            {
-                                path: "animales",
-                                element: <Animales title="Animales en el refugio" />,
-                                children: [
-                                    {
-                                        path: ":animalId",
-                                        element: <AnimalDetalle title="Ver animal" />
-                                    }
-                                ]
-                            },
-                            {
-                                path: "comentarios",
-                                element: <Comentarios title="Comentarios del refugio" />
-                            },
-                            {
-                                path: "veterinarias-asociadas",
-                                element: <VeterinariasAsociadas title="Veterinarias asociadas del refugio" />
-                            },
-                            {
-                                path: ":section",
-                                element: <MasInformacion shelterDb={shelterDb} title="Más información del refugio" />
-                            }
-                        ]*/
                     },
                     {
-                        path: "/usuarios/:id",
+                        path: "/refugio",
                         element: <PanelDeRefugio />,
                         children: [
                             {
                                 path: "perfil",
-                                element: <PerfilDeRefugio />
+                                element: <PerfilDeRefugio title="Perfil de refugio" />
                             },
                             {
-                                path: "solicitudes-de-adopcion",
-                                element: <SolicitudesDeAdopcion />
+                                path: "solicitudes",
+                                element: <SolicitudesDeAdopcion title="Solicitudes de adopción" />
                             }
                         ]
                     },

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { Link, Outlet, useLocation, useParams, useNavigate, useLoaderData } from 'react-router-dom';
 
 import { secciones } from 'src/utils/constants/refugio';
@@ -16,54 +16,7 @@ const RefugioDetalle = (props) => {
     //const {pathname} = location;
     const params = useParams();
     const navigate = useNavigate();
-    const cargado = useRef(false);
 	const refugio = useLoaderData();
-	//const [ refugio, setRefugio ] = useState(null);
-	//const [ loading, setLoading ] = useState(true);
-
-	/*const refugioLoader = useCallback(async () => {
-		try {
-			let requestOptions = {
-				method: "GET"
-			};
-
-			if(user && params.seccion === secciones.comentarios) {
-				requestOptions = {
-					method: "GET",
-					headers: {
-						Authorization: `Bearer ${user.accessToken}`
-					}
-				}
-			}
-
-			const response = await fetch(`https://localhost:7277/api/refugios/${params.id}/${params.seccion || "animales"}`, requestOptions);
-		
-			if(!response.ok)
-				throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
-	
-			const data = await response.json();
-			setRefugio(data);
-		}
-		catch(error) {
-			console.log(error);
-		}
-		finally {
-			setLoading(false);
-		}
-	}, []);*/
-
-    /*useEffect(() => {
-		//refugioLoader();
-		if(!cargado.current) {
-			cargado.current = true;
-			let regExp = new RegExp("/", "gi"); // g: buscar todas las ocurrencias, i: no sensible a mayúsculas
-			
-			if(location.pathname.match(regExp).length === 2)
-				navigate(`/refugios/${params.id}/animales`, {
-					replace: true
-				});
-		}
-	}, []);*/
 
 	const cargarSeccion = (seccion) => {
 		switch(seccion) {
