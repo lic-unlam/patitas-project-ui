@@ -64,12 +64,14 @@ function AdoptionProcessStarted(props) {
         adoptionStartedModal.hide();
         preAdoptionModal.hide();
 
-        let animalUpdated = props.animalData;
-        animalUpdated.solicitudActiva = true;
+        //let animalUpdated = props.animalData;
+        //animalUpdated.solicitudActiva = true;
         
-        navigate(location.pathname, {
+        /*navigate(location.pathname, {
             state: animalUpdated
-        });
+        });*/
+
+        navigate(`/refugios/${props.refugioId}/animales`);
     }
 
     return (

@@ -54,6 +54,18 @@ const MisAdopciones = (props) => {
     return (
         <div id="mis_adopciones_wrapper">
             <hr/>
+            <h5 className="title text-center">Procesos de adopción en curso</h5>
+            <hr/>
+            
+            <div className="list-group">
+                {
+                    solicitudes.adopcionesEnCurso.length > 0 ?
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesEnCurso} verificarExistenciaTurno={true} />
+                    : sinRegistros
+                }
+            </div>
+
+            <hr/>
             <h5 className="title text-center">Solicitudes pendientes de aprobación</h5>
             <hr/>
 
@@ -64,33 +76,6 @@ const MisAdopciones = (props) => {
                     : sinRegistros
                 }
             </div>
-            
-            <hr/>
-            <h5 className="title text-center">Procesos de adopción en curso</h5>
-            <hr/>
-            
-            <div className="list-group">
-                {
-                    solicitudes.adopcionesEnCurso.length > 0 ?
-                    solicitudes.adopcionesEnCurso.map((solicitud, index) =>
-                    <Link to={`/adoptante/mis-adopciones/${solicitud.id}`} className="list-group-item list-group-item-action" key={index}>
-                        <div>
-                            <h4 className="d-inline-block">Solicitud de adopción Nº {solicitud.id}</h4>
-                            <span style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom ms-2"><i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Sin turno asignado aún</span>
-                        </div>
-                        <p className="fst-italic">Iniciada el {solicitud.fechaInicio} a las {solicitud.horaInicio} hs.</p>
-                        <div>
-                            <span className="fs-5">Refugio: </span>
-                            <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
-                        </div>
-                        <div>
-                            <span className="fs-5">Animal a adoptar: </span>
-                            <span>Chispita</span>
-                        </div>
-                    </Link>
-                    ) : sinRegistros
-                }
-            </div>
 
             <hr/>
             <h5 className="title text-center">Adopciones exitosas</h5>
@@ -99,23 +84,8 @@ const MisAdopciones = (props) => {
             <div className="list-group">
                 {
                     solicitudes.adopcionesExitosas.length > 0 ?
-                    solicitudes.adopcionesExitosas.map((solicitud, index) =>
-                    <Link to={`/adoptante/mis-adopciones/${solicitud.id}`} className="list-group-item list-group-item-action" key={index}>
-                        <div>
-                            <h4 className="d-inline-block">Solicitud de adopción Nº {solicitud.id}</h4>
-                        </div>
-                        <p className="fst-italic">Iniciada el {solicitud.fechaInicio} a las {solicitud.horaInicio} hs.</p>
-                        <div>
-                            <span className="fs-5">Refugio: </span>
-                            <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
-                        </div>
-                        <div>
-                            <span className="fs-5">Animal a adoptar: </span>
-                            <span>Chispita</span>
-                        </div>
-                        <p className="fw-bold text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
-                    </Link>
-                    ) : sinRegistros
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesExitosas} />
+                    : sinRegistros
                 }
             </div>
 
@@ -126,23 +96,8 @@ const MisAdopciones = (props) => {
             <div className="list-group">
                 {
                     solicitudes.adopcionesCanceladas.length > 0 ?
-                    solicitudes.adopcionesCanceladas.map((solicitud, index) =>
-                    <Link to={`/adoptante/mis-adopciones/${solicitud.id}`} className="list-group-item list-group-item-action" key={index}>
-                        <div>
-                            <h4 className="d-inline-block">Solicitud de adopción Nº {solicitud.id}</h4>
-                        </div>
-                        <p className="fst-italic">Iniciada el {solicitud.fechaInicio} a las {solicitud.horaInicio} hs.</p>
-                        <div>
-                            <span className="fs-5">Refugio: </span>
-                            <span>San Pedro (Av. del Libertador 4101, Palermo)</span>
-                        </div>
-                        <div>
-                            <span className="fs-5">Animal a adoptar: </span>
-                            <span>Chispita</span>
-                        </div>
-                        <p className="fw-bold text-danger mt-2">Interrumpida el 22/11/2022 a las 11:00 hs.</p>
-                    </Link>
-                    ) : sinRegistros
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesCanceladas} />
+                    : sinRegistros
                 }
             </div>
 

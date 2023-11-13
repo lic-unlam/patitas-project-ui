@@ -65,7 +65,7 @@ const PreAdopcionModal = () => {
                                     <button className="btn btn-dark" type="button" data-bs-dismiss="modal"><i className="bi bi-arrow-left"></i> Volver atrás</button>
                                 </div>
                                 <div className="col-6">
-                                    <button className="btn btn-success" type="submit" data-bs-target="#startAdoptionModal" disabled={isSubmitting}>Enviar solicitud <i className="bi bi-heart-fill text-danger"></i></button>
+                                    <button className="btn btn-primary" type="submit" data-bs-target="#startAdoptionModal" disabled={isSubmitting}>Enviar solicitud</button>
                                 </div>
                             </div>
                         </div>

@@ -3,22 +3,22 @@ import { Link, useNavigate, useParams, useLocation } from 'react-router-dom';
 
 import PreAdopcionModal from './PreAdopcionModal';
 import AdoptionProcessStarted from './AdoptionProcessStarted';
-
 import { UserContext } from 'src/components/layout/LayoutPublic';
-
 import { genero } from 'src/utils/constants/refugio';
+import Loading from 'src/components/layout/Loading';
 
 const AnimalDetalle = (props) => {
     const navigate = useNavigate();
-    const { animalId } = useParams(); // obtengo el id del animal desde la url
+    const { id, animalId } = useParams(); // obtengo el id del refugio y el animal desde la url
     let { user } = useContext(UserContext); // datos del estado del usuario
+    const [ animalDetalle, setAnimalDetalle ] = useState({});
     
     // los datos del animal obtenidos desde la API en el componente padre y pasados como 'state' al redireccionarse a este componente
-    let { state } = useLocation();
+    //let { state } = useLocation();
 
     // formateo los datos recibidos de fecha de ingreso y nacimiento para presentarlos
-    let fecha_ingreso = new Date(state.fechaIngreso).toLocaleDateString();
-    let edadAproximada = new Date().getFullYear() - state.nacimiento;
+    //let fecha_ingreso = new Date(state.fechaIngreso).toLocaleDateString();
+    //let edadAproximada = new Date().getFullYear() - state.nacimiento;
 
     const closePublication = useCallback(() => {
         navigate('..');
@@ -29,16 +29,53 @@ const AnimalDetalle = (props) => {
             closePublication();
     }, [closePublication]);
 
+    const getAnimalDetalle = useCallback(async () => {
+        try {
+            let requestOptions = { method: "GET" };
+            let token = localStorage.getItem("userData");
+
+            if(token) {
+                token = JSON.parse(token);
+
+                requestOptions = {
+                    method: "GET",
+                    headers: {
+                        Authorization: `Bearer ${token.accessToken}`
+                    }
+                }
+            }
+            
+            const response = await fetch(`https://localhost:7277/api/refugios/${id}/animales/${animalId}`, requestOptions);
+        
+            if(!response.ok)
+                throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+
+            const data = await response.json();
+            console.log(data);
+            setAnimalDetalle(data);
+        }
+        catch(error) {
+            console.log(error);
+        }
+    }, []);
+
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
 		document.addEventListener("keydown", goBack);
         document.body.style.overflow = "hidden";
+        getAnimalDetalle();
 
 		return () => {
 			document.removeEventListener("keydown", goBack);
             document.body.style.overflow = '';
 		}
-	}, [goBack]);
+	}, [goBack, getAnimalDetalle]);
+
+    if(Object.keys(animalDetalle).length <= 0)
+        return <>
+            <div className="overlay"></div>
+            <Loading />
+        </>
 
     return (
         <>
@@ -46,15 +83,15 @@ const AnimalDetalle = (props) => {
             <div className="post-wrapper">
                 <div className="row">
                     <div className="col-6 text-center">
-                        <img className="img-fluid post-image" src={`/img/shelter/animals/thumbnail_${animalId}.jpg`} alt="post_image"/>
+                        <img className="img-fluid post-image" src={animalDetalle.fotografia} alt="post_image"/>
                     </div>
                     <div className="col-6">
                         <div className="post-content">
                             <div className="row">
                                 <div className="col-10">
                                     <div className="request-adoption">
-                                        {state.solicitudActiva ?
-                                        <h3>Ya tienes una <Link to="/usuario/mis-adopciones">solicitud activa</Link> para adoptar a {state.nombre}.<img src="/img/check.png" width={50} className="d-inline" alt="check" /></h3> :
+                                        {animalDetalle.solicitudActiva ?
+                                        <h3>Ya tienes una <Link to="/adoptante/mis-adopciones">solicitud activa</Link> para adoptar a {animalDetalle.nombre}.<img src="/img/check.png" width={50} className="d-inline" alt="check" /></h3> :
                                         <>
                                             <h3>¿Te gustaría adoptarme?</h3>
                                             <h3>¿Quieres verme en persona?</h3>
@@ -82,7 +119,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Nombre</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.nombre}</span>
+                                        <span className="info-content">{animalDetalle.nombre}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -90,7 +127,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Raza</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.raza}</span>
+                                        <span className="info-content">{animalDetalle.raza}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -98,7 +135,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Edad aproximada</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{edadAproximada > 0 ? edadAproximada + ((edadAproximada !== 1) ? " años" : " año") : "Menos de un año"}</span>
+                                        <span className="info-content">{animalDetalle.edad > 0 ? animalDetalle.edad + ((animalDetalle.edad !== 1) ? " años" : " año") : "Menos de un año"}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -106,7 +143,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Género</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.genero === 'H' ? genero.hembra : genero.macho}</span>
+                                        <span className="info-content">{animalDetalle.genero === 'H' ? genero.hembra : genero.macho}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -114,7 +151,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Peso</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.peso} kg.</span>
+                                        <span className="info-content">{animalDetalle.peso} kg.</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -122,7 +159,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Altura</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{Math.round(state.altura * 100)} cm.</span>
+                                        <span className="info-content">{Math.round(animalDetalle.altura * 100)} cm.</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -130,7 +167,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Fecha de ingreso</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{fecha_ingreso}</span>
+                                        <span className="info-content">{animalDetalle.fechaIngreso}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -138,7 +175,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Esterilizado</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.esterilizado ? "Si" : "No"}</span>
+                                        <span className="info-content">{animalDetalle.esterilizado ? "Si" : "No"}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -146,7 +183,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Desparasitado</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.desparasitado ? "Si" : "No"}</span>
+                                        <span className="info-content">{animalDetalle.desparasitado ? "Si" : "No"}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -154,7 +191,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Situación previa</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.situacionPrevia}</span>
+                                        <span className="info-content">{animalDetalle.situacionPrevia}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -162,7 +199,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Vacunas aplicadas</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.vacunas.length > 0 ? state.vacunas.join(", ") : "-"}</span>
+                                        <span className="info-content">{animalDetalle.vacunas.length > 0 ? animalDetalle.vacunas.join(", ") : "-"}</span>
                                     </div>
                                 </div>
                                 <div className="row align-items-center">
@@ -170,7 +207,7 @@ const AnimalDetalle = (props) => {
                                         <span className="info-title">Observaciones</span>
                                     </div>
                                     <div className="col-8">
-                                        <span className="info-content">{state.descripcionAdicional ? state.descripcionAdicional : "-"}</span>
+                                        <span className="info-content">{animalDetalle.descripcionAdicional ? animalDetalle.descripcionAdicional : "-"}</span>
                                     </div>
                                 </div>
                             </div>
@@ -179,7 +216,7 @@ const AnimalDetalle = (props) => {
                 </div>
             </div>
             <PreAdopcionModal />
-            <AdoptionProcessStarted animalData={state} />
+            <AdoptionProcessStarted refugioId={id} />
         </>
     );
 }
