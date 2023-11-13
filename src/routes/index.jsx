@@ -205,7 +205,7 @@ export const router = createBrowserRouter([
                         ]
                     },
                     {
-                        path: "/usuarios/:id/solicitudes-de-adopcion/:solicitudId",
+                        path: "/refugio/solicitudes/:solicitudId",
                         element: <SolicitudDetalle />,
                     }
                     /*{

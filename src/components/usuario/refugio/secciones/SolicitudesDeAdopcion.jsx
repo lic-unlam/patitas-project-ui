@@ -7,7 +7,7 @@ export const SolicitudesDeAdopcion = () => {
             <h5 className="title text-center">Solicitudes pendientes de aprobación</h5>
             <hr/>
             <div className="list-group">
-                <Link to="/usuarios/1/solicitudes-de-adopcion/1" className="list-group-item list-group-item-action">
+                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
                     <div>
                         <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4> <span style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom ms-2"><i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Pendiente de aprobación</span>
                     </div>
@@ -27,7 +27,7 @@ export const SolicitudesDeAdopcion = () => {
             <h5 className="title text-center">Procesos de adopción en curso</h5>
             <hr/>
             <div className="list-group">
-                <Link to="/usuarios/1/solicitudes-de-adopcion/1" className="list-group-item list-group-item-action">
+                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
                     <div>
                         <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4> <span style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom ms-2"><i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Sin turno asignado aún</span>
                     </div>
@@ -48,7 +48,7 @@ export const SolicitudesDeAdopcion = () => {
             <hr/>
 
             <div className="list-group">
-                <Link to="/usuarios/1/solicitudes-de-adopcion/1" className="list-group-item list-group-item-action">
+                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
                     <div>
                         <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
                     </div>
@@ -63,7 +63,7 @@ export const SolicitudesDeAdopcion = () => {
                     </div>
                     <p className="fw-bold text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
                 </Link>
-                <Link to="/usuarios/1/solicitudes-de-adopcion/1" className="list-group-item list-group-item-action">
+                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
                     <div>
                         <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
                     </div>
@@ -85,7 +85,7 @@ export const SolicitudesDeAdopcion = () => {
             <hr/>
 
             <div className="list-group">
-                <Link to="/usuarios/1/solicitudes-de-adopcion/1" className="list-group-item list-group-item-action">
+                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
                     <div>
                         <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
                     </div>

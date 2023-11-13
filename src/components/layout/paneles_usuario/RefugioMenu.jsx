@@ -8,7 +8,7 @@ export const RefugioMenu = () => {
             </li>
             <div className="dropdown-divider"></div>
             <li>
-                <Link className="dropdown-item" to="/refugio/solicitudes-de-adopcion">Adopciones</Link>
+                <Link className="dropdown-item" to="/refugio/solicitudes">Adopciones</Link>
             </li>
         </>
     );
