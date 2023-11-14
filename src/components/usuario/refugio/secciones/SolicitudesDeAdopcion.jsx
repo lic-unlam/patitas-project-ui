@@ -1,46 +1,81 @@
-import { Link } from "react-router-dom";
+import { useState, useCallback, useEffect, useContext } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-export const SolicitudesDeAdopcion = () => {
+import { UserContext } from "src/components/layout/LayoutPublic";
+import { SolicitudTarjeta } from "../../adoptante/secciones/tarjetas/SolicitudTarjeta";
+import Loading from "src/components/layout/Loading";
+import { roles } from "src/utils/constants/user";
+
+export const SolicitudesDeAdopcion = (props) => {
+    const { user } = useContext(UserContext); // datos del estado del usuario
+    const [solicitudes, setSolicitudes] = useState(null);
+    const navigate = useNavigate();
+    const sinRegistros = <div className="text-center pt-2 pb-4">
+                            <span className="p-2 text-muted">No hay registros que mostrar.</span>
+                        </div>;
+
+    const loadSolicitudesDeAdopcion = useCallback(async () => {
+        try {
+            if(!user)
+                throw new Error("No hay usuario logueado.");
+
+            const response = await fetch("https://localhost:7277/api/solicitudes-adopcion/refugio", {
+                method: "GET",
+                headers: {
+                    "Authorization": `Bearer ${user.accessToken}`
+                }
+            });
+
+            if(!response.ok) {
+                if(response.status === 403)
+                    navigate("/error/forbidden");
+
+                if(response.status === 401)
+                    navigate("/error/unauthorized");
+                
+                throw new Error("Hubo un problema con la solicitud. Código de error " + response.status);
+            }
+            
+            const data = await response.json();
+            setSolicitudes(data);
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        document.title = props.title.concat(' - ', window.$title);
+        loadSolicitudesDeAdopcion();
+    }, [user]);
+
+    if(!solicitudes)
+        return <Loading />
+
     return (
         <div id="solicitudes_de_adopcion_wrapper">
             <hr/>
-            <h5 className="title text-center">Solicitudes pendientes de aprobación</h5>
+            <h5 className="title text-center">Procesos de adopción en curso</h5>
             <hr/>
+            
             <div className="list-group">
-                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
-                    <div>
-                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4> <span style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom ms-2"><i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Pendiente de aprobación</span>
-                    </div>
-                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
-                    <div>
-                        <span className="fs-5">Adoptante: </span>
-                        <span>adoptante.test (Barrio: Puerto Madero)</span>
-                    </div>
-                    <div>
-                        <span className="fs-5">Animal a adoptar: </span>
-                        <span>Pancho</span>
-                    </div>
-                </Link>
+                {
+                    solicitudes.adopcionesEnCurso.length > 0 ?
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesEnCurso} verificarExistenciaTurno={true} rol={roles.refugio} />
+                    : sinRegistros
+                }
             </div>
 
             <hr/>
-            <h5 className="title text-center">Procesos de adopción en curso</h5>
+            <h5 className="title text-center">Solicitudes pendientes de aprobación</h5>
             <hr/>
+
             <div className="list-group">
-                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
-                    <div>
-                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4> <span style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom ms-2"><i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Sin turno asignado aún</span>
-                    </div>
-                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
-                    <div>
-                        <span className="fs-5">Adoptante: </span>
-                        <span>adoptante.test (Barrio: Puerto Madero)</span>
-                    </div>
-                    <div>
-                        <span className="fs-5">Animal a adoptar: </span>
-                        <span>Pancho</span>
-                    </div>
-                </Link>
+                {
+                    solicitudes.pendientesDeAprobacion.length > 0 ?
+                    <SolicitudTarjeta solicitudes={solicitudes.pendientesDeAprobacion} rol={roles.refugio} />
+                    : sinRegistros
+                }
             </div>
 
             <hr/>
@@ -48,36 +83,11 @@ export const SolicitudesDeAdopcion = () => {
             <hr/>
 
             <div className="list-group">
-                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
-                    <div>
-                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
-                    </div>
-                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
-                    <div>
-                        <span className="fs-5">Adoptante: </span>
-                        <span>adoptante.test (Barrio: Puerto Madero)</span>
-                    </div>
-                    <div>
-                        <span className="fs-5">Animal a adoptar: </span>
-                        <span>Pancho</span>
-                    </div>
-                    <p className="fw-bold text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
-                </Link>
-                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
-                    <div>
-                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
-                    </div>
-                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
-                    <div>
-                        <span className="fs-5">Adoptante: </span>
-                        <span>adoptante.test (Barrio: Puerto Madero)</span>
-                    </div>
-                    <div>
-                        <span className="fs-5">Animal a adoptar: </span>
-                        <span>Pancho</span>
-                    </div>
-                    <p className="fw-bold text-success mt-2">Concluida el 31/12/2022 a las 18:00 hs.</p>
-                </Link>
+                {
+                    solicitudes.adopcionesExitosas.length > 0 ?
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesExitosas} rol={roles.refugio} />
+                    : sinRegistros
+                }
             </div>
 
             <hr/>
@@ -85,21 +95,11 @@ export const SolicitudesDeAdopcion = () => {
             <hr/>
 
             <div className="list-group">
-                <Link to="/refugio/solicitudes/1" className="list-group-item list-group-item-action">
-                    <div>
-                        <h4 className="d-inline-block">Solicitud de adopción Nº 789</h4>
-                    </div>
-                    <p className="fst-italic">Iniciada el 20/11/2022 a las 12:00 hs.</p>
-                    <div>
-                        <span className="fs-5">Adoptante: </span>
-                        <span>adoptante.test (Barrio: Puerto Madero)</span>
-                    </div>
-                    <div>
-                        <span className="fs-5">Animal a adoptar: </span>
-                        <span>Pancho</span>
-                    </div>
-                    <p className="fw-bold text-danger mt-2">Interrumpida el 22/11/2022 a las 11:00 hs.</p>
-                </Link>
+                {
+                    solicitudes.adopcionesCanceladas.length > 0 ?
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesCanceladas} rol={roles.refugio} />
+                    : sinRegistros
+                }
             </div>
         </div>
     );

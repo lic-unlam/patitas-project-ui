@@ -83,40 +83,6 @@ export const SolicitudDetalle = () => {
         });
     }
 
-    /*const mostrarEstadoAdopcion = () => {
-        let contenidoAlert;
-
-        switch(estadoAdopcion) {
-            case "En curso":
-                contenidoAlert = {
-                    tipo: "primary",
-                    mensaje: "Adopción en curso"
-                }
-            break;
-            case "Completada":
-                contenidoAlert = {
-                    tipo: "success",
-                    mensaje: "Adopción completada"
-                }
-            break;
-            case "Cancelada":
-                contenidoAlert = {
-                    tipo: "danger",
-                    mensaje: "Adopción cancelada"
-                }
-            break;
-            default:
-                contenidoAlert = {
-                    tipo: "danger",
-                    mensaje: "Adopción Eliminada"
-                }
-        }
-
-        return <div className={`alert alert-${contenidoAlert.tipo} sticky-bottom text-center border-success`} role="alert">
-                    {contenidoAlert.mensaje}
-                </div>
-    }*/
-
     const cerrarCustomModal = () => {
         scrollToTop();
         setContenidoModal({});
@@ -140,6 +106,9 @@ export const SolicitudDetalle = () => {
                         <div className="col-12 col-md-6 text-center text-md-start">
                             <button type="button" className="btn btn-danger" onClick={mostrarRechazarSolicitudForm}><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
                         </div>
+                    </div>
+                    <div className=" text-center py-4">
+                        <button className="btn btn-dark">Crear nuevo turno</button>
                     </div>
                 </div>
                 <div className="card-body fs-5">

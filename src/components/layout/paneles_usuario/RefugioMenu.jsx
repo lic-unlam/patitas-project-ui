@@ -10,6 +10,9 @@ export const RefugioMenu = () => {
             <li>
                 <Link className="dropdown-item" to="/refugio/solicitudes">Adopciones</Link>
             </li>
+            <li>
+                <Link className="dropdown-item" to="/refugio/turnos">Turnos</Link>
+            </li>
         </>
     );
 }

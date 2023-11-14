@@ -25,6 +25,7 @@ import PanelDeRefugio from "../components/usuario/refugio/PanelDeRefugio";
 import { PerfilDeRefugio } from "../components/usuario/refugio/secciones/PerfilDeRefugio";
 import { SolicitudesDeAdopcion } from "../components/usuario/refugio/secciones/SolicitudesDeAdopcion";
 import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detalles/SolicitudDetalle";
+import Turnos from "src/components/usuario/refugio/secciones/Turnos";
 import refugioUserTabs from "src/config/usuario/refugioUserTabs.json";
 
 // Refugios
@@ -85,21 +86,21 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: `/adoptante/${adoptanteTabs.misAdopciones}`,
-                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misAdopciones} />,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misAdopciones} title="Mis adopciones" />,
                         children: [
                             {
                                 path: `/adoptante/${adoptanteTabs.misAdopciones}/:solicitudId`,
-                                element: <AdopcionDetalle />
+                                element: <AdopcionDetalle title="Detalles de la solicitud" />
                             }
                         ]
                     },
                     {
                         path: `/adoptante/${adoptanteTabs.misTurnos}`,
-                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misTurnos} />,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misTurnos} title="Mis turnos" />,
                         children: [
                             {
                                 path: `/adoptante/${adoptanteTabs.misTurnos}/:turnoId`,
-                                element: <TurnoDetalle />
+                                element: <TurnoDetalle title="Detalles del turno" />
                             }
                         ]
                     },
@@ -201,6 +202,10 @@ export const router = createBrowserRouter([
                             {
                                 path: "solicitudes",
                                 element: <SolicitudesDeAdopcion title="Solicitudes de adopción" />
+                            },
+                            {
+                                path: "turnos",
+                                element: <Turnos title="Turnos" />
                             }
                         ]
                     },

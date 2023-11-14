@@ -4,13 +4,14 @@ import { Link, Outlet, useNavigate } from "react-router-dom";
 import { UserContext } from "src/components/layout/LayoutPublic";
 import { SolicitudTarjeta } from "../adoptante/secciones/tarjetas/SolicitudTarjeta";
 import Loading from "src/components/layout/Loading";
+import { roles } from "src/utils/constants/user";
 
 const MisAdopciones = (props) => {
     const { user } = useContext(UserContext); // datos del estado del usuario
     const [solicitudes, setSolicitudes] = useState(null);
     const navigate = useNavigate();
     const sinRegistros = <div className="text-center pt-2 pb-4">
-                            <span className="p-2 text-muted">No hay registros que mostrar.</span>
+                            <span className="p-2 text-muted">No hay solicitudes que mostrar.</span>
                         </div>;
 
     const loadSolicitudesDeAdopcion = useCallback(async () => {
@@ -60,7 +61,7 @@ const MisAdopciones = (props) => {
             <div className="list-group">
                 {
                     solicitudes.adopcionesEnCurso.length > 0 ?
-                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesEnCurso} verificarExistenciaTurno={true} />
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesEnCurso} verificarExistenciaTurno={true} rol={roles.adoptante} />
                     : sinRegistros
                 }
             </div>
@@ -72,7 +73,7 @@ const MisAdopciones = (props) => {
             <div className="list-group">
                 {
                     solicitudes.pendientesDeAprobacion.length > 0 ?
-                    <SolicitudTarjeta solicitudes={solicitudes.pendientesDeAprobacion} />
+                    <SolicitudTarjeta solicitudes={solicitudes.pendientesDeAprobacion} rol={roles.adoptante} />
                     : sinRegistros
                 }
             </div>
@@ -84,7 +85,7 @@ const MisAdopciones = (props) => {
             <div className="list-group">
                 {
                     solicitudes.adopcionesExitosas.length > 0 ?
-                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesExitosas} />
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesExitosas} rol={roles.adoptante} />
                     : sinRegistros
                 }
             </div>
@@ -96,7 +97,7 @@ const MisAdopciones = (props) => {
             <div className="list-group">
                 {
                     solicitudes.adopcionesCanceladas.length > 0 ?
-                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesCanceladas} />
+                    <SolicitudTarjeta solicitudes={solicitudes.adopcionesCanceladas} rol={roles.adoptante} />
                     : sinRegistros
                 }
             </div>

@@ -1,11 +1,22 @@
 import { Link } from "react-router-dom";
+import { roles } from "src/utils/constants/user";
 
 export const SolicitudTarjeta = (props) => {
-    const { solicitudes } = props;
+    const { solicitudes, rol } = props;
+    let urlPrefix = "";
+
+    switch(rol) {
+        case roles.adoptante:
+            urlPrefix = "/adoptante/mis-adopciones";
+            break;
+        case roles.refugio:
+            urlPrefix = "/refugio/solicitudes";
+            break;
+    }
 
     return (
         solicitudes?.map((solicitud, index) =>
-            <Link to={`/adoptante/mis-adopciones/${solicitud.id}`} className="list-group-item list-group-item-action" key={index}>
+            <Link to={`${urlPrefix}/${solicitud.id}`} className="list-group-item list-group-item-action" key={index}>
                 <div>
                     <h4 className="d-inline-block">Solicitud de adopción Nº {solicitud.id}</h4>
                     {/* si la solicitud está pendiende de aprobación, muestro el cartel */}
@@ -16,7 +27,7 @@ export const SolicitudTarjeta = (props) => {
                 </div>
                 <p className="fst-italic">Iniciada el {solicitud.fechaInicio} a las {solicitud.horaInicio} hs.</p>
                 <div>
-                    <span className="fs-5">Refugio: </span>
+                    <span className="fs-5">{ rol === roles.adoptante ? "Refugio: " : "Adoptante: " }</span>
                     <span>{solicitud.nombre} ({solicitud.ubicacion})</span>
                 </div>
                 <div>

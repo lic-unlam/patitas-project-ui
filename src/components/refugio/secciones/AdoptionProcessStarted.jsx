@@ -9,7 +9,6 @@ function AdoptionProcessStarted(props) {
 
     useEffect(() => {
         const element = ref.current;
-
         element.addEventListener('shown.bs.modal', triggerAllFires);
 
         return () => {
@@ -17,10 +16,10 @@ function AdoptionProcessStarted(props) {
         };
     });
 
-    var myConfetti = confetti.create(confetisRef.current, {
+    /*var myConfetti = confetti.create(confetisRef.current, {
         resize: true,
         useWorker: true
-    });
+    });*/
 
     var count = 200;
     var defaults = {
@@ -28,9 +27,11 @@ function AdoptionProcessStarted(props) {
     };
 
     function fire(particleRatio, opts) {
-        myConfetti(Object.assign({}, defaults, opts, {
+        confetti({
+            ...defaults,
+            ...opts,
             particleCount: Math.floor(count * particleRatio)
-        }));
+          });
     }
 
     function triggerAllFires() {
