@@ -27,6 +27,7 @@ import { SolicitudesDeAdopcion } from "../components/usuario/refugio/secciones/S
 import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detalles/SolicitudDetalle";
 import Turnos from "src/components/usuario/refugio/secciones/Turnos";
 import { CrearTurno } from "src/components/usuario/refugio/secciones/CrearTurno";
+import { TurnoDetalleRefugio } from "src/components/usuario/refugio/secciones/detalles/TurnoDetalleRefugio";
 import refugioUserTabs from "src/config/usuario/refugioUserTabs.json";
 
 // Refugios
@@ -202,7 +203,13 @@ export const router = createBrowserRouter([
                             },
                             {
                                 path: "turnos",
-                                element: <Turnos title="Turnos" />
+                                element: <Turnos title="Turnos" />,
+                                children: [
+                                    {
+                                        path: ":turnoId",
+                                        element: <TurnoDetalleRefugio title="Detalles del turno" />
+                                    }
+                                ]
                             }
                         ]
                     },

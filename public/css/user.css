@@ -75,6 +75,11 @@
     border-radius: 1rem;
 }
 
+.tarjeta-desactivada {
+    border-width: thin;
+    background-color: #f9f6f6;
+}
+
 /* Administrador */
 
 .datos-de-usuario img {

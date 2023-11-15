@@ -91,7 +91,7 @@ const MisTurnos = (props) => {
             <div className="list-group">
                 {
                     turnos.turnosPasados.length > 0 ?
-                    <TurnoTarjeta turnos={turnos.turnosPasados} rol={roles.adoptante} />
+                    <TurnoTarjeta turnos={turnos.turnosPasados} rol={roles.adoptante} desactivada={true} />
                     : sinRegistros
                 }
             </div>

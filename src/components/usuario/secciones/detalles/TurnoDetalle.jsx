@@ -101,12 +101,23 @@ export const TurnoDetalle = (props) => {
 
     return (
         <CustomModal>
-            <h4 className="title">Turno pendiente para visitar el refugio "<Link to={`/refugios/${turno.refugioId}/animales`}>{turno.nombreRefugio}</Link>"</h4>
+            <h4 className="title">Turno para el refugio "<Link to={`/refugios/${turno.refugioId}/animales`}>{turno.nombreRefugio}</Link>"</h4>
             <hr/>
-            <Link to={`/adoptante/mis-adopciones/${turno.solicitudId}`} className="btn btn-dark">Ver solicitud de adopción</Link>
+
+            {
+            turno.asistio &&
+                <div className="alert alert-success border-success py-2">
+                    Asististe al encuentro con el refugio.
+                </div>
+            }
+
+            <Link to={`/adoptante/mis-adopciones/${turno.solicitudId}`} className="btn btn-sm btn-dark">Ver solicitud de adopción</Link>
             <p className="card-text pt-3">Se te ha reservado un turno para visitar el refugio en la siguiente fecha:</p>
+            <figure>
+                <img src="/img/clock.png" className="img-fluid" width={70} alt="reloj" />
+            </figure>
             <p className="title fs-4">{turno.fechaTurno} a las {turno.horaTurno} hs.</p>
-            {(!turno.estaConfirmado && !turno.porReprogramar) &&
+            {(turno.estaActivo && !turno.estaConfirmado && !turno.porReprogramar) &&
             <>
                 <button type="button" className="btn btn-danger me-0 me-md-4 my-2" data-bs-target="#modal_popup" onClick={() => handleModal(accionesModal.cancelarAdopcion)}>
                     <i className="bi bi-x-lg"></i> Cancelar adopción
