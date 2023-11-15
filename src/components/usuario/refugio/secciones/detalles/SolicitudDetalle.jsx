@@ -1,12 +1,13 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 
 import { useTitlePageSetter } from "src/hooks/useTitlePageSetter";
 import PlanDeVacunacion from "src/components/usuario/PlanDeVacunacion";
 import { CustomModal } from "src/components/layout/CustomModal";
 import { scrollToTop } from "src/utils/scrollToTop";
 
-export const SolicitudDetalle = () => {
+export const SolicitudDetalle = (props) => {
+    const { solicitudId } = useParams();
     useTitlePageSetter("Solicitud Nº 789");
 
     const [contenidoModal, setContenidoModal] = useState({
@@ -107,14 +108,14 @@ export const SolicitudDetalle = () => {
                             <button type="button" className="btn btn-danger" onClick={mostrarRechazarSolicitudForm}><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
                         </div>
                     </div>
-                    <div className=" text-center py-4">
-                        <button className="btn btn-dark">Crear nuevo turno</button>
+                    <div className=" text-center py-2">
+                        <Link to={`/refugio/solicitudes/${solicitudId}/turnos`} className="btn btn-dark fs-6">Crear nuevo turno</Link>
                     </div>
                 </div>
                 <div className="card-body fs-5">
                     <div className="row pt-2">
                         <div className="col-12 col-md-6 datos-de-usuario">
-                            <h5 className="card-title fs-4 text-center py-2 border-top border-bottom">Datos del adoptante</h5>
+                            <h5 className="card-title fs-4 text-center py-2 border-bottom">Datos del adoptante</h5>
                             <div className="row py-4 justify-content-center">
                                 <div className="col-auto">
                                     <img src="/img/default_profile_picture.png" width={100} alt="foto_perfil" />
@@ -171,7 +172,7 @@ export const SolicitudDetalle = () => {
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <h5 className="card-title fs-4 text-center py-2 border-top border-bottom">Datos del animal</h5>
+                            <h5 className="card-title fs-4 text-center py-2 border-bottom">Datos del animal</h5>
                             <div className="custom-modal-animal-img-wrapper">
                                 <img src="/img/shelter/animals/thumbnail_4.jpg" className="img-fluid" alt="animal_a_adoptar" />
                             </div>

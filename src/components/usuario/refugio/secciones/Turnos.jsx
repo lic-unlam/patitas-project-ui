@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import { UserContext } from "src/components/layout/LayoutPublic";
 import { TurnoTarjeta } from "../../TurnoTarjeta";
@@ -9,6 +9,7 @@ import { roles } from "src/utils/constants/user";
 const Turnos = (props) => {
     const [ turnos, setTurnos ] = useState(null);
     const { user } = useContext(UserContext);
+    const navigate = useNavigate();
     const sinRegistros = <div className="text-center pt-2 pb-4">
                             <span className="p-2 text-muted">No hay turnos que mostrar.</span>
                         </div>;

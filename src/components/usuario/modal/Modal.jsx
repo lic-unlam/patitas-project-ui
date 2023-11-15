@@ -11,24 +11,30 @@ const Modal = (props) => {
     }, [ocultarModal]);
     
     const confirmarModal = useCallback((event) => { // acá llamo a la API a través de la función que recibe como prop
+        event.preventDefault();
+        
+        if(typeof props.onSubmit === "function")
+            props.onSubmit();
+
         var modal = bootstrap.Modal.getInstance(document.querySelector("#modal_popup"));
         modal.hide();
+        
         ocultarModal('');
     }, [ocultarModal]);
 
     return (
-        <form>
+        <form onSubmit={confirmarModal}>
             <div className="modal fade" id="modal_popup" tabIndex="-1" data-bs-backdrop="static" data-bs-keyboard="false" aria-labelledby="modalPopup" aria-hidden="true">
                 <div className="modal-dialog modal-dialog-centered">
                     <div className="modal-content">
                         <div className="modal-header">
-                            <h5 className="modal-title">{props.title}</h5>
+                            <h5 className="modal-title title">{props.title}</h5>
                         </div>
                         <div className="modal-body">
-                            {props.element}
+                            {props.children}
                         </div>
                         <div className="modal-footer">
-                            <button id="aceptar" type="submit" className="btn btn-success me-2" onClick={confirmarModal}>Confirmar</button>
+                            <button id="aceptar" type="submit" className="btn btn-success me-2">Confirmar</button>
                             <button id="cancelar" type="button" className="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
                         </div>
                     </div>

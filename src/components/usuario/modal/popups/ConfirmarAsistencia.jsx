@@ -1,5 +1,7 @@
-export const ConfirmarAsistencia = () => {
+export const ConfirmarAsistencia = (props) => {
+    const { turno } = props;
+
     return (
-        <h5>¿Desea confirmar asistencia al turno reservado para el 20/11/2022 a las 12:00 hs. en el refugio San Pedro?</h5>
+        <h5>¿Desea confirmar asistencia al turno reservado para el {turno.fechaTurno} a las {turno.horaTurno} hs. en el refugio {turno.nombreRefugio}?</h5>
     );
 }

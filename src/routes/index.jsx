@@ -26,6 +26,7 @@ import { PerfilDeRefugio } from "../components/usuario/refugio/secciones/PerfilD
 import { SolicitudesDeAdopcion } from "../components/usuario/refugio/secciones/SolicitudesDeAdopcion";
 import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detalles/SolicitudDetalle";
 import Turnos from "src/components/usuario/refugio/secciones/Turnos";
+import { CrearTurno } from "src/components/usuario/refugio/secciones/CrearTurno";
 import refugioUserTabs from "src/config/usuario/refugioUserTabs.json";
 
 // Refugios
@@ -99,7 +100,7 @@ export const router = createBrowserRouter([
                         element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misTurnos} title="Mis turnos" />,
                         children: [
                             {
-                                path: `/adoptante/${adoptanteTabs.misTurnos}/:turnoId`,
+                                path: `:turnoId`,
                                 element: <TurnoDetalle title="Detalles del turno" />
                             }
                         ]
@@ -114,10 +115,6 @@ export const router = createBrowserRouter([
                             }
                         ]
                     },
-                    /*{
-                        path: `/refugio/${refugioUserTabs.perfil}`,
-                        element: <PanelDeRefugio />
-                    },*/
                     {
                         path: "usuarios/notificaciones",
                         element: <Notificaciones />
@@ -212,39 +209,11 @@ export const router = createBrowserRouter([
                     {
                         path: "/refugio/solicitudes/:solicitudId",
                         element: <SolicitudDetalle />,
+                    },
+                    {
+                        path: "/refugio/solicitudes/:solicitudId/turnos",
+                        element: <CrearTurno />,
                     }
-                    /*{
-                        path: "/refugios/:id",
-                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.animales} />,
-                        children: [
-                            {
-                                path: "/refugios/:id/publicacion/:postid", // es obligatorio que lo combine el path padre
-                                element: <AnimalDetalle />
-                            }
-                        ]
-                    },
-                    {
-                        path: "/refugios/:id/animales",
-                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.animales} title="Refugio" />,
-                        children: [
-                            {
-                                path: "/refugios/:id/animales/:animalId", // es obligatorio que lo combine el path padre
-                                element: <AnimalDetalle />
-                            }
-                        ]
-                    },
-                    {
-                        path: "/refugios/:id/comentarios",
-                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.comentarios} />
-                    },
-                    {
-                        path: "/refugios/:id/veterinarias-asociadas",
-                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.veterinariasAsociadas} />
-                    },
-                    {
-                        path: "/refugios/:id/mas-informacion",
-                        element: <RefugioDetalle tabs={refugioTabs} tabActiva={refugioTabs.masInformacion} />
-                    },*/
                 ],
             },
         ],

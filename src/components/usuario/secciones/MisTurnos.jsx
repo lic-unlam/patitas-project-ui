@@ -1,5 +1,5 @@
 import { useState, useCallback, useEffect, useContext } from "react";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 
 import { UserContext } from "src/components/layout/LayoutPublic";
 import { TurnoTarjeta } from "../TurnoTarjeta";
@@ -7,6 +7,7 @@ import Loading from "src/components/layout/Loading";
 import { roles } from "src/utils/constants/user";
 
 const MisTurnos = (props) => {
+    const navigate = useNavigate();
     const [ turnos, setTurnos ] = useState(null);
     const { user } = useContext(UserContext);
     const sinRegistros = <div className="text-center pt-2 pb-4">
@@ -15,9 +16,6 @@ const MisTurnos = (props) => {
 
     const loadTurnos = useCallback(async () => {
         try {
-            if(!user)
-                throw new Error("No hay usuario logueado.");
-
             const response = await fetch("https://localhost:7277/api/turnos/adoptante", {
                 method: "GET",
                 headers: {
@@ -45,8 +43,10 @@ const MisTurnos = (props) => {
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
-        loadTurnos();
-    }, [user]);
+
+        if(user)
+            loadTurnos();
+    }, [loadTurnos]);
 
     if(!turnos)
         return <Loading />

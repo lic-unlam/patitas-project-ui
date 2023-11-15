@@ -51,7 +51,6 @@ const AnimalDetalle = (props) => {
                 throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
 
             const data = await response.json();
-            console.log(data);
             setAnimalDetalle(data);
         }
         catch(error) {
