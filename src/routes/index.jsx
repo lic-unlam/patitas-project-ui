@@ -215,7 +215,7 @@ export const router = createBrowserRouter([
                     },
                     {
                         path: "/refugio/solicitudes/:solicitudId",
-                        element: <SolicitudDetalle />,
+                        element: <SolicitudDetalle title="Detalle de solicitud" />,
                     },
                     {
                         path: "/refugio/solicitudes/:solicitudId/turnos",

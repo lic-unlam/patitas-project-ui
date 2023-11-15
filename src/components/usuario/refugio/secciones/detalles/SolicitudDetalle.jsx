@@ -1,14 +1,17 @@
-import React, { useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useState, useCallback, useEffect, useContext } from "react";
+import { Link, useParams, useNavigate } from "react-router-dom";
 
-import { useTitlePageSetter } from "src/hooks/useTitlePageSetter";
 import PlanDeVacunacion from "src/components/usuario/PlanDeVacunacion";
 import { CustomModal } from "src/components/layout/CustomModal";
 import { scrollToTop } from "src/utils/scrollToTop";
+import Loading from "src/components/layout/Loading";
+import { UserContext } from "src/components/layout/LayoutPublic";
 
 export const SolicitudDetalle = (props) => {
-    const { solicitudId } = useParams();
-    useTitlePageSetter("Solicitud Nº 789");
+    const navigate = useNavigate();
+    const { user } = useContext(UserContext); // cargo el usuario logueado
+    const { solicitudId } = useParams(); // obtengo el id de la solicitud
+    const [ solicitudDetalle, setSolicitudDetalle ] = useState({}); // contiene la información de la solicitud
 
     const [contenidoModal, setContenidoModal] = useState({
         mostrar: false,
@@ -16,31 +19,97 @@ export const SolicitudDetalle = (props) => {
         customButtons: false
     });
 
+    const getSolicitudDetalle = useCallback(async () => {
+        try {
+            const response = await fetch(`https://localhost:7277/api/refugios/solicitudes/${solicitudId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.accessToken}`
+                }
+            });
+            
+            if(!response.ok) {
+                if(response.status === 403)
+                    navigate("/error/forbidden");
+
+                if(response.status === 401)
+                    navigate("/error/unauthorized");
+
+                throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+            }
+            
+            const data = await response.json();
+            setSolicitudDetalle(data); // seteo el estado para poder ver la información de solicitud
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+    }, [user]);
+
+    useEffect(() => {
+        document.title = props.title.concat(' - ', window.$title);
+
+        if (user)
+            getSolicitudDetalle();
+    }, [getSolicitudDetalle]);
+
     //const [estadoAdopcion, setEstadoAdopcion] = useState("Pendiente de aprobación");
 
-    const solicitudAprobada = (event) => {
-        event.preventDefault();
-        
-        setContenidoModal({
-            mostrar: true,
-            componente: <div>
-                            <h4 className="title">¡Solicitud de adopción Nº 789 aprobada!</h4>
-                            <hr/>
-                            <div className="custom-modal-body">
-                                <h5>Ahora puede reservar un turno para la visita de <strong>adoptante.test</strong> al refugio.</h5>
-                                {/*<h5>Se reservó un turno para adoptante.test el día 12/09/2023 a las 17:30 hs.</h5>*/}
-                            </div>
-                            <div className="row justify-content-center">
-                                <div className="col-6 text-end">
-                                    <Link to="/usuarios/turnos" className="btn btn-turnos">Ir a mis turnos</Link>
+    if(JSON.stringify(solicitudDetalle) === '{}')
+        return (
+            <Loading />
+        );
+
+    const solicitudAprobada = async (event) => {
+        try {
+            event.preventDefault();
+            const response = await fetch(`https://localhost:7277/api/solicitudes-adopcion/aprobacion/${solicitudId}`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.accessToken}`
+                },
+                body: solicitudId
+            });
+            
+            if(!response.ok) {
+                if(response.status === 403)
+                    navigate("/error/forbidden");
+
+                if(response.status === 401)
+                    navigate("/error/unauthorized");
+
+                throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+            }
+
+            setContenidoModal({
+                mostrar: true,
+                componente: <div>
+                                <h4 className="title">¡Solicitud de adopción Nº {solicitudDetalle.nroSolicitud} aprobada!</h4>
+                                <hr/>
+                                <div className="custom-modal-body">
+                                    <figure>
+                                        <img src="/img/check.png" className="img-fluid" width={80} alt="check_icon" />
+                                    </figure>
+                                    <h5>Ahora puede reservar un turno para la visita de <strong>adoptante.test</strong> al refugio.</h5>
+                                    {/*<h5>Se reservó un turno para adoptante.test el día 12/09/2023 a las 17:30 hs.</h5>*/}
                                 </div>
-                                <div className="col-6 text-start">
-                                    <button type="button" className="btn btn-dark" onClick={() => setContenidoModal({})}>Cerrar</button>
-                                </div>
-                            </div>
-                        </div>,
-            customButtons: true
-        });
+                                {/*<div className="row justify-content-center">
+                                    <div className="col-6 text-end">
+                                        <Link to="/usuarios/turnos" className="btn btn-turnos">Ir a mis turnos</Link>
+                                    </div>
+                                    <div className="col-6 text-start">
+                                        <button type="button" className="btn btn-dark" onClick={() => setContenidoModal({})}>Cerrar</button>
+                                    </div>
+                                </div>*/}
+                            </div>,
+                customButtons: false
+            });
+        }
+        catch(error) {
+            console.log(error.message);
+        }
     }
 
     const mostrarRechazarSolicitudForm = () => {
@@ -50,7 +119,7 @@ export const SolicitudDetalle = (props) => {
                 <div>
                     <h5 className="title">Rechazar solicitud</h5>
                     <hr/>
-                    <span className="fs-5">¿Está seguro que desea rechazar la solicitud Nº 789 de adoptante.test?</span>
+                    <span className="fs-5">¿Está seguro que desea rechazar la solicitud Nº {solicitudDetalle.nroSolicitud} de {solicitudDetalle.nombreUsuario}?</span>
                     <form id="rechazar_solicitud_form" onSubmit={rechazarSolicitud}>
                         <div className="py-4">
                             <label htmlFor="motivo">Motivo del rechazo</label>
@@ -86,44 +155,70 @@ export const SolicitudDetalle = (props) => {
 
     const cerrarCustomModal = () => {
         scrollToTop();
-        setContenidoModal({});
+        //setContenidoModal({});
+        window.location.reload();
+    }
+
+    const mostrarEstadoDeSolicitud = () => {
+        if(solicitudDetalle.adopcionExitosa)
+            return `Concluida el ${solicitudDetalle.fechaFinSolicitud} a las ${solicitudDetalle.horaFinSolicitud} hs.`;
+        else if(solicitudDetalle.pendienteDeAprobacion)
+            return "Pendiente de aprobación";
+        else if(solicitudDetalle.adopcionEnCurso)
+            return "En curso";
+        else
+            return "Cancelada";
+    }
+
+    const MarcaSiNo = ({ seleccionado }) => {
+        return (
+            (seleccionado)
+            ? <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+            : <p><img src="/img/no.png" className="img-fluid" alt="no_icon" /></p>
+        );
     }
 
     return (
         <div id="solicitud_detalle_wrapper">
             <div className="card">
                 <div className="card-header title text-center">
-                    <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº 789</span>
+                    <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº {solicitudDetalle.nroSolicitud}</span>
                 </div>
-                <div className="text-center pt-2">Enviada el 10/09/2023 18:00 hs.</div>
-                <div className="text-center pt-2">
-                    <span>Estado: <strong className="text-danger">Pendiente de aprobación</strong></span>
-                </div>
+                <h5 className="text-center pt-2">Enviada el {solicitudDetalle.fechaInicioSolicitud} a las {solicitudDetalle.horaInicioSolicitud} hs.</h5>
+                <h5 className="text-center pt-2">
+                    <span>Estado: <strong>{mostrarEstadoDeSolicitud()}</strong></span>
+                </h5>
                 <div className="pt-4">
-                    <div className="row justify-content-center">
-                        <div className="col-12 col-md-6 text-center text-md-end">
-                            <button type="submit" className="btn btn-success mb-4 mb-md-0" onClick={solicitudAprobada}><i className="bi bi-check-lg"></i> Aprobar solicitud</button>
+                    {
+                        !solicitudDetalle.aprobada &&
+                        <div className="row justify-content-center">
+                            <div className="col-12 col-md-6 text-center text-md-end">
+                                <button type="submit" className="btn btn-success mb-4 mb-md-0" onClick={solicitudAprobada}><i className="bi bi-check-lg"></i> Aprobar solicitud</button>
+                            </div>
+                            <div className="col-12 col-md-6 text-center text-md-start">
+                                <button type="button" className="btn btn-danger" onClick={mostrarRechazarSolicitudForm}><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
+                            </div>
                         </div>
-                        <div className="col-12 col-md-6 text-center text-md-start">
-                            <button type="button" className="btn btn-danger" onClick={mostrarRechazarSolicitudForm}><i className="bi bi-x-lg"></i> Rechazar solicitud</button>
+                    }
+                    {
+                        solicitudDetalle.adopcionEnCurso && !solicitudDetalle.tieneTurnoActivo &&
+                        <div className=" text-center py-2">
+                            <Link to={`/refugio/solicitudes/${solicitudId}/turnos`} className="btn btn-dark fs-6">Crear nuevo turno</Link>
                         </div>
-                    </div>
-                    <div className=" text-center py-2">
-                        <Link to={`/refugio/solicitudes/${solicitudId}/turnos`} className="btn btn-dark fs-6">Crear nuevo turno</Link>
-                    </div>
+                    }
                 </div>
                 <div className="card-body fs-5">
                     <div className="row pt-2">
                         <div className="col-12 col-md-6 datos-de-usuario">
-                            <h5 className="card-title fs-4 text-center py-2 border-bottom">Datos del adoptante</h5>
+                            <h5 className="card-title title fs-4 text-center py-2 border-bottom">Datos del adoptante</h5>
                             <div className="row py-4 justify-content-center">
                                 <div className="col-auto">
                                     <img src="/img/default_profile_picture.png" width={100} alt="foto_perfil" />
                                 </div>
                                 <div className="col-auto">
-                                    <span className="text-center text-md-start">adoptante.test</span>
-                                    <p className="mb-0">adoptante.test@gmail.com</p>
-                                    <small className="text-muted fs-6 fst-italic">Registrado el 25/12/2022 14:45</small>
+                                    <span className="text-center text-md-start">{solicitudDetalle.nombreUsuario}</span>
+                                    <p className="mb-0">{solicitudDetalle.emailUsuario}</p>
+                                    <small className="text-muted fs-6 fst-italic">Registrado el {solicitudDetalle.fechaRegistroAdoptante} {solicitudDetalle.horaRegistroAdoptante} hs.</small>
                                 </div>
                             </div>
                             <div className="row">
@@ -137,60 +232,63 @@ export const SolicitudDetalle = (props) => {
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Nombre:</span>
-                                            <p>Adoptante</p>
+                                            <p>{solicitudDetalle.txtNombre}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Apellido:</span>
-                                            <p>Test</p>
+                                            <p>{solicitudDetalle.txtApellido}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Barrio:</span>
-                                            <p>Recoleta</p>
+                                            <p>{solicitudDetalle.txtBarrio}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Dirección:</span>
-                                            <p>Av. Hipólito Yrigoyen 1849</p>
+                                            <p>{solicitudDetalle.txtDireccion}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Fecha de nacimiento:</span>
-                                            <p>9/07/1995</p>
+                                            <p>{solicitudDetalle.txtFechaNacimiento}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Documento:</span>
-                                            <p>40.579.842</p>
+                                            <p>{solicitudDetalle.txtDocumento}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Teléfono:</span>
-                                            <p>5555-5555</p>
+                                            <p>{solicitudDetalle.txtTelefono}</p>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Adopciones:</span>
-                                            <p title="Exitosas: 4 - Interrumpidas: 2"><i className="bi bi-check-circle-fill text-success"></i> 4 <i className="bi bi-x-circle-fill text-danger ps-2"></i> 2</p>
+                                            <p title={"Exitosas: " + solicitudDetalle.adopcionesExitosas + " - Interrumpidas: " + solicitudDetalle.adopcionesInterrumpidas}>
+                                                <i className="bi bi-check-circle-fill text-success"></i> {solicitudDetalle.adopcionesExitosas}
+                                                <i className="bi bi-x-circle-fill text-danger ps-2"></i> {solicitudDetalle.adopcionesInterrumpidas}
+                                            </p>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <div className="col-12 col-md-6">
-                            <h5 className="card-title fs-4 text-center py-2 border-bottom">Datos del animal</h5>
+                            <h5 className="card-title title fs-4 text-center py-2 border-bottom">Datos del animal</h5>
                             <div className="custom-modal-animal-img-wrapper">
-                                <img src="/img/shelter/animals/thumbnail_4.jpg" className="img-fluid" alt="animal_a_adoptar" />
+                                <img src={solicitudDetalle.imgAnimal} className="img-fluid" alt="animal_a_adoptar" />
                             </div>
                             <div className="row pt-4 text-center">
                                 <div className="col-12 col-md-6">
                                     <span className="fw-bold">Nombre:</span>
-                                    <p>Pancho</p>
+                                    <p>{solicitudDetalle.nombreAnimal}</p>
                                     <span className="fw-bold">Raza:</span>
-                                    <p>Gato siamés</p>
+                                    <p>{solicitudDetalle.razaAnimal}</p>
                                     <span className="fw-bold">Género:</span>
-                                    <p>Macho</p>
+                                    <p>{solicitudDetalle.generoAnimal}</p>
                                 </div>
                                 <div className="col-12 col-md-6">
                                     <div className="d-grid gap-2">
-                                        <Link to="/refugios/1/animales/4" className="btn btn-sm btn-primary">Ver ficha completa</Link>
-                                        <Link to="/refugio/turnos" className="btn btn-sm btn-turnos">Turnos</Link>
-                                        <Link to="/refugio/seguimientos" className="btn btn-sm btn-seguimiento">Seguimiento de vacunación</Link>
-                                        <PlanDeVacunacion />
+                                        <Link to={`/refugios/${solicitudDetalle.id_Refugio}/animales/${solicitudDetalle.id_Animal}`} className="btn btn-sm btn-primary">Ver ficha completa</Link>
+                                        <Link to="/refugio/turnos" hidden={!solicitudDetalle.snTurnos} className="btn btn-sm btn-turnos">Turnos</Link>
+                                        <Link to="/refugio/seguimientos" hidden={!solicitudDetalle.snSeguimiento} className="btn btn-sm btn-seguimiento">Seguimiento de vacunación</Link>
+                                        {solicitudDetalle.snPlanVacunacion && <PlanDeVacunacion />}
                                     </div>
                                 </div>
                             </div>
@@ -207,54 +305,54 @@ export const SolicitudDetalle = (props) => {
                                 </div>
                                 <div className="row col-12 col-md-8">
                                     <span>Motivo</span>
-                                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                    <p>{solicitudDetalle.txtMotivo}</p>
                                 </div>
                                 <div className="row py-4 justify-content-center">
                                     <div className="col-12 col-md-6 text-center">
                                         <div className="row">
                                             <div className="col-12 col-md-6">
                                                 <span>¿Alguna vez tuvo a cargo alguna mascota?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snTuvoMascota} />
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <span>¿Posee mascotas actualmente?</span>
-                                                <p><img src="/img/no.png" className="img-fluid" alt="no_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snTieneMascotas} />
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <span>¿Convive con más personas?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={!solicitudDetalle.snViveSolo} />
                                             </div>
                                             <div className="col-12 col-md-6">
                                                 <span>¿Existen veterinarias cerca de su zona?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snTieneVeterinariaCerca} />
                                             </div>
                                             <div className="col-12">
                                                 <span>Vivienda</span>
-                                                <p className="pt-2">Departamento</p>
-                                                <p>3 ambientes</p>
-                                                <p>Patio</p>
-                                                <p>Balcón</p>
-                                                <p>Redes en ventanas a altura</p>
+                                                <p className="pt-2">{(solicitudDetalle.snViveEnDepartamento) ? "Departamento" : ((solicitudDetalle.snViveEnCasa) ? "Casa" : "")}</p>
+                                                <p>{solicitudDetalle.cantidadAmbientes} ambientes</p>
+                                                {solicitudDetalle.snTienePatio && <p>Patio</p>}
+                                                {solicitudDetalle.snTieneBalcon && <p>Balcón</p>}
+                                                {solicitudDetalle.snTieneRedEnVentanas && <p>Redes en ventanas a altura</p>}
                                             </div>
                                             <div className="col-12">
                                                 <span>¿Tiene conocimiento acerca de la Ley 14.346 referida al maltrato animal?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snConoceLeyMaltratoAnimal} />
                                             </div>
                                             <div className="col-12">
                                                 <span>¿Con que frecuencia dejaría solo al animal en el hogar?</span>
-                                                <p>Algo frecuente</p>
+                                                <p>{solicitudDetalle.frecuenciaAnimalSolo}</p>
                                             </div>
                                             <div className="col-12">
                                                 <span>¿Si hubiera una emergencia con el animal, ¿tendría alguien a quien recurrir para que lo lleve al veterinario?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snTieneConocidosEnCasoDeEmergencia} />
                                             </div>
                                             <div className="col-12">
                                                 <span>¿Su remuneración es acorde a los gastos que estima tener para el cuidado del animal?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snTieneSalarioAcordeAGastos} />
                                             </div>
                                             <div className="col-12">
                                                 <span>¿Tiene familiares o conocidos que lo aconsejen acerca de la crianza del animal?</span>
-                                                <p><img src="/img/si.png" className="img-fluid" alt="si_icon" /></p>
+                                                <MarcaSiNo seleccionado={solicitudDetalle.snTieneConocidosQueLoAconsejen} />
                                             </div>
                                         </div>
                                     </div>
