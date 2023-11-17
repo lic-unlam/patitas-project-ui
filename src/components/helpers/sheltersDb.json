@@ -1,6 +1,6 @@
 [
     {
-        "id": "1",
+        "id": "3",
         "name": "San Pedro",
         "stars": "4.5",
         "address": "Av. del Libertador 4101",
@@ -8,7 +8,7 @@
         "map": "/img/shelter/maps/shelter_1.png"
     },
     {
-        "id": "2",
+        "id": "6",
         "name": "El arca de Noé",
         "stars": "3",
         "address": "Moreno 1623",
@@ -16,7 +16,7 @@
         "map": "/img/shelter/maps/shelter_2.png"
     },
     {
-        "id": "3",
+        "id": "7",
         "name": "Patas Unidas",
         "stars": "5",
         "address": "Hipólito Yrigoyen 1849",
@@ -24,7 +24,7 @@
         "map": "/img/shelter/maps/shelter_3.png"
     },
     {
-        "id": "4",
+        "id": "8",
         "name": "Santuario animal",
         "stars": "2.6",
         "address": "Av. San Juan 350",
@@ -32,7 +32,7 @@
         "map": "/img/shelter/maps/shelter_4.png"
     },
     {
-        "id": "5",
+        "id": "9",
         "name": "Nuevas oportunidades",
         "stars": "4.1",
         "address": "Adolfo Alsina 940",
