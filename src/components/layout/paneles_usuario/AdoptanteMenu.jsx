@@ -17,7 +17,7 @@ export const AdoptanteMenu = () => {
                 <Link className="dropdown-item" to="/adoptante/mis-turnos">Mis turnos</Link>
             </li>
             <li>
-                <Link className="dropdown-item" to="/adoptante/mis-seguimientos">Seguimientos</Link>
+                <Link className="dropdown-item" to="/adoptante/mis-seguimientos">Mis seguimientos</Link>
             </li>
         </>
     );

@@ -16,9 +16,6 @@ const Turnos = (props) => {
 
     const loadTurnos = useCallback(async () => {
         try {
-            if(!user)
-                throw new Error("No hay usuario logueado.");
-
             const response = await fetch("https://localhost:7277/api/turnos/refugio", {
                 method: "GET",
                 headers: {
@@ -46,8 +43,10 @@ const Turnos = (props) => {
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
-        loadTurnos();
-    }, [user]);
+
+        if(user)
+            loadTurnos();
+    }, [loadTurnos]);
 
     if(!turnos)
         return <Loading />

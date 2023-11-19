@@ -593,9 +593,17 @@ form button[type="submit"] {
     background-color: white;
 	padding: 1rem;
     border-radius: var(--default-border-radius);
-    border: 1px solid #4c98ef;
-    box-shadow: 1px 1px 7px 1px #4c98ef;
     animation: growUp .25s;
+}
+
+.border-patitas {
+	border: 1px solid #4c98ef;
+    box-shadow: 1px 1px 7px 1px #4c98ef;
+}
+
+.border-successful {
+	border: 1px solid #29c327;
+    box-shadow: 1px 1px 7px 1px #4fcf3e;
 }
 
 .custom-modal-body {
@@ -626,16 +634,18 @@ form button[type="submit"] {
 	margin-top: 0.2rem;
 	margin-bottom: 0.2rem;
 	border-radius: inherit;
-	border-width: thick;
+	border-width: 2px;
+	border-color: lightgray;
+	transition: all 0.7s;
 }
 
 .list-group-item:hover {
-	border-color: lightgray;
+	border-color: #959595;
 }
 
-.list-group-item+.list-group-item {
-	border-top-width: thick;
-}
+/*.list-group-item+.list-group-item {
+	border-bottom-width: thick;
+}*/
 
 /* Página de error 404 */
 

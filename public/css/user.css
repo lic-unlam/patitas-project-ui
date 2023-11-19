@@ -75,6 +75,13 @@
     border-radius: 1rem;
 }
 
+.solicitud-tarjeta-animal {
+    object-fit: cover;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+
 .tarjeta-desactivada {
     border-width: thin;
     background-color: #f9f6f6;

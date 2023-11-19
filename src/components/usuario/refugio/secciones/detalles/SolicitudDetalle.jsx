@@ -64,7 +64,7 @@ export const SolicitudDetalle = (props) => {
     const solicitudAprobada = async (event) => {
         try {
             event.preventDefault();
-            const response = await fetch(`https://localhost:7277/api/solicitudes-adopcion/aprobacion/${solicitudId}`, {
+            const response = await fetch(`https://localhost:7277/api/solicitudes/aprobacion/${solicitudId}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -86,24 +86,18 @@ export const SolicitudDetalle = (props) => {
             setContenidoModal({
                 mostrar: true,
                 componente: <div>
-                                <h4 className="title">¡Solicitud de adopción Nº {solicitudDetalle.nroSolicitud} aprobada!</h4>
+                                <h4 className="title"><img src="/img/check.png" width={50} alt="check_icon" /> ¡Solicitud de adopción Nº {solicitudDetalle.nroSolicitud} aprobada!</h4>
                                 <hr/>
                                 <div className="custom-modal-body">
+                                    <p className="fs-4">Ahora puedes reservar un turno para la visita de <strong>{solicitudDetalle.nombreUsuario}</strong> al refugio.</p>
                                     <figure>
-                                        <img src="/img/check.png" className="img-fluid" width={80} alt="check_icon" />
+                                        <img src="/img/shelter/gato_festejando.png" className="img-fluid" width={200} alt="gato_festejando" />
                                     </figure>
-                                    <h5>Ahora puede reservar un turno para la visita de <strong>adoptante.test</strong> al refugio.</h5>
-                                    {/*<h5>Se reservó un turno para adoptante.test el día 12/09/2023 a las 17:30 hs.</h5>*/}
                                 </div>
-                                {/*<div className="row justify-content-center">
-                                    <div className="col-6 text-end">
-                                        <Link to="/usuarios/turnos" className="btn btn-turnos">Ir a mis turnos</Link>
-                                    </div>
-                                    <div className="col-6 text-start">
-                                        <button type="button" className="btn btn-dark" onClick={() => setContenidoModal({})}>Cerrar</button>
-                                    </div>
-                                </div>*/}
                             </div>,
+                borderClass: "border-successful",
+                buttonClass: "btn-success",
+                showConfettis: true,
                 customButtons: false
             });
         }
@@ -161,13 +155,13 @@ export const SolicitudDetalle = (props) => {
 
     const mostrarEstadoDeSolicitud = () => {
         if(solicitudDetalle.adopcionExitosa)
-            return `Concluida el ${solicitudDetalle.fechaFinSolicitud} a las ${solicitudDetalle.horaFinSolicitud} hs.`;
+            return <strong className="text-success">{`Concluida el ${solicitudDetalle.fechaFinSolicitud} a las ${solicitudDetalle.horaFinSolicitud} hs.`}</strong>;
         else if(solicitudDetalle.pendienteDeAprobacion)
-            return "Pendiente de aprobación";
+            return <strong className="text-danger">Pendiente de aprobación</strong>;
         else if(solicitudDetalle.adopcionEnCurso)
-            return "En curso";
+            return <strong className="text-primary">En curso{solicitudDetalle.enEtapaDeSeguimiento && " (en etapa de vacunación)"}</strong>;
         else
-            return "Cancelada";
+            return <strong className="text-danger">Cancelada</strong>;
     }
 
     const MarcaSiNo = ({ seleccionado }) => {
@@ -184,11 +178,12 @@ export const SolicitudDetalle = (props) => {
                 <div className="card-header title text-center">
                     <img src="/img/usuarios/archivo.png" className="img-fluid" width={48} alt="archivo" /> <span className="align-middle">Solicitud de adopción Nº {solicitudDetalle.nroSolicitud}</span>
                 </div>
-                <h5 className="text-center pt-2">Enviada el {solicitudDetalle.fechaInicioSolicitud} a las {solicitudDetalle.horaInicioSolicitud} hs.</h5>
+                <h5 className="text-center pt-4">Enviada el {solicitudDetalle.fechaInicioSolicitud} a las {solicitudDetalle.horaInicioSolicitud} hs.</h5>
                 <h5 className="text-center pt-2">
-                    <span>Estado: <strong>{mostrarEstadoDeSolicitud()}</strong></span>
+                    <span>Estado: {mostrarEstadoDeSolicitud()}</span>
                 </h5>
-                <div className="pt-4">
+
+                <div className="py-4">
                     {
                         !solicitudDetalle.aprobada &&
                         <div className="row justify-content-center">
@@ -201,9 +196,9 @@ export const SolicitudDetalle = (props) => {
                         </div>
                     }
                     {
-                        solicitudDetalle.adopcionEnCurso && !solicitudDetalle.tieneTurnoActivo &&
+                        solicitudDetalle.adopcionEnCurso && !solicitudDetalle.enEtapaDeSeguimiento && !solicitudDetalle.tieneTurnoActivo &&
                         <div className=" text-center py-2">
-                            <Link to={`/refugio/solicitudes/${solicitudId}/turnos`} className="btn btn-dark fs-6">Crear nuevo turno</Link>
+                            <Link to={`/refugio/solicitudes/${solicitudId}/turnos`} className="btn btn-secondary fs-6" style={{'backgroundColor': 'mediumslateblue'}}><i className="bi bi-clock"></i> Crear nuevo turno</Link>
                         </div>
                     }
                 </div>
@@ -225,10 +220,10 @@ export const SolicitudDetalle = (props) => {
                                 <div className="col text-center">
                                     <div className="row">
                                         <div className="col-12 col-xl-6">
-                                            <button className="btn btn-primary mb-3 mb-xl-0">Historial de adopciones</button>
+                                            <button className="btn btn-outline-primary mb-3 mb-xl-0">Historial de adopciones</button>
                                         </div>
                                         <div className="col-12 col-xl-6">
-                                            <button className="btn btn-primary mb-4">Historial de seguimientos</button>
+                                            <button className="btn btn-outline-primary mb-4">Historial de seguimientos</button>
                                         </div>
                                         <div className="col-12 col-md-6">
                                             <span>Nombre:</span>
@@ -296,7 +291,7 @@ export const SolicitudDetalle = (props) => {
                     </div>
                     <hr className="border-dashed" />
                     <div className="marco-formulario">
-                        <h5 className="card-title text-center fs-4 py-1 m-2 border-top border-bottom"><img src="/img/usuarios/pre_adopcion_2.png" className="img-fluid" width={48} alt="formulario_preadopcion_icon" /> Formulario de pre-adopción:</h5>
+                        <h5 className="card-title text-center fs-4 py-1 m-2 border-top border-bottom"><img src="/img/usuarios/pre_adopcion_2.png" className="img-fluid" width={48} alt="formulario_preadopcion_icon" /> Formulario de pre-adopción</h5>
                         <div id="contenido_formulario_preadopcion">
                             <div className="row justify-content-center">
                                 <div className="row">
@@ -391,7 +386,7 @@ export const SolicitudDetalle = (props) => {
                 </div>*/}
             </div>
             { contenidoModal.mostrar && 
-                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons}>
+                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons} borderClass={contenidoModal.borderClass} buttonClass={contenidoModal.buttonClass} showConfettis={contenidoModal.showConfettis}>
                     { contenidoModal.componente }
                 </CustomModal>
             }

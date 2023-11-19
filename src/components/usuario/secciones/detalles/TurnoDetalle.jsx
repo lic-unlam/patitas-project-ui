@@ -107,11 +107,12 @@ export const TurnoDetalle = (props) => {
             {
             turno.asistio &&
                 <div className="alert alert-success border-success py-2">
-                    Asististe al encuentro con el refugio.
+                    <b>Asististe al encuentro con el refugio:</b>
+                    <div className="fst-italic">{turno.informeDeVisita}</div>
                 </div>
             }
 
-            <Link to={`/adoptante/mis-adopciones/${turno.solicitudId}`} className="btn btn-sm btn-dark">Ver solicitud de adopción</Link>
+            <Link to={`/adoptante/mis-adopciones/${turno.solicitudId}`}>Ver solicitud de adopción</Link>
             <p className="card-text pt-3">Se te ha reservado un turno para visitar el refugio en la siguiente fecha:</p>
             <figure>
                 <img src="/img/clock.png" className="img-fluid" width={70} alt="reloj" />
@@ -130,9 +131,25 @@ export const TurnoDetalle = (props) => {
                 </button>
             </>
             }
-            {turno.estaConfirmado && <span style={{'color': 'forestgreen', 'fontStyle': 'italic'}} className="d-block fs-5"><i className="bi bi-check-lg h2 align-middle"></i> Asistencia confirmada</span>}
-            {turno.porReprogramar && <span style={{'color': 'mediumvioletred', 'fontStyle': 'italic'}} className="fs-5"><i className="bi bi-clock h2 align-middle"></i> Pedido de reprogramación enviado</span>}
-            <small className="d-block pt-3 pb-2"><i>Nota: en caso de no asistir el día indicado, el refugio se contactará contigo via telefónica y/o email.</i></small>
+            {
+                turno.estaConfirmado &&
+                <span style={{'color': 'forestgreen'}} className="d-block fst-italic fs-5">
+                    <i className="bi bi-check-lg h2 align-middle"></i> Asistencia confirmada
+                </span>
+            }
+            
+            {
+                turno.porReprogramar &&
+                <span style={{'color': 'mediumvioletred'}} className="fst-italic fs-5">
+                    <i className="bi bi-clock h2 align-middle"></i> Pedido de reprogramación enviado
+                </span>
+            }
+
+            {!turno.asistio &&
+                <small className="d-block pt-3 pb-2">
+                    <i>Nota: en caso de no asistir el día indicado, el refugio se contactará contigo via telefónica y/o email.</i>
+                </small>
+            }
 
             {
             modalActivo === accionesModal.confirmarAsistencia &&
@@ -163,6 +180,15 @@ export const TurnoDetalle = (props) => {
                 >
                     <CancelarAdopcion/>
                 </Modal>
+            }
+
+            {
+                turno.solicitudEnEtapaDeSeguimiento ?
+                <>
+                <hr/>
+                <h5 style={{'color': 'blueviolet'}} className="fw-bold">La solicitud está en etapa de seguimiento.</h5>
+                </>
+                : <button className="btn btn-warning" onClick={() => habilitarSeguimiento(turno.solicitudId)}>Marcar solicitud para etapa de seguimiento</button>
             }
         </CustomModal>
     );

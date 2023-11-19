@@ -107,11 +107,11 @@ export const router = createBrowserRouter([
                         ]
                     },
                     {
-                        path: `/adoptante/${adoptanteTabs.seguimientos}`,
-                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.seguimientos} />,
+                        path: `/adoptante/${adoptanteTabs.misSeguimientos}`,
+                        element: <PanelDeUsuario tabs={adoptanteTabs} seccionActiva={adoptanteTabs.misSeguimientos} />,
                         children: [
                             {
-                                path: `/adoptante/${adoptanteTabs.seguimientos}/:seguimientoId`,
+                                path: `/adoptante/${adoptanteTabs.misSeguimientos}/:seguimientoId`,
                                 element: <SeguimientoDetalle />
                             }
                         ]

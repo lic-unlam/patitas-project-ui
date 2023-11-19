@@ -6,15 +6,12 @@ import Loading from "src/components/layout/Loading";
 
 export const PerfilAdoptante = (props) => {
     const navigate = useNavigate();
-    let { user } = useContext(UserContext);
+    const { user } = useContext(UserContext);
     const [ datosPerfil, setDatosPerfil ] = useState();
     const datoNoEspecificado = "No especificado";
 
     const loadPerfil = useCallback(async () => {
         try {
-            if(user === null)
-                throw new Error("No hay usuario logueado.");
-
             const response = await fetch("https://localhost:7277/api/adoptante/perfil", {
                 method: "GET",
                 headers: {
@@ -42,8 +39,10 @@ export const PerfilAdoptante = (props) => {
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
-        loadPerfil();
-    }, []);
+
+        if(user)
+            loadPerfil();
+    }, [loadPerfil]);
 
     if(!datosPerfil)
         return <Loading />

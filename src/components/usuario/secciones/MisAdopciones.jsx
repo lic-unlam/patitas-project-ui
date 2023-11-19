@@ -19,7 +19,7 @@ const MisAdopciones = (props) => {
             if(!user)
                 throw new Error("No hay usuario logueado.");
 
-            const response = await fetch("https://localhost:7277/api/solicitudes-adopcion/adoptante", {
+            const response = await fetch("https://localhost:7277/api/solicitudes/adoptante", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${user.accessToken}`
@@ -54,9 +54,8 @@ const MisAdopciones = (props) => {
 
     return (
         <div id="mis_adopciones_wrapper">
-            <hr/>
             <h5 className="title text-center">Procesos de adopción en curso</h5>
-            <hr/>
+            <hr className="text-primary"/>
             
             <div className="list-group">
                 {
@@ -66,9 +65,8 @@ const MisAdopciones = (props) => {
                 }
             </div>
 
-            <hr/>
             <h5 className="title text-center">Solicitudes pendientes de aprobación</h5>
-            <hr/>
+            <hr className="text-dark"/>
 
             <div className="list-group">
                 {
@@ -78,9 +76,8 @@ const MisAdopciones = (props) => {
                 }
             </div>
 
-            <hr/>
             <h5 className="title text-center">Adopciones exitosas</h5>
-            <hr/>
+            <hr className="text-success"/>
 
             <div className="list-group">
                 {
@@ -90,9 +87,8 @@ const MisAdopciones = (props) => {
                 }
             </div>
 
-            <hr/>
             <h5 className="title text-center">Adopciones canceladas</h5>
-            <hr/>
+            <hr className="text-danger"/>
 
             <div className="list-group">
                 {

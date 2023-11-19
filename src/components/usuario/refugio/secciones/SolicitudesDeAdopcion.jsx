@@ -16,10 +16,7 @@ export const SolicitudesDeAdopcion = (props) => {
 
     const loadSolicitudesDeAdopcion = useCallback(async () => {
         try {
-            if(!user)
-                throw new Error("No hay usuario logueado.");
-
-            const response = await fetch("https://localhost:7277/api/solicitudes-adopcion/refugio", {
+            const response = await fetch("https://localhost:7277/api/solicitudes/refugio", {
                 method: "GET",
                 headers: {
                     "Authorization": `Bearer ${user.accessToken}`
@@ -46,17 +43,18 @@ export const SolicitudesDeAdopcion = (props) => {
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
-        loadSolicitudesDeAdopcion();
-    }, [user]);
+
+        if(user)
+            loadSolicitudesDeAdopcion();
+    }, [loadSolicitudesDeAdopcion]);
 
     if(!solicitudes)
         return <Loading />
 
     return (
         <div id="solicitudes_de_adopcion_wrapper">
-            <hr/>
             <h5 className="title text-center">Procesos de adopción en curso</h5>
-            <hr/>
+            <hr className="text-primary"/>
             
             <div className="list-group">
                 {
@@ -66,9 +64,8 @@ export const SolicitudesDeAdopcion = (props) => {
                 }
             </div>
 
-            <hr/>
             <h5 className="title text-center">Solicitudes pendientes de aprobación</h5>
-            <hr/>
+            <hr className="text-dark"/>
 
             <div className="list-group">
                 {
@@ -78,9 +75,8 @@ export const SolicitudesDeAdopcion = (props) => {
                 }
             </div>
 
-            <hr/>
             <h5 className="title text-center">Adopciones exitosas</h5>
-            <hr/>
+            <hr className="text-success"/>
 
             <div className="list-group">
                 {
@@ -90,9 +86,8 @@ export const SolicitudesDeAdopcion = (props) => {
                 }
             </div>
 
-            <hr/>
             <h5 className="title text-center">Adopciones canceladas</h5>
-            <hr/>
+            <hr className="text-danger"/>
 
             <div className="list-group">
                 {

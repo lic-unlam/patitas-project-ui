@@ -53,12 +53,23 @@ export const AdopcionDetalle = () => {
             </CustomModal>
         );
 
+    const mostrarEstadoDeSolicitud = () => {
+        if(adopcionDetalle.adopcionExitosa)
+            return <strong className="text-success">{`Concluida el ${adopcionDetalle.fechaFinSolicitud} a las ${adopcionDetalle.horaFinSolicitud} hs.`}</strong>;
+        else if(adopcionDetalle.pendienteDeAprobacion)
+            return <strong className="text-danger">Pendiente de aprobación</strong>;
+        else if(adopcionDetalle.adopcionEnCurso)
+            return <strong className="text-primary">En curso{adopcionDetalle.enEtapaDeSeguimiento && " (en etapa de vacunación)"}</strong>;
+        else
+            return <strong className="text-danger">Cancelada</strong>;
+    }
+
     return (
             <CustomModal>
                 <h4 className="title">Solicitud de adopción Nº {adopcionDetalle.nroSolicitud}</h4>
                 <hr/>
-                <p style={{'color': 'crimson', 'fontStyle': 'italic'}} className="align-text-bottom" hidden={adopcionDetalle.snAprobada}>
-                    <i className="bi bi-exclamation-diamond-fill h5 align-middle"></i> Pendiente de aprobación
+                <p className="text-center pt-2">
+                    <span>Estado: {mostrarEstadoDeSolicitud()}</span>
                 </p>
                 <div className="row">
                     <div className="col-12 col-md-7">

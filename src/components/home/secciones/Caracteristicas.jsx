@@ -32,7 +32,7 @@ function Caracteristicas() {
                 <div className="col-12 col-md-4">
                     <img className="img-fluid" width={150} src="/img/features/gratuito.png" alt="perro_libre" />
                     <h3>Gratuito</h3>
-		            <p className="text-muted">Queremos ayudar a que los animales puedan tener un hogar, una mejor calidad de vida y concientizar en la adopción responsable, por eso, en Patitas podrás adoptar a tu próximo gran amigo sin costo alguno.</p>
+		            <p className="text-muted">Queremos que los animales puedan conseguir un hogar, una mejor calidad de vida y concientizar en la adopción responsable, por eso, en Patitas te ayudaremos en el proceso de adopción <u>sin costo alguno.</u></p>
                 </div>
             </div>
         </div>

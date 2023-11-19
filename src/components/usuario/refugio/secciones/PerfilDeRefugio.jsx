@@ -12,9 +12,6 @@ export const PerfilDeRefugio = (props) => {
 
     const loadPerfil = useCallback(async () => {
         try {
-            if(user === null)
-                throw new Error("No hay usuario logueado.");
-
             const response = await fetch("https://localhost:7277/api/refugios/perfil", {
                 method: "GET",
                 headers: {
@@ -42,8 +39,10 @@ export const PerfilDeRefugio = (props) => {
 
     useEffect(() => {
         document.title = props.title.concat(' - ', window.$title);
-        loadPerfil();
-    }, []);
+
+        if(user)
+            loadPerfil();
+    }, [loadPerfil]);
 
     if(!datosPerfil)
         return <Loading />
@@ -117,7 +116,7 @@ export const PerfilDeRefugio = (props) => {
                                     <p>{datosPerfil.descripcion ? datosPerfil.descripcion : datoNoEspecificado}</p>
                                 </div>
                                 <div className="col-12">
-                                    <span>Imágen del refugio:</span>
+                                    <span>Imágen del refugio</span>
                                     <figure>
                                         <img className="img-fluid border border-4 rounded" src={datosPerfil.fotoDelRefugio ? datosPerfil.fotoDelRefugio : "/img/shelter/shelter.png"} alt="portada_del_refugio" />
                                     </figure>

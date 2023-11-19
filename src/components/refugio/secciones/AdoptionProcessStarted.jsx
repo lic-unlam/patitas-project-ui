@@ -80,7 +80,7 @@ function AdoptionProcessStarted(props) {
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <img className="img-fluid" width={200} src="/img/posts/perro_saludando.png" alt="perro_saludando"/>
+                        <img className="img-fluid" width={200} src="/img/perro_globos.png" alt="perro_globos"/>
                         <h2>¡Felicitaciones!</h2>
                         <p>Estás un paso más cerca de ese gran amigo que estás buscando.</p>
                         <p>El refugio analizará tu solicitud y programará un turno para tu visita.</p>

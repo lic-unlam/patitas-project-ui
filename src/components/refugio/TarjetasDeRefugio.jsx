@@ -25,7 +25,7 @@ export const TarjetasDeRefugio = (props) => {
                     <div className="card shelter-card mb-3">
                         <div className="row g-0">
                             <div className="col-2">
-                                <img className="img-fluid rounded-start" width={100} src="/img/shelter/shelter.png" alt="refugio"/>
+                                <img className="img-fluid rounded-start" width={100} src={refugio.fotografia ? refugio.fotografia : "/img/shelter/shelter.png"} alt="portada_refugio"/>
                             </div>
                             <div className="col-10">
                                 <div className="card-body">

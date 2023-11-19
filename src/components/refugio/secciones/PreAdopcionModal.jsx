@@ -16,7 +16,7 @@ const PreAdopcionModal = () => {
             if(!user)
                 throw new Error("No hay usuario logueado.");
 
-            const response = await fetch("https://localhost:7277/api/solicitudes-adopcion", {
+            const response = await fetch("https://localhost:7277/api/solicitudes", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

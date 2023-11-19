@@ -42,8 +42,8 @@ const PanelDeUsuario = (props) => {
 				return <MisAdopciones title="Mis adopciones" />
 			case props.tabs.misTurnos:
 				return <MisTurnos title="Mis turnos" />
-			case props.tabs.seguimientos:
-				return <MisSeguimientos title="Seguimientos" />
+			case props.tabs.misSeguimientos:
+				return <MisSeguimientos title="Mis seguimientos" />
 			default:
 				break;
 		}
@@ -62,7 +62,7 @@ const PanelDeUsuario = (props) => {
 					<Link to={`/adoptante/${props.tabs.misTurnos}`} className={`nav-link ${(props.seccionActiva === props.tabs.misTurnos) ? "active" : "" }`}><img src="/img/usuarios/turnos.png" width={32} alt="mis_turnos_icon" /> Mis turnos</Link>
 				</li>
 				<li className="nav-item">
-					<Link to={`/adoptante/${props.tabs.seguimientos}`} className={`nav-link ${(props.seccionActiva === props.tabs.seguimientos) ? "active" : "" }`}><img src="/img/usuarios/jeringa.png" width={32} alt="seguimientos_icon" /> Seguimientos</Link>
+					<Link to={`/adoptante/${props.tabs.misSeguimientos}`} className={`nav-link ${(props.seccionActiva === props.tabs.misSeguimientos) ? "active" : "" }`}><img src="/img/usuarios/jeringa.png" width={32} alt="mis_seguimientos_icon" /> Mis seguimientos</Link>
 				</li>
 			</ul>
 			{/*<Outlet context={{refugio}} />*/}
