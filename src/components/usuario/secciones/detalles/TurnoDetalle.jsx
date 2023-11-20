@@ -183,12 +183,11 @@ export const TurnoDetalle = (props) => {
             }
 
             {
-                turno.solicitudEnEtapaDeSeguimiento ?
+                turno.solicitudEnEtapaDeSeguimiento &&
                 <>
-                <hr/>
-                <h5 style={{'color': 'blueviolet'}} className="fw-bold">La solicitud está en etapa de seguimiento.</h5>
+                    <hr/>
+                    <h5 style={{'color': 'blueviolet'}} className="fw-bold">La solicitud está en etapa de seguimiento.</h5>
                 </>
-                : <button className="btn btn-warning" onClick={() => habilitarSeguimiento(turno.solicitudId)}>Marcar solicitud para etapa de seguimiento</button>
             }
         </CustomModal>
     );

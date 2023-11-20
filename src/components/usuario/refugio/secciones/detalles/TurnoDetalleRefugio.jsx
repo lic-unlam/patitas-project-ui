@@ -6,6 +6,7 @@ import { CustomModal } from "src/components/layout/CustomModal";
 import { UserContext } from "src/components/layout/LayoutPublic";
 import Loading from "src/components/layout/Loading";
 import { RegistrarAsistencia } from "./RegistrarAsistencia";
+import { MarcarSolicitudParaSeguimiento } from "./MarcarSolicitudParaSeguimiento";
 
 export const TurnoDetalleRefugio = (props) => {
     const navigate = useNavigate();
@@ -14,6 +15,7 @@ export const TurnoDetalleRefugio = (props) => {
     const [ turno, setTurno ] = useState({});
     const [ modalActivo, setModalActivo ] = useState(''); // por defecto el modal no se carga al DOM
     const [ showRegistrarAsistenciaForm, setShowRegistrarAsistenciaForm ] = useState(false);
+    const [ showMarcarParaSeguimientoForm, setShowMarcarParaSeguimientoForm ] = useState(false);
 
     const handleModal = (accion) => {
         flushSync(() => {
@@ -132,6 +134,21 @@ export const TurnoDetalleRefugio = (props) => {
                 </div>
             }
 
+            {
+                turno.solicitudEnEtapaDeSeguimiento ?
+                <>
+                <hr/>
+                <h5 style={{'color': 'blueviolet'}} className="fw-bold">La solicitud está en etapa de seguimiento.</h5>
+                </>
+                : (turno.asistio) &&
+                    <div>
+                        {
+                        showMarcarParaSeguimientoForm ? <MarcarSolicitudParaSeguimiento solicitudId={turno.solicitudId} refugioId={turno.refugioId} setShowMarcarParaSeguimientoForm={setShowMarcarParaSeguimientoForm} />
+                        : <button className="btn btn-warning mb-4" onClick={() => setShowMarcarParaSeguimientoForm(true)}>Marcar solicitud para etapa de seguimiento</button>
+                        }
+                    </div>
+            }
+
             <Link to={`/refugio/solicitudes/${turno.solicitudId}`}>Ver solicitud de adopción</Link>
 
             {
@@ -156,14 +173,7 @@ export const TurnoDetalleRefugio = (props) => {
             }
             
             <small className="d-block pt-3 pb-2"><i>Datos de contacto: Correo ({turno.emailAdoptante}) - Teléfono: ({turno.telefono})</i></small>
-            {
-                turno.solicitudEnEtapaDeSeguimiento ?
-                <>
-                <hr/>
-                <h5 style={{'color': 'blueviolet'}} className="fw-bold">La solicitud está en etapa de seguimiento.</h5>
-                </>
-                : <button className="btn btn-warning" onClick={() => habilitarSeguimiento(turno.solicitudId)}>Marcar solicitud para etapa de seguimiento</button>
-            }
+            
         </CustomModal>
     );
 }

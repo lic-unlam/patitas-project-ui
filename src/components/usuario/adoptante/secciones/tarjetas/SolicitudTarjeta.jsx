@@ -12,6 +12,11 @@ export const SolicitudTarjeta = (props) => {
         case roles.refugio:
             urlPrefix = "/refugio/solicitudes";
             break;
+        case roles.veterinaria:
+            urlPrefix = "/veterinaria/adopciones-vinculadas";
+            break;
+        default:
+            break;
     }
 
     return (
@@ -50,10 +55,24 @@ export const SolicitudTarjeta = (props) => {
                             }
                         </div>
                         <p className="fst-italic">Iniciada el {solicitud.fechaInicio} a las {solicitud.horaInicio} hs.</p>
-                        <div>
-                            <span className="fs-5">{ rol === roles.adoptante ? "Refugio: " : "Adoptante: " }</span>
-                            <span>{solicitud.nombre} ({solicitud.ubicacion})</span>
-                        </div>
+                        {
+                            rol === roles.veterinaria ?
+                            <>
+                                <div>
+                                    <span className="fs-5">Adoptante: </span>
+                                    <span>{solicitud.nombre.split('*')[0]} ({solicitud.ubicacion.split('*')[0]})</span>
+                                </div>
+                                <div>
+                                    <span className="fs-5">Refugio: </span>
+                                    <span>{solicitud.nombre.split('*')[1]} ({solicitud.ubicacion.split('*')[1]})</span>
+                                </div>
+                            </>
+                            :
+                            <div>
+                                <span className="fs-5">{ rol === roles.adoptante ? "Refugio: " : "Adoptante: " }</span>
+                                <span>{solicitud.nombre} ({solicitud.ubicacion})</span>
+                            </div>
+                        }
                         <div>
                             <span className="fs-5">Animal a adoptar: </span>
                             <span>{solicitud.nombreAnimal}</span>

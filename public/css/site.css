@@ -635,6 +635,7 @@ form button[type="submit"] {
 	margin-bottom: 0.2rem;
 	border-radius: inherit;
 	border-width: 2px;
+	border-top-width: thick;
 	border-color: lightgray;
 	transition: all 0.7s;
 }
@@ -643,9 +644,9 @@ form button[type="submit"] {
 	border-color: #959595;
 }
 
-/*.list-group-item+.list-group-item {
-	border-bottom-width: thick;
-}*/
+.list-group-item+.list-group-item {
+	border-top-width: thick;
+}
 
 /* Página de error 404 */
 

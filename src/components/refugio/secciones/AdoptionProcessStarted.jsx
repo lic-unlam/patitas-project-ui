@@ -80,10 +80,10 @@ function AdoptionProcessStarted(props) {
             <div className="modal-dialog modal-dialog-centered">
                 <div className="modal-content">
                     <div className="modal-body">
-                        <img className="img-fluid" width={200} src="/img/perro_globos.png" alt="perro_globos"/>
+                        <img className="img-fluid" width={200} src="/img/shelter/perro_globos.png" alt="perro_globos"/>
                         <h2>¡Felicitaciones!</h2>
-                        <p>Estás un paso más cerca de ese gran amigo que estás buscando.</p>
-                        <p>El refugio analizará tu solicitud y programará un turno para tu visita.</p>
+                        <h5>Estás un paso más cerca de ese gran amigo que estás buscando.</h5>
+                        <h5>El refugio analizará tu solicitud y programará un turno para tu visita.</h5>
                     </div>
                     <div className="modal-footer">
                         <button type="button" className="btn btn-primary" onClick={redirectToPublication} data-bs-dismiss="modal">De acuerdo</button>

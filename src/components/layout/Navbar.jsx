@@ -2,7 +2,7 @@ import { useContext, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { UserContext } from './LayoutPublic';
-import { AdministradorMenu, AdoptanteMenu, RefugioMenu } from './paneles_usuario';
+import { AdministradorMenu, AdoptanteMenu, RefugioMenu, VeterinariaMenu } from './paneles_usuario';
 import { roles } from 'src/utils/constants/user';
 
 function Navbar(props) {
@@ -27,6 +27,8 @@ function Navbar(props) {
                 return <AdoptanteMenu />
             case roles.refugio:
                 return <RefugioMenu />
+            case roles.veterinaria:
+                return <VeterinariaMenu />
             default:
                 break;
         }

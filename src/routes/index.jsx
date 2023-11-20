@@ -28,21 +28,21 @@ import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detall
 import Turnos from "src/components/usuario/refugio/secciones/Turnos";
 import { CrearTurno } from "src/components/usuario/refugio/secciones/CrearTurno";
 import { TurnoDetalleRefugio } from "src/components/usuario/refugio/secciones/detalles/TurnoDetalleRefugio";
-import refugioUserTabs from "src/config/usuario/refugioUserTabs.json";
+
+// Veterinaria
+import PanelDeVeterinaria from "src/components/usuario/veterinaria/PanelDeVeterinaria";
+import { PerfilDeVeterinaria } from "src/components/usuario/veterinaria/secciones/PerfilDeVeterinaria";
+import { SeguimientosDeVacunacion } from "src/components/usuario/veterinaria/secciones/SeguimientosDeVacunacion";
+import { PlanesDeVacunacion } from "src/components/usuario/veterinaria/secciones/PlanesDeVacunacion";
+import { AdopcionesVinculadas } from "src/components/usuario/veterinaria/secciones/AdopcionesVinculadas";
+import { AdopcionVinculadaDetalle } from "src/components/usuario/veterinaria/secciones/detalles/AdopcionVinculadaDetalle";
 
 // Refugios
 import ExplorarRefugios from '../components/refugio/ExplorarRefugios';
 import RefugioDetalle from '../components/refugio/RefugioDetalle';
 
-import Animales from "../components/refugio/secciones/Animales";
-import Comentarios from "../components/refugio/secciones/Comentarios";
-import VeterinariasAsociadas from "../components/refugio/secciones/VeterinariasAsociadas";
-import MasInformacion from "../components/refugio/secciones/MasInformacion";
-import shelterDb from '../components/helpers/sheltersDb.json';
-
 import AnimalDetalle from "../components/refugio/secciones/AnimalDetalle";
 import BuscadorDeRefugios from "../components/refugio/buscar/BuscadorDeRefugios";
-import refugioTabs from '../config/refugio/refugioTabs.json';
 import { refugioLoader } from "src/components/refugio/loaders/refugioLoader";
 
 // Foro
@@ -220,6 +220,36 @@ export const router = createBrowserRouter([
                     {
                         path: "/refugio/solicitudes/:solicitudId/turnos",
                         element: <CrearTurno />,
+                    },
+                    {
+                        path: "/veterinaria",
+                        element: <PanelDeVeterinaria />,
+                        children: [
+                            {
+                                path: "perfil",
+                                element: <PerfilDeVeterinaria title="Perfil de veterinaria" />
+                            },
+                            {
+                                path: "seguimientos-de-vacunacion",
+                                element: <SeguimientosDeVacunacion title="Seguimientos de vacunación" />
+                            },
+                            {
+                                path: "planes-de-vacunacion",
+                                element: <PlanesDeVacunacion title="Planes de vacunación" />
+                            },
+                            {
+                                path: ":solicitudId",
+                                element: <AdopcionVinculadaDetalle title="Detalle de adopción vinculada" />
+                            },
+                            {
+                                path: "adopciones-vinculadas",
+                                element: <AdopcionesVinculadas title="Adopciones vinculadas" />
+                            },
+                            {
+                                path: "/veterinaria/adopciones-vinculadas/:solicitudId",
+                                element: <AdopcionVinculadaDetalle title="Detalle de adopción vinculada" />
+                            }
+                        ]
                     }
                 ],
             },
