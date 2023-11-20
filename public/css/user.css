@@ -199,3 +199,18 @@
 .lista-de-vacunas ul > li:last-child {
     width: 50%;
 }
+
+/* Cuenta veterinaria */
+
+#lista_vacunas_wrapper {
+    padding-bottom: 1rem;
+}
+
+#lista_vacunas_wrapper, #lista_del_plan_wrapper {
+    padding-bottom: 1rem;
+}
+
+#agregar_a_la_lista {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
