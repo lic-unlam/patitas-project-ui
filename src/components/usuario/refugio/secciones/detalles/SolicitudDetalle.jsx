@@ -172,6 +172,50 @@ export const SolicitudDetalle = (props) => {
         );
     }
 
+    const finalizarProcesoDeAdopcion = async () => {
+        try {
+            const response = await fetch(`https://localhost:7277/api/solicitudes/${solicitudId}/finalizacion`, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.accessToken}`
+                },
+                body: solicitudId
+            });
+            
+            if(!response.ok) {
+                if(response.status === 403)
+                    navigate("/error/forbidden");
+
+                if(response.status === 401)
+                    navigate("/error/unauthorized");
+
+                throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+            }
+
+            setContenidoModal({
+                mostrar: true,
+                componente: <div>
+                                <h4 className="title"><img src="/img/check.png" width={50} alt="check_icon" /> ¡Solicitud de adopción Nº {solicitudDetalle.nroSolicitud} finalizada!</h4>
+                                <hr/>
+                                <div className="custom-modal-body">
+                                    <p className="fs-5">¡Felicitaciones! ¡Has completado exitosamente el proceso de adopción! El usuario "{solicitudDetalle.nombreUsuario}" ha completado el plan de vacunación y el animal ahora está en condiciones de una vida mejor en su nuevo hogar.</p>
+                                    <figure>
+                                        <img src="/img/shelter/perro_festejando.jpg" className="img-fluid" width={200} alt="perro_festejando" />
+                                    </figure>
+                                </div>
+                            </div>,
+                borderClass: "border-successful",
+                buttonClass: "btn-success",
+                showSchoolConfettis: true,
+                customButtons: false
+            });
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+    }
+
     return (
         <div id="solicitud_detalle_wrapper">
             <div className="card">
@@ -182,6 +226,13 @@ export const SolicitudDetalle = (props) => {
                 <h5 className="text-center pt-2">
                     <span>Estado: {mostrarEstadoDeSolicitud()}</span>
                 </h5>
+                {
+                    solicitudDetalle.planEstaCompleto && !solicitudDetalle.fechaFinSolicitud && !solicitudDetalle.horaFinSolicitud &&
+                    <div className="text-center pt-4">
+                        <p className="text-success fw-bold">El plan de vacunación está completo.</p>
+                        <button className="btn btn-success" onClick={finalizarProcesoDeAdopcion}>Finalizar proceso de adopción</button>
+                    </div>
+                }
 
                 <div className="py-4">
                     {
@@ -386,7 +437,7 @@ export const SolicitudDetalle = (props) => {
                 </div>*/}
             </div>
             { contenidoModal.mostrar && 
-                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons} borderClass={contenidoModal.borderClass} buttonClass={contenidoModal.buttonClass} showConfettis={contenidoModal.showConfettis}>
+                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons} borderClass={contenidoModal.borderClass} buttonClass={contenidoModal.buttonClass} showSchoolConfettis={contenidoModal.showSchoolConfettis}>
                     { contenidoModal.componente }
                 </CustomModal>
             }

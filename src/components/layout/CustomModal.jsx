@@ -24,6 +24,9 @@ export const CustomModal = (props) => {
         if(props.showConfettis)
             desplegarEstrellas();
 
+        if(props.showSchoolConfettis)
+            desplegarSchoolPride();
+
 		return () => {
             document.removeEventListener("keydown", goBack);
             document.body.style.overflow = '';
@@ -31,6 +34,8 @@ export const CustomModal = (props) => {
 	}, [navigate, cerrarCustomModal]);
 
     //// CONFETTI ////
+
+    // Efecto de estrellas cuando se aprueba la solicitud
 
     var defaults = {
         spread: 360,
@@ -61,6 +66,36 @@ export const CustomModal = (props) => {
         setTimeout(shoot, 0);
         setTimeout(shoot, 100);
         setTimeout(shoot, 200);
+    }
+
+    // Efecto de escuela cuando se finaliza la adopción
+
+    function desplegarSchoolPride() {
+        var end = Date.now() + (15 * 1000); // 15 segundos dura el efecto
+
+        // go Buckeyes!
+        var colors = ['#bb0000', '#ffffff'];
+
+        (function frame() {
+            confetti({
+                particleCount: 2,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors
+            });
+            confetti({
+                particleCount: 2,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors
+            });
+        
+            if (Date.now() < end) {
+                requestAnimationFrame(frame);
+            }
+        }());
     }
     
     //////////////////

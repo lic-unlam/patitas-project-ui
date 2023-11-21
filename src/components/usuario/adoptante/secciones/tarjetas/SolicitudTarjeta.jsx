@@ -48,7 +48,7 @@ export const SolicitudTarjeta = (props) => {
                             }
 
                             {
-                                solicitud.enEtapaDeSeguimiento &&
+                                solicitud.enEtapaDeSeguimiento && !solicitud.fechaFinalizacion && !solicitud.horaFinalizacion &&
                                 <span className="align-text-bottom fst-italic ms-2" style={{ 'color': 'mediumvioletred' }}>
                                     <i className="bi bi-asterisk"></i> En etapa de seguimiento
                                 </span>
