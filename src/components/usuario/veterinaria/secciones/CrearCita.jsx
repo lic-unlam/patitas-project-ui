@@ -8,7 +8,7 @@ import { AuthFormErrorMessage } from "src/components/auth/formularios/AuthFormEr
 import { CustomAlertContext } from "src/components/layout/LayoutPublic";
 import { UserContext } from "src/components/layout/LayoutPublic";
 
-export const CrearTurno = (props) => {
+export const CrearCita = (props) => {
     const { solicitudId } = useParams();
     const { setCustomAlert } = useContext(CustomAlertContext);
     const { user } = useContext(UserContext);
@@ -39,13 +39,15 @@ export const CrearTurno = (props) => {
     let listaDeHoras = getListaDeHoras();
     let listaDeMinutos = getListaDeMinutos();
 
-    const turnoInitialValues = {
+    const citaInitialValues = {
         fechaTurno: '',
         horaTurno: '',
-        minutoTurno: ''
+        minutoTurno: '',
+        /*vacuna: '',
+        nroDosis: 0*/
     }
 
-    const turnoSchema = Yup.object().shape({
+    const citaSchema = Yup.object().shape({
         fechaTurno: Yup.date().required(validationMessages.FIELD_REQUIRED),
         horaTurno: Yup.number()
                 .required(validationMessages.FIELD_REQUIRED)
@@ -54,15 +56,19 @@ export const CrearTurno = (props) => {
         minutoTurno: Yup.number()
                 .required(validationMessages.FIELD_REQUIRED)
                 .typeError(validationMessages.MUST_BE_A_NUMBER)
-                .integer(validationMessages.HOUR_NOT_VALID)
+                .integer(validationMessages.HOUR_NOT_VALID),
+        /*vacuna: Yup.string()
+                .required(validationMessages.FIELD_REQUIRED),
+        nroDosis: Yup.number()
+                .required(validationMessages.FIELD_REQUIRED)
+                .typeError(validationMessages.MUST_BE_A_NUMBER)
+                .positive(validationMessages.MUST_BE_A_NUMBER)
+                .integer(validationMessages.MUST_BE_A_NUMBER)*/
     });
 
-    const crearTurnoSubmit = async (values, actions) => {
+    const crearCitaSubmit = async (values, actions) => {
         try {
-            if(!user)
-                throw new Error("No hay usuario logueado.");
-
-            const response = await fetch("https://localhost:7277/api/turnos", {
+            const response = await fetch("https://localhost:7277/api/seguimientos", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
@@ -82,13 +88,14 @@ export const CrearTurno = (props) => {
             // agregar validación para que no crear un turno en la misma fecha y hora
             
             actions.resetForm();
+
             setCustomAlert({
                 mostrar: true,
                 tipo: "success",
-                mensaje: `El turno para la solicitud Nº ${solicitudId} ha sido creado exitosamente.`
+                mensaje: `La cita para vacunación de la solicitud Nº ${solicitudId} ha sido creada exitosamente.`
             });
 
-            navigate(`/refugio/solicitudes/${solicitudId}`, {
+            navigate(`/veterinaria/adopciones-vinculadas/${solicitudId}`, {
                 replace: true
             });
             //new bootstrap.Modal(document.querySelector("#startAdoptionModal")).show(); // llamo manualmente al modal
@@ -101,27 +108,28 @@ export const CrearTurno = (props) => {
         }
     }
 
-    const cancelarCreacionDeTurno = () => {
-        navigate(`/refugio/solicitudes/${solicitudId}`, {
+    const cancelarCreacionDeCita = () => {
+        navigate(`/veterinaria/adopciones-vinculadas/${solicitudId}`, {
             replace: true
         });
     }
 
     return (
-        <div id="crear_turno_wrapper">
-            <h1 className="title fs-1"><img src="/img/clock.png" className="img-fluid" width={80} alt="reloj" /> Crear nuevo turno</h1>
+        <div id="crear_cita_wrapper">
+            <h1 className="title fs-1"><img src="/img/clock.png" className="img-fluid" width={80} alt="reloj" /> Crear nueva cita para vacunación</h1>
             <div className="row justify-content-center">
                 <div className="col-12 col-md-7">
                     <div className="card">
-                        <div className="card-header title text-center">Turno para la solicitud Nº {solicitudId}</div>
+                        <div className="card-header title text-center">Seguimiento de la solicitud Nº {solicitudId}</div>
                         <div className="card-body">
                             <Formik
-                                initialValues={turnoInitialValues}
-                                validationSchema={turnoSchema}
-                                onSubmit={crearTurnoSubmit}
+                                initialValues={citaInitialValues}
+                                validationSchema={citaSchema}
+                                onSubmit={crearCitaSubmit}
                             >
                                 {({ isSubmitting }) => (
-                                <Form id="nuevo_turno_form">
+                                <Form id="nueva_cita_form">
+                                    <h4 className="text-center mb-4">Vacuna a aplicar: Parvovirus (2º dosis)</h4>
                                     <p>Adoptante: adoptante.test@gmail.com</p>
                                     <p>Animal a adoptar: Pancho</p>
                                     <div className="row my-4">
@@ -149,8 +157,8 @@ export const CrearTurno = (props) => {
                                         </div>
                                     </div>
                                     <div className="text-center">
-                                        <button type="submit" className="btn btn-success me-2" disabled={isSubmitting}>Programar turno</button>
-                                        <button type="button" className="btn btn-danger" onClick={cancelarCreacionDeTurno}>Cancelar</button>
+                                        <button type="submit" className="btn btn-success me-2" disabled={isSubmitting}>Reservar cita</button>
+                                        <button type="button" className="btn btn-danger" onClick={cancelarCreacionDeCita}>Cancelar</button>
                                     </div>
                                 </Form>
                                 )}

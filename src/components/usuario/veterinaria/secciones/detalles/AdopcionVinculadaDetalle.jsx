@@ -59,9 +59,29 @@ export const AdopcionVinculadaDetalle = (props) => {
             );
     }
 
+    const checkIfFaltaCompletar = () => {
+        let faltaCompletar = solicitudDetalle.itemsVacunaDelPlan.find((item) => item.fechaDeAplicacion === null);
+        
+        if(faltaCompletar)
+            return true;
+
+        return false;
+    }
+
     const getPlanillaDeVacunas = () => {
         return (
             <div id="planilla_de_vacunas_wrapper">
+                {
+                    checkIfFaltaCompletar() &&
+                    <div className="text-center pt-2 pb-4">
+                        {
+                            solicitudDetalle.hayCitaProgramada ?
+                            <h5 className="border border-4 rounded p-4">Existe una cita para vacunación programada. <b><Link to="/veterinaria/seguimientos-de-vacunacion">Consulte la sección de seguimientos.</Link></b></h5>
+                            : <Link to={`/veterinaria/solicitudes/${solicitudId}/citas`} className="btn btn-warning">Crear cita para vacunación</Link>
+                        }
+                    </div>
+                }
+
                 {
                     solicitudDetalle.itemsVacunaDelPlan.map((item, index) =>
                         <div className="row justify-content-center py-2" key={index}>
@@ -75,7 +95,8 @@ export const AdopcionVinculadaDetalle = (props) => {
                         </div>
                     )
                 }
-                <p className="card bg-light text-center p-3 my-4">Una vez que el adoptante complete todas las vacunas, se dará por finalizado el proceso de adopción.</p>
+                
+                <p className="card bg-light fst-italic text-center p-3 my-4">Una vez que el adoptante complete todas las vacunas, se dará por finalizado el proceso de adopción.</p>
             </div>
         );
     }
@@ -88,6 +109,12 @@ export const AdopcionVinculadaDetalle = (props) => {
     return (
         <div id="adopcion_detalle_wrapper">
             <h1 className="card bg-light py-1 title text-center">Adopción Nº {solicitudId}</h1>
+            {
+                !solicitudDetalle.faltanVacunas &&
+                <div className="text-center p-4">
+                    <h4 className="text-success fw-bold">Se completó el plan de vacunación correctamente.</h4>
+                </div>
+            }
             <div className="row justify-content-center">
                 <div className="col-12 col-md-6">
                     <h5 className="card-title title fs-4 text-center py-2 border-bottom">Datos del animal</h5>

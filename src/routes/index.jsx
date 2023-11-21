@@ -32,10 +32,12 @@ import { TurnoDetalleRefugio } from "src/components/usuario/refugio/secciones/de
 // Veterinaria
 import PanelDeVeterinaria from "src/components/usuario/veterinaria/PanelDeVeterinaria";
 import { PerfilDeVeterinaria } from "src/components/usuario/veterinaria/secciones/PerfilDeVeterinaria";
-import { SeguimientosDeVacunacion } from "src/components/usuario/veterinaria/secciones/SeguimientosDeVacunacion";
+import SeguimientosDeVacunacion from "src/components/usuario/veterinaria/secciones/SeguimientosDeVacunacion";
+import { SeguimientoDetalleVeterinaria } from "src/components/usuario/veterinaria/secciones/detalles/SeguimientoDetalleVeterinaria";
 import { PlanesDeVacunacion } from "src/components/usuario/veterinaria/secciones/PlanesDeVacunacion";
 import { AdopcionesVinculadas } from "src/components/usuario/veterinaria/secciones/AdopcionesVinculadas";
 import { AdopcionVinculadaDetalle } from "src/components/usuario/veterinaria/secciones/detalles/AdopcionVinculadaDetalle";
+import { CrearCita } from "src/components/usuario/veterinaria/secciones/CrearCita";
 
 // Refugios
 import ExplorarRefugios from '../components/refugio/ExplorarRefugios';
@@ -231,7 +233,13 @@ export const router = createBrowserRouter([
                             },
                             {
                                 path: "seguimientos-de-vacunacion",
-                                element: <SeguimientosDeVacunacion title="Seguimientos de vacunación" />
+                                element: <SeguimientosDeVacunacion title="Seguimientos de vacunación" />,
+                                children: [
+                                    {
+                                        path: ":seguimientoId",
+                                        element: <SeguimientoDetalleVeterinaria title="Detalle del seguimiento" />
+                                    }
+                                ]
                             },
                             {
                                 path: "planes-de-vacunacion",
@@ -250,6 +258,10 @@ export const router = createBrowserRouter([
                                 element: <AdopcionVinculadaDetalle title="Detalle de adopción vinculada" />
                             }
                         ]
+                    },
+                    {
+                        path: "/veterinaria/solicitudes/:solicitudId/citas",
+                        element: <CrearCita title="Crear nueva cita para vacunación" />,
                     }
                 ],
             },
