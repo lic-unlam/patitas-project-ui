@@ -10,9 +10,9 @@ export const VeterinariaMenu = () => {
             <li>
                 <Link className="dropdown-item" to="/veterinaria/seguimientos-de-vacunacion">Seguimientos de vacunación</Link>
             </li>
-            <li>
+            {/*<li>
                 <Link className="dropdown-item" to="/veterinaria/planes-de-vacunacion">Planes de vacunación</Link>
-            </li>
+            </li>*/}
             <li>
                 <Link className="dropdown-item" to="/veterinaria/adopciones-vinculadas">Adopciones vinculadas</Link>
             </li>

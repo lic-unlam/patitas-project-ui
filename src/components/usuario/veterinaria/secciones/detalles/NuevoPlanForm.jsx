@@ -7,6 +7,7 @@ import { validationMessages } from "src/components/auth/formularios/parametros/v
 import { AuthFormErrorMessage } from "src/components/auth/formularios/AuthFormErrorMessage";
 import { UserContext } from "src/components/layout/LayoutPublic";
 import Loading from "src/components/layout/Loading";
+import { CustomModal } from "src/components/layout/CustomModal";
 
 const initialValues = {
     nombreVacuna: '',
@@ -87,20 +88,9 @@ export const NuevoPlanForm = (props) => {
                     nroDosisVacuna: nroDosisVacunaSelect.value
                 }
             ]);
-            /*setVacunasDelPlan([
-                ...vacunasDelPlan, {
-                    nombreVacuna: nombreVacunaSelect.value,
-                    nroDosisVacuna: nroDosisVacunaSelect.value
-                }
-            ]);*/
     }
 
     const crearPlanDeVacunacion = async (values, actions) => {
-        /*if(vacunasDelPlan.length < 1) {
-            actions.setFieldError("vacunasDelPlan", "La lista está vacía.");
-            return;
-        }*/
-
         actions.validateField("vacunasDelPlan");
 
         try {
@@ -137,19 +127,27 @@ export const NuevoPlanForm = (props) => {
         return <Loading />
 
     return (
+        <CustomModal borderClass="border-plan" customButtons={true}>
         <Formik
             initialValues={initialValues}
             validationSchema={validationSchema}
             onSubmit={crearPlanDeVacunacion}
         >
             {({ isSubmitting, handleChange, setFieldValue, values }) => (
-                <Form id="nuevo_plan_form" className="card bg-light mt-4">
-                    <div className="card-header title">Crear plan de vacunación</div>
-                    <div className="card-body">
-                        <p>Acá va un texto describiendo la funcionalidad.</p>
+                <Form id="nuevo_plan_form">
+                    <div className="title border-bottom">Crear plan de vacunación</div>
+                    <div className="card-body text-start">
+                        <div className="row py-4 justify-content-center">
+                            <div className="col-auto">
+                                <img src="/img/perro_gato_jeringa.png" width={80} height={80} alt="perro_gato_jeringa" />
+                            </div>
+                            <div className="col-5">
+                                <p className="fst-italic">El adoptante deberá visitar tu veterinaria para aplicar cada vacuna que elijas a continuación.</p>
+                            </div>
+                        </div>
                         <div className="row">
                             <div className="col-12 col-md-6">
-                                <Field as="select" id="nombre_vacuna" name="nombreVacuna" className="form-select" onChange={(event) => changeEdadIndicada(event, handleChange)}>
+                                <Field as="select" id="nombre_vacuna" name="nombreVacuna" className="form-select form-select-sm" onChange={(event) => changeEdadIndicada(event, handleChange)}>
                                     <option value={""} defaultValue>Seleccione una vacuna...</option>
                                     {
                                         listaDeVacunas.map((vacuna, index) => 
@@ -160,7 +158,7 @@ export const NuevoPlanForm = (props) => {
                                 <ErrorMessage name="nombreVacuna">{ message => <AuthFormErrorMessage field={message} /> }</ErrorMessage>
                             </div>
                             <div className="col-12 col-md-6">
-                                <Field as="select" id="cantidad_dosis_vacuna" name="nroDosisVacuna" className="form-select">
+                                <Field as="select" id="cantidad_dosis_vacuna" name="nroDosisVacuna" className="form-select form-select-sm">
                                     <option value={0} defaultValue>Elegir cantidad de dosis...</option>
                                     {
                                         dosisYEdad.dosisCombo.map((dosis, index) =>
@@ -176,14 +174,13 @@ export const NuevoPlanForm = (props) => {
                                 </p>
                             }
                             <div className="row justify-content-center mb-4">
-                                <button type="button" id="agregar_a_la_lista" className="btn btn-dark col-4" onClick={() => agregarVacunaALaLista(setFieldValue, values.vacunasDelPlan)} disabled={isSubmitting}>Agregar a la lista</button>
+                                <button type="button" id="agregar_a_la_lista" className="btn btn-sm btn-dark col-4" onClick={() => agregarVacunaALaLista(setFieldValue, values.vacunasDelPlan)} disabled={isSubmitting}>Agregar a la lista</button>
                             </div>
                         </div>
                         <div className="row">
                             <div className="col-12 col-md-6">
                                 <div id="vacunas_animal_wrapper">
-                                    <h5>Vacunas que el animal ya tiene</h5>
-                                    <hr/>
+                                    <h5 className="border-bottom border-secondary">Vacunas que el animal ya tiene</h5>
                                     <div id="lista_vacunas_wrapper">
                                         <ul>
                                             <li className="fst-italic">Aún no tiene vacunas registradas.</li>
@@ -193,8 +190,7 @@ export const NuevoPlanForm = (props) => {
                             </div>
                             <div className="col-12 col-md-6">
                                 <div id="plan_de_vacunas_wrapper">
-                                    <h5>Lista del plan de vacunación</h5>
-                                    <hr/>
+                                    <h5 className="border-bottom border-secondary">Lista del plan de vacunación</h5>
                                     <div id="lista_del_plan_wrapper">
                                         <ul>
                                             {
@@ -222,5 +218,6 @@ export const NuevoPlanForm = (props) => {
                 </Form>
             )}
         </Formik>
+        </CustomModal>
     );
 }

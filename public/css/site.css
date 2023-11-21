@@ -606,6 +606,11 @@ form button[type="submit"] {
     box-shadow: 1px 1px 7px 1px #4fcf3e;
 }
 
+.border-plan {
+	border: 1px solid #c32768;
+    box-shadow: 1px 1px 7px 1px #cf3e7c;
+}
+
 .custom-modal-body {
 	padding: 1rem;
 }
