@@ -123,7 +123,7 @@ export const CrearTurno = (props) => {
                                 {({ isSubmitting }) => (
                                 <Form id="nuevo_turno_form">
                                     <p>Adoptante: adoptante.test@gmail.com</p>
-                                    <p>Animal a adoptar: Pancho</p>
+                                    <p>Animal a adoptar: Max</p>
                                     <div className="row my-4">
                                         <label htmlFor="fecha_turno" className="col-sm-4 col-form-label my-auto">Fecha a programar:</label>
                                         <div className="col-sm-8">

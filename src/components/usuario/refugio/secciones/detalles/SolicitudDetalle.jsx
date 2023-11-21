@@ -437,7 +437,7 @@ export const SolicitudDetalle = (props) => {
                 </div>*/}
             </div>
             { contenidoModal.mostrar && 
-                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons} borderClass={contenidoModal.borderClass} buttonClass={contenidoModal.buttonClass} showSchoolConfettis={contenidoModal.showSchoolConfettis}>
+                <CustomModal onCloseCustomModal={cerrarCustomModal} customButtons={contenidoModal.customButtons} borderClass={contenidoModal.borderClass} buttonClass={contenidoModal.buttonClass} showConfettis={contenidoModal.showConfettis} showSchoolConfettis={contenidoModal.showSchoolConfettis}>
                     { contenidoModal.componente }
                 </CustomModal>
             }

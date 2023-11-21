@@ -129,9 +129,9 @@ export const CrearCita = (props) => {
                             >
                                 {({ isSubmitting }) => (
                                 <Form id="nueva_cita_form">
-                                    <h4 className="text-center mb-4">Vacuna a aplicar: Parvovirus (2º dosis)</h4>
+                                    <h4 className="text-center mb-4">Vacuna a aplicar: Parvovirus (1º dosis)</h4>
                                     <p>Adoptante: adoptante.test@gmail.com</p>
-                                    <p>Animal a adoptar: Pancho</p>
+                                    <p>Animal a adoptar: Max</p>
                                     <div className="row my-4">
                                         <label htmlFor="fecha_turno" className="col-sm-4 col-form-label my-auto">Fecha a programar:</label>
                                         <div className="col-sm-8">

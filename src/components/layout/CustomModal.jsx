@@ -23,8 +23,7 @@ export const CustomModal = (props) => {
 
         if(props.showConfettis)
             desplegarEstrellas();
-
-        if(props.showSchoolConfettis)
+        else if(props.showSchoolConfettis)
             desplegarSchoolPride();
 
 		return () => {
@@ -71,7 +70,7 @@ export const CustomModal = (props) => {
     // Efecto de escuela cuando se finaliza la adopción
 
     function desplegarSchoolPride() {
-        var end = Date.now() + (15 * 1000); // 15 segundos dura el efecto
+        var end = Date.now() + (10 * 1000); // 10 segundos dura el efecto
 
         // go Buckeyes!
         var colors = ['#bb0000', '#ffffff'];
