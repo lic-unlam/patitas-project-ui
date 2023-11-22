@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { Link, useOutletContext } from 'react-router-dom';
+import { Link, useParams, useOutletContext } from 'react-router-dom';
 
 import CustomAlert from '../../layout/CustomAlert';
 import { ProhibidoComentario } from './comentarios/ProhibidoComentario';
@@ -12,7 +12,7 @@ import { CustomAlertContext } from 'src/components/layout/LayoutPublic';
 const Comentarios = (props) => {
     let { user, setUser } = useContext(UserContext);
     let { customAlert, setCustomAlert } = useContext(CustomAlertContext);
-    const [descripcionEstrella, setDescripcionEstrella] = useState({ nroEstrella: 0, leyenda: "" });
+    const [descripcionEstrella, setDescripcionEstrella] = useState({ nroEstrella: 0, leyenda: "", fijada: false });
     const [tieneComentario, setTieneComentario] = useState(false);
 
     const [ contenidoAlert, setContenidoAlert ] = useState({
@@ -22,6 +22,7 @@ const Comentarios = (props) => {
     });
 
     const { comentarios } = props;
+    const { id } = useParams();
 
     // valoraciones: excelente, muy recomendable, buen lugar, poco recomendable, un desastre
     const leyendasAlReves = ['Un desastre', 'Poco recomendable', 'Buen lugar', 'Muy recomendable', 'Excelente'];
@@ -49,22 +50,55 @@ const Comentarios = (props) => {
     }
 
     const mostrarDescripcionEstrella = (event) => {
-        const nroEstrella = event.target.dataset.nro;
-        setDescripcionEstrella({ nroEstrella: nroEstrella, leyenda: leyendasAlReves[nroEstrella - 1] });
+        if(!descripcionEstrella.fijada) {
+            const nroEstrella = event.target.dataset.nro;
+            setDescripcionEstrella({ nroEstrella: nroEstrella, leyenda: leyendasAlReves[nroEstrella - 1], fijada: false });
+        }
     }
 
-    const limpiarDescripcionEstrella = () => setDescripcionEstrella("");
+    const fijarEstrella = (event) => {
+        const nroEstrella = event.target.dataset.nro;
+        setDescripcionEstrella({ nroEstrella: nroEstrella, leyenda: leyendasAlReves[nroEstrella - 1], fijada: true });
+    }
 
-    const agregarComentario = (event) => {
-        event.preventDefault();
-        
-        setContenidoAlert({
-            mostrar: true,
-            tipo: "success",
-            mensaje: <span><strong>¡Gracias por dejar tu comentario!</strong> Se mostrará una vez que haya sido aprobado por un administrador.</span>
-        });
+    const limpiarDescripcionEstrella = () => {
+        if(!descripcionEstrella.fijada)
+            setDescripcionEstrella("");
+    }
 
-        setTieneComentario(true);
+    const agregarComentario = async (values, actions) => {
+        try {
+            const response = await fetch(`https://localhost:7277/api/adoptante/comentario`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.accessToken}`
+                },
+                body: JSON.stringify({
+                    contenido: values.contenido,
+                    nroEstrellas: descripcionEstrella.nroEstrella !== 0 ? descripcionEstrella.nroEstrella : 4,
+                    id_Refugio: id
+                })
+            });
+            
+            if(!response.ok) {
+                if(response.status === 403)
+                    navigate("/error/forbidden");
+
+                if(response.status === 401)
+                    navigate("/error/unauthorized");
+
+                throw new Error("Hubo un problema con la solicitud. Código: " + response.status);
+            }
+    
+            window.location.reload();
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+        finally {
+            actions.setSubmitting(false);
+        }
     }
 
     const ocultarAlert = () => {
@@ -72,17 +106,19 @@ const Comentarios = (props) => {
     }
 
     const mostrarOProhibirComentario = () => {
-        if(user.puedeComentar) {
-            {!tieneComentario ? <CrearComentario
-                descripcionEstrella={descripcionEstrella}
-                mostrarDescripcionEstrella={mostrarDescripcionEstrella}
-                limpiarDescripcionEstrella={limpiarDescripcionEstrella}
-                agregarComentario={agregarComentario}
-                /> :
-                <MostrarComentario setTieneComentario={setTieneComentario} />}
+        if(props.puedeComentar) {
+            if(!props.tieneComentario) {
+                return <CrearComentario
+                    descripcionEstrella={descripcionEstrella}
+                    mostrarDescripcionEstrella={mostrarDescripcionEstrella}
+                    limpiarDescripcionEstrella={limpiarDescripcionEstrella}
+                    fijarEstrella={fijarEstrella}
+                    agregarComentario={agregarComentario}
+                    />;
+            }
         }
         else
-            return <ProhibidoComentario />
+            return <ProhibidoComentario />;
     }
 
     return (
@@ -95,8 +131,8 @@ const Comentarios = (props) => {
                 <label className="col-auto my-auto">Ordenar por:</label>
                 <div className="col-12 col-md-3 pt-2 pt-md-0">
                     <select id="ordenar_comentarios_select" className="form-select" aria-label="Ordenar por...">
-                        <option value="0" defaultValue>Más recientes</option>
-                        <option value="1">Más antiguos</option>
+                        <option value="0" defaultValue>Más antiguos</option>
+                        <option value="1">Más recientes</option>
                     </select>
                 </div>
             </div>

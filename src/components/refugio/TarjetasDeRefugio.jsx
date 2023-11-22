@@ -32,7 +32,7 @@ export const TarjetasDeRefugio = (props) => {
                                     <span className="list-group-item list-group-item-action" aria-current="true">
                                         <div className="d-flex w-100 justify-content-between">
                                             <h5 className="mb-1 title">{refugio.nombre}</h5>
-                                            <span className="stars">{refugio.puntaje} <i className="bi bi-star-fill"></i></span>
+                                            <span className="stars">{refugio.puntaje.toFixed(1)} <i className="bi bi-star-fill"></i></span>
                                         </div>
                                         <p className="mb-1 text-muted location">{refugio.direccion}, {refugio.barrio}</p>
                                     </span>

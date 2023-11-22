@@ -23,7 +23,7 @@ const RefugioDetalle = (props) => {
 			/*case secciones.animales:
 				return <Animales animales={refugio.animales} title="Animales en el refugio" />*/
 			case secciones.comentarios:
-				return <Comentarios comentarios={refugio.comentarios} sesionExpirada={refugio.sesionExpirada} title="Comentarios del refugio" />
+				return <Comentarios comentarios={refugio.comentarios} puedeComentar={refugio.puedeComentar} tieneComentario={refugio.tieneComentario} sesionExpirada={refugio.sesionExpirada} title="Comentarios del refugio" />
 			case secciones.veterinariasAsociadas:
 				return <VeterinariasAsociadas veterinarias={refugio.veterinariasAsociadas} title="Veterinarias asociadas del refugio" />
 			case secciones.masInformacion:
@@ -45,7 +45,7 @@ const RefugioDetalle = (props) => {
                     <p className="text-muted"><i className="bi bi-geo-alt-fill"></i> Ubicado en {refugio.infoBasica.direccion}, {refugio.infoBasica.barrio}</p>
                 </div>
                 <div className="col-12 col-md-3 text-md-end">
-                    <h1 className="display-3">{refugio.infoBasica.puntaje} <i className="bi bi-star-fill"></i></h1>
+                    <h1 className="display-3">{refugio.infoBasica.puntaje.toFixed(1)} <i className="bi bi-star-fill"></i></h1>
                     <p className="text-muted">{refugio.infoBasica.cantidadDeComentarios} {refugio.infoBasica.cantidadDeComentarios === 1 ? "valoración" : "valoraciones"}</p>
                 </div>
             </div>
