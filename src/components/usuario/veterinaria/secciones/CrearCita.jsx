@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useCallback, useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as Yup from 'yup';
@@ -7,17 +7,19 @@ import { validationMessages } from "src/components/auth/formularios/parametros/v
 import { AuthFormErrorMessage } from "src/components/auth/formularios/AuthFormErrorMessage";
 import { CustomAlertContext } from "src/components/layout/LayoutPublic";
 import { UserContext } from "src/components/layout/LayoutPublic";
+import Loading from "src/components/layout/Loading";
 
 export const CrearCita = (props) => {
     const { solicitudId } = useParams();
     const { setCustomAlert } = useContext(CustomAlertContext);
     const { user } = useContext(UserContext);
     const navigate = useNavigate();
+    const [ infoCita, setInfoCita ] = useState(null);
 
     const getListaDeHoras = () => {
         let horas = [];
 
-        for(let i = 0; i < 24; i++) {
+        for(let i = 9; i <= 17; i++) {
             let horaConZeroALaIzquierda = String(i).padStart(2, '0');
             horas.push(horaConZeroALaIzquierda);
         }
@@ -42,9 +44,7 @@ export const CrearCita = (props) => {
     const citaInitialValues = {
         fechaTurno: '',
         horaTurno: '',
-        minutoTurno: '',
-        /*vacuna: '',
-        nroDosis: 0*/
+        minutoTurno: ''
     }
 
     const citaSchema = Yup.object().shape({
@@ -56,15 +56,29 @@ export const CrearCita = (props) => {
         minutoTurno: Yup.number()
                 .required(validationMessages.FIELD_REQUIRED)
                 .typeError(validationMessages.MUST_BE_A_NUMBER)
-                .integer(validationMessages.HOUR_NOT_VALID),
-        /*vacuna: Yup.string()
-                .required(validationMessages.FIELD_REQUIRED),
-        nroDosis: Yup.number()
-                .required(validationMessages.FIELD_REQUIRED)
-                .typeError(validationMessages.MUST_BE_A_NUMBER)
-                .positive(validationMessages.MUST_BE_A_NUMBER)
-                .integer(validationMessages.MUST_BE_A_NUMBER)*/
+                .integer(validationMessages.HOUR_NOT_VALID)
     });
+
+    const cargarDatosCita = useCallback(async () => {
+        try {
+            const response = await fetch(`https://localhost:7277/api/seguimientos/cita/${solicitudId}`, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${user.accessToken}`
+                }
+            });
+
+            if(!response.ok)
+                throw new Error("Hubo un problema con la solicitud. Código de error " + response.status);
+
+            const data = await response.json();
+            setInfoCita(data);
+        }
+        catch(error) {
+            console.log(error.message);
+        }
+    }, [user]);
 
     const crearCitaSubmit = async (values, actions) => {
         try {
@@ -114,6 +128,14 @@ export const CrearCita = (props) => {
         });
     }
 
+    useEffect(() => {
+        if(user)
+            cargarDatosCita();
+    }, [cargarDatosCita]);
+
+    if(!infoCita)
+        return <Loading />
+
     return (
         <div id="crear_cita_wrapper">
             <h1 className="title fs-1"><img src="/img/clock.png" className="img-fluid" width={80} alt="reloj" /> Crear nueva cita para vacunación</h1>
@@ -129,9 +151,17 @@ export const CrearCita = (props) => {
                             >
                                 {({ isSubmitting }) => (
                                 <Form id="nueva_cita_form">
-                                    <h4 className="text-center mb-4">Vacuna a aplicar: Parvovirus (1º dosis)</h4>
-                                    <p>Adoptante: adoptante.test@gmail.com</p>
-                                    <p>Animal a adoptar: Max</p>
+                                    <div className="row">
+                                        <div className="col-4">
+                                            <img src={infoCita.fotoAnimal} className="img-fluid rounded-circle" alt="foto_animal" />
+                                        </div>
+                                        <div className="col-8 my-auto">
+                                            <h5 className="mb-4">Vacuna a aplicar: <strong>{infoCita.nombreVacuna} ({infoCita.nroDosisAAplicar}º dosis)</strong></h5>
+                                            <h5 className="mb-4">Adoptante: <strong>{infoCita.nombreAdoptante}</strong></h5>
+                                            <h5>Animal a adoptar: <strong>{infoCita.nombreAnimal}</strong></h5>
+                                        </div>
+                                    </div>
+                                    
                                     <div className="row my-4">
                                         <label htmlFor="fecha_turno" className="col-sm-4 col-form-label my-auto">Fecha a programar:</label>
                                         <div className="col-sm-8">

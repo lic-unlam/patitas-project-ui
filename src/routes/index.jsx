@@ -28,6 +28,7 @@ import { SolicitudDetalle } from "../components/usuario/refugio/secciones/detall
 import Turnos from "src/components/usuario/refugio/secciones/Turnos";
 import { CrearTurno } from "src/components/usuario/refugio/secciones/CrearTurno";
 import { TurnoDetalleRefugio } from "src/components/usuario/refugio/secciones/detalles/TurnoDetalleRefugio";
+import AbmAnimales from "src/components/usuario/refugio/secciones/AbmAnimales";
 
 // Veterinaria
 import PanelDeVeterinaria from "src/components/usuario/veterinaria/PanelDeVeterinaria";
@@ -212,6 +213,10 @@ export const router = createBrowserRouter([
                                         element: <TurnoDetalleRefugio title="Detalles del turno" />
                                     }
                                 ]
+                            },
+                            {
+                                path: "abm-animales",
+                                element: <AbmAnimales title="ABM animales" />
                             }
                         ]
                     },

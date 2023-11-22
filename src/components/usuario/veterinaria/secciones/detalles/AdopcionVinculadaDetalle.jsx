@@ -109,12 +109,12 @@ export const AdopcionVinculadaDetalle = (props) => {
     return (
         <div id="adopcion_detalle_wrapper">
             <h1 className="card bg-light py-1 title text-center">Adopción Nº {solicitudId}</h1>
-            {/*
-                !solicitudDetalle.faltanVacunas &&
+            {
+                !solicitudDetalle.faltanVacunas && solicitudDetalle.existeListaDeVacunas &&
                 <div className="text-center p-4">
                     <h4 className="text-success fw-bold">Se completó el plan de vacunación correctamente.</h4>
                 </div>
-            */}
+            }
             <div className="row justify-content-center">
                 <div className="col-12 col-md-6">
                     <h5 className="card-title title fs-4 text-center py-2 border-bottom">Datos del animal</h5>

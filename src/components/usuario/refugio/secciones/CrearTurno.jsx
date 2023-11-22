@@ -17,7 +17,7 @@ export const CrearTurno = (props) => {
     const getListaDeHoras = () => {
         let horas = [];
 
-        for(let i = 0; i < 24; i++) {
+        for(let i = 9; i <= 12; i++) {
             let horaConZeroALaIzquierda = String(i).padStart(2, '0');
             horas.push(horaConZeroALaIzquierda);
         }

@@ -89,8 +89,8 @@ export const AdopcionDetalle = () => {
                         <p>{adopcionDetalle.txtResponsable}</p>
                         <div className="d-grid gap-2">
                             <Link to="/adoptante/mis-turnos" hidden={!adopcionDetalle.snTurnos} className="btn btn-sm btn-block btn-success">Turnos</Link>
-                            <Link to={adopcionDetalle.lnkSeguimiento} hidden={!adopcionDetalle.snSeguimiento} className="btn btn-sm btn-block btn-danger">Seguimiento de vacunación</Link>
-                            <Link to={adopcionDetalle.lnkCalificarRefugio} hidden={!adopcionDetalle.snCalificarRefugio} className="btn btn-sm btn-block btn-warning">Calificar refugio</Link>
+                            <Link to="/adoptante/mis-seguimientos" hidden={!adopcionDetalle.snSeguimiento} className="btn btn-sm btn-block btn-danger">Seguimiento de vacunación</Link>
+                            <Link to={`/refugios/${adopcionDetalle.refugioId}/comentarios`} hidden={!adopcionDetalle.snCalificarRefugio} className="btn btn-sm btn-block btn-warning">Calificar refugio</Link>
                             {adopcionDetalle.snPlanVacunacion && <PlanDeVacunacion />}
                         </div>
                     </div>

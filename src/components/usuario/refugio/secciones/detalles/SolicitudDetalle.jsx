@@ -196,10 +196,11 @@ export const SolicitudDetalle = (props) => {
             setContenidoModal({
                 mostrar: true,
                 componente: <div>
-                                <h4 className="title"><img src="/img/check.png" width={50} alt="check_icon" /> ¡Solicitud de adopción Nº {solicitudDetalle.nroSolicitud} finalizada!</h4>
+                                <h4 className="title"><img src="/img/check.png" width={50} alt="check_icon" /> Solicitud de adopción Nº {solicitudDetalle.nroSolicitud} finalizada</h4>
                                 <hr/>
                                 <div className="custom-modal-body">
-                                    <p className="fs-5">¡Felicitaciones! ¡Has completado exitosamente el proceso de adopción! El usuario "{solicitudDetalle.nombreUsuario}" ha completado el plan de vacunación y el animal ahora está en condiciones de una vida mejor en su nuevo hogar.</p>
+                                    <p className="fs-5 fw-bold">¡Has completado exitosamente el proceso de adopción!</p>
+                                    <p>El usuario "{solicitudDetalle.nombreUsuario}" ha completado el plan de vacunación y el animal ahora está en condiciones de una vida mejor en su nuevo hogar.</p>
                                     <figure>
                                         <img src="/img/shelter/perro_festejando.jpg" className="img-fluid" width={200} alt="perro_festejando" />
                                     </figure>
